@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Valedictorian")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+f7044a7a816359392c2ea79a04db77a099bd258c")]
 [assembly: System.Reflection.AssemblyProductAttribute("Valedictorian")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Valedictorian")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
