@@ -1,0 +1,14 @@
+# .NET MAUI
+BackEnd/Valedictorian/Valedictorian/bin/
+BackEnd/Valedictorian/Valedictorian/obj/
+BackEnd/Valedictorian/*.suo
+BackEnd/Valedictorian/*.user
+
+# Electron
+FrontEnd/ValedictorianFE/node_modules/
+FrontEnd/ValedictorianFE/dist/
+FrontEnd/ValedictorianFE/*.log
+
+# General
+*.bak
+*.swp
