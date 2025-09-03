@@ -4,6 +4,11 @@ BackEnd/Valedictorian/Valedictorian/obj/
 BackEnd/Valedictorian/Valedictorian/*.suo
 BackEnd/Valedictorian/Valedictorian/*.user
 
+# Electron
+FrontEnd/ValedictorianFE/node_modules/
+FrontEnd/ValedictorianFE/dist/
+FrontEnd/ValedictorianFE/*.log
+
 # General
 *.bak
 *.swp
