@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8hau/m9AGLo=",
+  "dgSpecHash": "8yMMXzD41wY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Heiner\\Desktop\\LPR 381\\Project\\Valedictorian\\Valedictorian\\Valedictorian.csproj",
+  "projectFilePath": "C:\\Users\\Heiner\\Desktop\\SEN_381\\Project\\BackEnd\\Valedictorian\\Valedictorian\\Valedictorian.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Heiner\\.nuget\\packages\\googlegson\\2.13.0.1\\googlegson.2.13.0.1.nupkg.sha512",
     "C:\\Users\\Heiner\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.5\\microsoft.extensions.configuration.9.0.5.nupkg.sha512",

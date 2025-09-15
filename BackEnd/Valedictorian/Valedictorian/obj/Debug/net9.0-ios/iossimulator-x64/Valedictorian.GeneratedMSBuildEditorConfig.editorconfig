@@ -47,3 +47,111 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/ArrangeSession.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.ArrangeSession.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ArrangeSession.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ArrangeSession.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/BookTutorPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.BookTutorPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\BookTutorPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\BookTutorPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/CalendarPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.CalendarPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CalendarPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CalendarPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/CourseMaterialPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.CourseMaterialPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\CourseMaterialPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\CourseMaterialPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/ForumLandingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.ForumLandingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ForumLandingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ForumLandingPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/GradesPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.GradesPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\GradesPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\GradesPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/HomePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.HomePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\HomePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\HomePage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\LoginPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/MessagingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.MessagingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\MessagingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\MessagingPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/ModuleListPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.ModuleListPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ModuleListPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ModuleListPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/ModulePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.ModulePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ModulePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ModulePage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/NotificationPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.NotificationPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\NotificationPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\NotificationPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/ParticipantsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.ParticipantsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ParticipantsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ParticipantsPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/PostPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.PostPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\PostPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\PostPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/ProfilePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.ProfilePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\ProfilePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\ProfilePage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\RegisterPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/TopicPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.TopicPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\TopicPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\TopicPage.xaml
+
+[C:/Users/Heiner/Desktop/SEN_381/Project/BackEnd/Valedictorian/Valedictorian/Views/UserProfilePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Valedictorian.Views.UserProfilePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\UserProfilePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\UserProfilePage.xaml

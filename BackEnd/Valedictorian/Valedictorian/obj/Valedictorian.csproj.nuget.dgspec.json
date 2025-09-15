@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Heiner\\Desktop\\LPR 381\\Project\\Valedictorian\\Valedictorian\\Valedictorian.csproj": {}
+    "C:\\Users\\Heiner\\Desktop\\SEN_381\\Project\\BackEnd\\Valedictorian\\Valedictorian\\Valedictorian.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Heiner\\Desktop\\LPR 381\\Project\\Valedictorian\\Valedictorian\\Valedictorian.csproj": {
+    "C:\\Users\\Heiner\\Desktop\\SEN_381\\Project\\BackEnd\\Valedictorian\\Valedictorian\\Valedictorian.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Heiner\\Desktop\\LPR 381\\Project\\Valedictorian\\Valedictorian\\Valedictorian.csproj",
+        "projectUniqueName": "C:\\Users\\Heiner\\Desktop\\SEN_381\\Project\\BackEnd\\Valedictorian\\Valedictorian\\Valedictorian.csproj",
         "projectName": "Valedictorian",
-        "projectPath": "C:\\Users\\Heiner\\Desktop\\LPR 381\\Project\\Valedictorian\\Valedictorian\\Valedictorian.csproj",
+        "projectPath": "C:\\Users\\Heiner\\Desktop\\SEN_381\\Project\\BackEnd\\Valedictorian\\Valedictorian\\Valedictorian.csproj",
         "packagesPath": "C:\\Users\\Heiner\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Heiner\\Desktop\\LPR 381\\Project\\Valedictorian\\Valedictorian\\obj\\",
+        "outputPath": "C:\\Users\\Heiner\\Desktop\\SEN_381\\Project\\BackEnd\\Valedictorian\\Valedictorian\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
