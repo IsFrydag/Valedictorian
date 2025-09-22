@@ -1,3 +1,6 @@
+//rendering includes DOM, done after html&css parsing
+//below handles user registration...
+// takes email&password enetered in reigstration form & sends them to a server to cretae a new user account
 const axios = require('axios');
 
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
