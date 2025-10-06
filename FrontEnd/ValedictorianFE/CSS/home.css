@@ -1,0 +1,1147 @@
+body{
+
+    background-color: black;
+
+}
+
+.hidden {
+    display: none;
+}
+
+.hB{
+    
+    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.3);
+    
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+.topBar{
+
+    position: absolute;
+    left: 0%;
+    bottom: 84%;
+    right: 35%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    column-gap: 0px;
+    height: 130px;
+
+}
+
+.topLeftCircle{
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: white;
+    z-index: 10;
+    padding: 0;
+    margin: 10px 0px 0px 22px;
+
+    grid-column: 1/3;
+
+}
+
+.topLeftCircle:hover{
+
+    cursor: pointer;
+
+}
+
+.bellIcon{
+
+    background-size: contain;
+    color: white;
+    grid-column: 2;
+    align-self: center;
+    margin: -58px 0px 0px -15px;
+
+}
+
+.logo{
+
+    position: absolute;
+    width: 600px;
+    height: 107px;
+    grid-column: 3/7;
+    padding: 5px;
+    margin: 0px 0px 25px 0px;
+    background: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.950), rgba(0, 0, 0, 0.050), rgba(0,0,0,0), rgba(0,0,0,0)), 
+        linear-gradient(to left, rgba(0,0,0,0.950), rgba(0,0,0,0.050), rgba(0,0,0,0), rgba(0,0,0,0)), 
+        url("../assets/images/Valedictorian1.jpg");
+    background-size: cover;
+    background-size: 110%;
+    background-position: -15px -65px;
+    border-radius: 40px;
+    border: none;
+
+}
+
+.logo::after{
+
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: conic-gradient(from var(--angle), transparent 80%, #ffffff, rgb(255, 215, 0), rgb(255, 215, 0), rgb(255, 255, 255), #ffffff, rgb(255, 215, 0), rgb(255, 215, 0), #ffffff);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -5;
+    padding: 4px;
+    border-radius: 45px;
+    opacity: 0;
+
+}
+
+.logo.animateAfter::after {
+
+    animation: spinning2 3s linear forwards;
+
+}
+
+@keyframes spinning2{
+
+    0% {
+        --angle: 0deg;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        --angle: 360deg;
+        opacity: 0;
+    }
+}
+
+.bellIcon i{
+    
+    font-size: 36px;
+    
+}
+
+.bellIcon i:hover{
+    
+    color: red;
+    cursor: pointer;
+    
+}
+
+.tab{
+    
+    border: solid transparent 1px;
+    
+}
+
+.tabHome{
+
+    display: flex;
+    grid-column: 8;
+    background-color: red;
+    color: white;
+    padding: 0px 0px 0px 0px;
+    border-top-left-radius: 12px;
+    text-align: center;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: Bold;
+    font-size: 20px;
+    height: 50px;
+    align-self: end;
+    margin: 0px 0px 0px 0px;
+
+}
+.tabCal{
+
+    display: flex;
+    grid-column: 9;
+    background-color: rgb(183,0,0);
+    color: white;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: Bold;
+    font-size: 20px;
+    height: 50px;
+    align-self: end;
+    margin: 0px 0px 0px 0px;
+
+}
+.tabMes{
+
+    display: flex;
+    grid-column: 10;
+    background-color: rgb(117,1,1);
+    color: white;
+    border-top-right-radius: 12px;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: Bold;
+    font-size: 20px;
+    height: 50px;
+    align-self: end;
+    margin: 0px 0px 0px 0px;
+
+}
+
+.tabHome p{
+    margin: 11px 0px 0px 35px;
+}
+.tabCal p{
+    margin: 11px 0px 0px 17px;
+}
+.tabMes p{
+    margin: 11px 0px 0px 12px;
+}
+
+.tabHome:hover{
+    
+    margin: 0px 0px 5px 0px;
+    cursor: pointer;
+    height: +4x;
+    
+}
+.tabCal:hover{
+    
+    margin: 0px 0px 5px 0px;
+    cursor: pointer;
+    height: +4x;
+    
+}
+.tabMes:hover{
+    
+    margin: 0px 0px 5px 0px;
+    cursor: pointer;
+    height: +4x;
+    
+}
+
+.mainBox{
+
+    position: absolute;
+    left: 1%;
+    right: 35%;
+    top: 15%;
+    border: solid transparent 2px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: -15px;
+    column-gap: 0px;
+    padding: 0px;
+
+    height: 80vh;
+    overflow-y:auto;
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    justify-items: center;
+    align-items: center;
+
+}
+
+.mainBox::-webkit-scrollbar{
+
+    display: none;
+
+}
+
+.mainBox .hB:nth-child(3n+2){
+
+    margin-top: 200px;
+
+}
+
+.hB{
+
+    border: solid red 2pt;
+    border-radius: 20px;
+    width: 350px;
+    height: 350px;
+    
+    display: flex;
+    align-items: center;
+    margin: -100px 0px -120px 0px;
+
+}
+
+.imageColumnContainer{
+
+    position: absolute;
+    top: 1%;
+    bottom: 1%;
+    right: 1%;
+    width: 33%;
+    display: flex;
+    justify-content: space-between;
+
+    border: solid white 2px;
+    border-radius: 15px;
+
+}
+
+.imageColumn{
+    
+    width: 45%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding: 0px 10px 0px 10px;
+
+}
+
+.scroller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.leftScroller {
+    animation: scrollDown 13s linear infinite;
+}
+
+.rightScroller {
+    animation: scrollUp 13s linear infinite;
+}
+
+.lSquareBox, 
+.rSquareBox {
+    width: 90%;
+    aspect-ratio: 1 / 1;
+    background: gray;
+    margin: 10px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.lSquareBox:hover,
+.rSquareBox:hover{
+
+    padding: +2px;
+    cursor: pointer;
+
+}
+
+#leftColImg1{
+
+    background-image: url("../assets/images/Limg1.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+#leftColImg2{
+
+    background-image: url("../assets/images/Limg2.webp");
+    background-size: cover;
+    background-position: center;
+
+}
+#leftColImg3{
+
+    background-image: url("../assets/images/Limg3.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+#leftColImg4{
+
+    background-image: url("../assets/images/Limg4.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+
+#rightColImg1{
+
+    background-image: url("../assets/images/Rimg1.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+#rightColImg2{
+
+    background-image: url("../assets/images/Rimg2.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+#rightColImg3{
+
+    background-image: url("../assets/images/Rimg3.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+#rightColImg4{
+
+    background-image: url("../assets/images/Rim4.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+
+@keyframes scrollUp {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+@keyframes scrollDown {
+    0%   { transform: translateY(-50%); }
+    100% { transform: translateY(0%); }
+}
+
+/* MainBox */
+/* Calender Box */
+
+.calBox{
+
+    position: absolute;
+    left: 1%;
+    right: 35%;
+    top: 15%;
+    border: solid transparent 2px;
+
+    display: none;
+
+    height: 80vh;
+    overflow-y:auto;
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    justify-items: center;
+    align-items: center;
+
+}
+
+#calendarHeader{
+    
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 10px auto;
+    font-family: "Zalando Sans Expanded", sans-serif;
+
+}
+
+#calendarTable{
+
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto 20px auto;
+
+}
+
+#calendarTable th, #calendarTable td{
+
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+
+}
+
+#calendarTable td{
+
+    height: 50px;
+    cursor: pointer;
+    text-align: left;
+    vertical-align: top;
+    padding: 5px; 
+
+}
+
+#calendarTable td:hover{
+
+    background-color: #f0f0f0;
+
+}
+
+
+/* Calender Box */
+/* Modules */
+
+
+#moduleRec{
+
+    background-image: url('../assets/images/moduleRec.png');
+    background-size: cover;
+    background-position: center;
+    border: none;
+
+}
+
+#moduleRec:hover{
+
+    transition: 0.2s ease-in;
+    cursor: pointer;
+    padding: +2px;
+
+}
+
+#moduleRec:hover .moduleRecTxt{
+
+    opacity: 1;
+    transition: opacity 0.2s ease;
+
+}
+
+#moduleRec:hover .moduleRecTxt::after{
+
+    opacity: 1;
+    transition: opacity 0.2s ease;
+
+}
+
+.moduleRecTitle{
+
+    color: white;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+    position: absolute;
+    font-size: 30px;
+    border-radius: 9px;
+    padding: 7px;
+    z-index: 10;
+    background-color: rgba(0,0,0,0);
+
+}
+
+.moduleRecTxt{
+
+    position: absolute;
+    padding: 0px 164px 50px 0px;
+    margin: 300px 0px 0px 100px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#moduleRec .gradientMod{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    margin: 47px 844px 411px 115px;
+    padding: 2px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#moduleRec .gradientMod:hover{
+
+    opacity: 1;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+@keyframes spinning{
+
+    from{
+        --angle: 0deg;
+    }
+    to{
+        --angle: 360deg;
+    }
+
+}
+
+@property --angle{
+
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+
+}
+/* Modules */
+/* Claritas */
+
+#claritasRec{
+
+    background-size: cover;
+    background-position: center;
+    border: none;
+    overflow: hidden;
+    
+
+}
+
+#claritasRec .videoBg{
+
+    object-fit: cover;
+    margin: 0px 0px -80px -90px;
+    z-index: 1;
+
+}
+
+.claritasRecTitle{
+
+    color: white;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+    position: absolute;
+    font-size: 30px;
+    border-radius: 9px;
+    padding: 7px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+.claritasRecTxt{
+
+    position: absolute;
+    padding: 0px 165px 50px 0px;
+    margin: 300px 0px 0px 100px;
+    border-radius: 9px;
+    z-index: 10;
+
+}
+
+#claritasRec .gradientClaritas{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px 0px 0px 0px;
+    margin: 200px 435px 260px 525px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#claritasRec .gradientClaritas:hover{
+
+    opacity: 1;
+    cursor: pointer;
+    padding: +2px;
+
+}
+
+.gradientClaritas:hover ~ .claritasRecTxt .claritasRecTitle{
+
+    opacity: 1;
+    transition: opacity 0.2s ease;
+
+}
+
+/* Claritas */
+/* Chatbot */
+
+#chatBotRec{
+
+    background-image: url('../assets/images/chatBotRec.jpg');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    background-position: 0px 0px;
+
+}
+
+#chatBotRec:hover{
+
+    transition: 0.4s ease-in;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+#chatBotRec:hover .chatBotRecTxt{
+
+    opacity: 1;
+    transition: opacity 0.4s ease;
+
+}
+
+.chatBotRecTitle{
+    
+    color: white;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+    
+}
+
+.chatBotRecTitle{
+
+    position: absolute;
+    font-size: 30px;
+    border-radius: 9px;
+    padding: 7px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0);
+
+}
+
+.chatBotRecTxt{
+
+    position: absolute;
+    padding: 0px 159px 50px 0px;
+    margin: 300px 0px 0px 100px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#chatBotRec .gradientChat{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px;
+    margin: 58px 26px 413px 933px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#chatBotRec .gradientChat:hover{
+
+    opacity: 1;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+/* Chatbot */
+/* FAQ */
+
+#faqRec{
+
+    background-image: url('../assets/images/faqRec.jpg');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    background-position: 0px 0px;
+
+}
+
+#faqRec:hover{
+
+    transition: 0.4s ease-in;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+#faqRec:hover .faqRecTxt{
+
+    opacity: 1;
+    transition: opacity 0.4s ease;
+
+}
+
+.faqRecTitle{
+    
+    color: white;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+    
+}
+
+.faqRecTitle{
+
+    position: absolute;
+    font-size: 30px;
+    border-radius: 9px;
+    padding: 7px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0);
+
+}
+
+.faqRecTxt{
+
+    position: absolute;
+    padding: 0px 76px 50px 0px;
+    margin: 320px 0px 0px 140px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#faqRec .gradientFAQ{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px;
+    margin: 479px 843px -22px 116px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#faqRec .gradientFAQ:hover{
+
+    opacity: 1;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+/* FAQ */
+/* StudentResources */
+
+#resourcesRec{
+
+    background-image: url('../assets/images/resourcesRec.png');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    background-position: 0px 0px;
+
+}
+
+#resourcesRec:hover{
+
+    transition: 0.4s ease-in;
+    cursor: pointer;
+
+}
+
+#resourcesRec:hover .resourcesRecTxt{
+
+    opacity: 1;
+    transition: opacity 0.4s ease;
+
+}
+
+.resourcesRecTitle{
+
+    color: white;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+    position: absolute;
+    font-size: 30px;
+    border-radius: 9px;
+    padding: 7px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0);
+
+}
+
+.resourcesRecTxt{
+
+    position: absolute;
+    padding: 0px 210px 83px 0px;
+    margin: 290px 0px 0px 80px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    text-align: center;
+
+}
+
+#resourcesRec .gradientRes{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px;
+    margin: 630px 434px -171px 525px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#resourcesRec .gradientRes:hover{
+
+    opacity: 1;
+    cursor: pointer;
+
+}
+
+/* Resources */
+/* Sessions */
+
+#sessionRec{
+
+    background-image: url('../assets/images/sessionRec.png');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    background-position: 0px 0px;
+
+}
+
+#sessionRec:hover{
+
+    transition: 0.4s ease-in;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+#sessionRec:hover .sessionRecTxt{
+
+    opacity: 1;
+    transition: opacity 0.4s ease;
+
+}
+
+.sessionRecTitle{
+
+    position: absolute;
+    font-size: 30px;
+    border-radius: 9px;
+    padding: 7px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0);
+    color: white;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+
+}
+
+.sessionRecTxt{
+
+    position: absolute;
+    padding: 0px 188px 50px 0px;
+    margin: 310px 0px 0px 85px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#sessionRec .gradientSes{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px;
+    margin: 473px 25px -22px 930px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#sessionRec .gradientSes:hover{
+
+    opacity: 1;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+/* Session */
+/* Dev */
+
+#inDev1Rec,
+#inDev2Rec,
+#inDev3Rec{
+
+    background-image: url('../assets/images/devRec.png');
+    background-size: cover;
+    background-position: center;
+    border: none;
+    background-position: 0px 0px;
+
+}
+
+#inDev1Rec:hover,
+#inDev3Rec:hover{
+
+    transition: 0.4s ease-in;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+#inDev2Rec:hover{
+
+    transition: 0.4s ease-in;
+    cursor: pointer;
+
+}
+
+#inDev1Rec:hover .dev1RecTxt,
+#inDev2Rec:hover .dev2RecTxt,
+#inDev3Rec:hover .dev3RecTxt{
+
+    opacity: 1;
+    transition: opacity 0.4s ease;
+
+}
+
+.dev1RecTitle,
+.dev2RecTitle,
+.dev3RecTitle{
+
+    position: absolute;
+    font-size: 30px;
+    border-radius: 9px;
+    padding: 7px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0);
+    color: white;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+
+}
+
+.dev1RecTxt{
+
+    position: absolute;
+    padding: 0px 243px 83px 0px;
+    margin: 290px 0px 0px 55px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    text-align: center;
+
+}
+
+.dev2RecTxt{
+
+    position: absolute;
+    padding: 0px 243px 83px 0px;
+    margin: 290px 0px 0px 55px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    text-align: center;
+
+}
+
+.dev3RecTxt{
+
+    position: absolute;
+    padding: 0px 243px 83px 0px;
+    margin: 290px 0px 0px 55px;
+    border-radius: 9px;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+    text-align: center;
+
+}
+
+#inDev1Rec .gradientDev1{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px;
+    margin: 905px 840px -450px 113px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#inDev2Rec .gradientDev2{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px;
+    margin: 1056px 431px -600px 521px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#inDev3Rec .gradientDev3{
+
+    position: absolute;
+    top: 0;
+    left: -90px;
+    bottom: -80px;
+    right: 0;
+    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
+    z-index: 2;
+    padding: 0px;
+    margin: 905px 25px -450px 930px;
+    border-radius: 15px;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+
+}
+
+#inDev1Rec .gradientDev1:hover{
+
+    opacity: 1;
+    cursor: pointer;
+    padding: 2px;
+
+}
+
+#inDev2Rec .gradientDev2:hover{
+
+    opacity: 1;
+    cursor: pointer;
+
+}
+
+#inDev3Rec .gradientDev3:hover{
+
+    opacity: 1;
+    cursor: pointer;
+    padding: 2px;
+
+}

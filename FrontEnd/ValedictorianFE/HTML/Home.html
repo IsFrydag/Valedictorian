@@ -1,31 +1,191 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <title>My Electron App</title>
+        <title>Home</title>
 
-        <style>
-            body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-            form { max-width: 300px; margin: 0 auto; }
-            input, button { margin: 10px; padding: 8px; width: 100%; }
-        </style>
+        <link rel="stylesheet" href="../css/home.css">
+        <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 
     </head>
 
     <body>
 
-        <h1>Register</h1>
+        <div class="topBar">
 
-        <form id="registerForm">
+            <a href="../HTML/profile.html" style="text-decoration: none; color: inherit;">
+                <div class="topLeftCircle"></div>
+            </a>
+            
 
-            <input type="email" id="email" placeholder="Email" required>
-            <input type="password" id="password" placeholder="Password" required>
-            <button type="submit">Register</button>
+            <div class="bellIcon"><i class='bxr  bx-bell-ring'></i></div>
+            <div class="logo"></div>
+            
+            <div class="tab tabHome">
+                <p>Home</p>
+            </div>
+            <div class="tab tabCal">
+                <p>Calendar</p>
+            </div>
+            <div class="tab tabMes">
+                <p>Messages</p>
+            </div>
 
-        </form>
+        </div>
+
+        <section class="mainBox">
+
+            <div class="hB" id="moduleRec">
+
+                <div class="gradientMod"></div>
+
+                <div class="moduleRecTxt">
+                    <div class="moduleRecTitle">MODULES</div>
+                </div>
+
+            </div>
+            <div class="hB" id="claritasRec">
+
+                
+                <video autoplay muted loop playsinline class="videoBg">
+                    <source src="../assets/images/claritasRec.mp4" type="video/mp4">
+                </video>
+                <div class="gradientClaritas"></div>
+                
+                <div class="claritasRecTxt">
+                    <div class="claritasRecTitle">CLARITAS</div>
+                </div>
+
+            </div>
+            <div class="hB" id="chatBotRec">
+
+                <div class="gradientChat"></div>
+
+                <div class="chatBotRecTxt">
+                    <div class="chatBotRecTitle">CHATBOT</div>
+                </div>
+
+            </div>
+            <div class="hB" id="faqRec">
+
+                <div class="gradientFAQ"></div>
+
+                <div class="faqRecTxt">
+                    <div class="faqRecTitle">FAQ</div>
+                </div>
+
+            </div>
+            <div class="hB" id="resourcesRec">
+
+                <div class="gradientRes"></div>
+
+                <div class="resourcesRecTxt">
+                    <div class="resourcesRecTitle">STUDENT RESOURCES</div>
+                </div>
+
+            </div>
+            <div class="hB" id="sessionRec">
+
+                <div class="gradientSes"></div>
+
+                <div class="sessionRecTxt">
+                    <div class="sessionRecTitle">TUTORING?</div>
+                </div>
+
+            </div>
+            <div class="hB" id="inDev1Rec">
+
+                <div class="gradientDev1"></div>
+
+                <div class="dev1RecTxt">
+                    <div class="dev1RecTitle">UNDER DEVELOPMENT</div>
+                </div>
+
+            </div>
+            <div class="hB" id="inDev2Rec">
+
+                <div class="gradientDev2"></div>
+
+                <div class="dev2RecTxt">
+                    <div class="dev2RecTitle">UNDER DEVELOPMENT</div>
+                </div>
+
+            </div>
+            <div class="hB" id="inDev3Rec">
+
+                <div class="gradientDev3"></div>
+
+                <div class="dev3RecTxt">
+                    <div class="dev3RecTitle">UNDER DEVELOPMENT</div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="calBox">
+
+            <div id="calendarHeader">
+                <button id="prevMonth">&lt;</button>
+                <span id="monthYear"></span>
+                <button id="nextMonth">&gt;</button>
+            </div>
+            <table id="calendarTable">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- JS will fill this -->
+                </tbody>
+            </table>
+
+        </section>
+
+        <section class="imageColumnContainer">
+
+            <div class="imageColumn leftImageColumn">
+                
+                <div class="scroller leftScroller">
+                    <div class="lSquareBox" id="leftColImg1"></div>
+                    <div class="lSquareBox" id="leftColImg2"></div>
+                    <div class="lSquareBox" id="leftColImg3"></div>
+                    <div class="lSquareBox" id="leftColImg4"></div>
+
+                    <div class="lSquareBox" id="leftColImg1"></div>
+                    <div class="lSquareBox" id="leftColImg2"></div>
+                    <div class="lSquareBox" id="leftColImg3"></div>
+                    <div class="lSquareBox" id="leftColImg4"></div>
+                </div>
+
+            </div>
+
+            <div class="imageColumn rightImageColumn">
+
+                <div class="scroller rightScroller">
+                    <div class="rSquareBox" id="rightColImg1"></div>
+                    <div class="rSquareBox" id="rightColImg2"></div>
+                    <div class="rSquareBox" id="rightColImg3"></div>
+                    <div class="rSquareBox" id="rightColImg4"></div>
+
+                    <div class="rSquareBox" id="rightColImg1"></div>
+                    <div class="rSquareBox" id="rightColImg2"></div>
+                    <div class="rSquareBox" id="rightColImg3"></div>
+                    <div class="rSquareBox" id="rightColImg4"></div>
+                </div>
+
+            </div>
+
+        </section>
         
-        <p id="message"></p>
-
-        <script src="renderer.js"></script>
+        <script src="../JS/home.js"></script>
+        <script src="../JS/renderer.js"></script>
 
     </body>
 

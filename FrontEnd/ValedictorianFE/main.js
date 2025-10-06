@@ -4,15 +4,15 @@ const path = require('path');
 function createWindow(){
 
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: 1600,
+        height: 1200,
         webPreferences: {
             preload: path.join(__dirname, 'renderer.js'),
             contextIsolation: true,
             nodeIntegration: false
         }
     });
-    win.loadFile('Home.html');
+    win.loadFile('HTML/login_reg.html');
 }
 
 app.whenReady().then(createWindow);
