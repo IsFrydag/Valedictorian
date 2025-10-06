@@ -7,9 +7,9 @@
     "start": "electron ."
   },
   "keywords": [],
-  "author": "",
+  "author": "HeinerAndMilenke",
   "license": "ISC",
-  "description": "",
+  "description": "main file",
   "devDependencies": {
     "electron": "^38.1.2"
   },
