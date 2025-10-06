@@ -1,8 +1,8 @@
 # .NET MAUI
-BackEnd/Valedictorian/bin/
-BackEnd/Valedictorian/obj/
-BackEnd/Valedictorian/*.suo
-BackEnd/Valedictorian/*.user
+BackEnd/Valedictorian/Valedictorian/bin/
+BackEnd/Valedictorian/Valedictorian/obj/
+BackEnd/Valedictorian/Valedictorian/*.suo
+BackEnd/Valedictorian/Valedictorian/*.user
 
 # Electron
 FrontEnd/ValedictorianFE/node_modules/
