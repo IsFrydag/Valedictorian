@@ -36,6 +36,30 @@
         }
       }
     },
+    "/api/Notif/NotificationReceived": {
+      "get": {
+        "tags": [
+          "Notif"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Profile/SaveProfileInfo": {
+      "get": {
+        "tags": [
+          "Profile"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Reg/Register": {
       "post": {
         "tags": [

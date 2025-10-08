@@ -4,15 +4,15 @@ namespace ValedictorianAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class NotivController : ControllerBase
+    public class NotifController : ControllerBase
     {
-            [HttpGet("NotificationRecived")]
-            public IActionResult NotificationRecived()
+            [HttpGet("NotificationReceived")]
+            public IActionResult NotificationReceived()
             {
                 // Example static data
                 var Message = new
                 {
-                    Message = "No new Notifications"
+                    message = "No new Notifications"
                 };
 
                 return Ok(Message); // returns JSON { "username": "Andy123", "age": 29 }

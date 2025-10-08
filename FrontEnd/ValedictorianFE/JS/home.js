@@ -1,3 +1,5 @@
+import { apiRequest } from '../JS/api.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const mainBox = document.querySelector('.mainBox');
   const calBox  = document.querySelector('.calBox');
@@ -91,4 +93,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   animate();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const bell = document.getElementById('bell');
+
+  if (bell) {
+    bell.addEventListener('click', async () => {
+      try {
+        // Call backend notification endpoint
+        const response = await apiRequest('/Notif/NotificationReceived', 'GET');
+        
+        // Show message in an alert
+        alert(response.message);
+      } catch (err) {
+        console.error('Notification fetch error:', err);
+        alert('Failed to retrieve notifications');
+      }
+    });
+  } else {
+    console.warn('Notification bell element not found');
+  }
 });

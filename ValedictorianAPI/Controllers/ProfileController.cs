@@ -13,10 +13,10 @@ namespace ValedictorianAPI.Controllers
             // Example static data
             var Message = new
             {
-                Message = "Piet"
+                message = "Information saved successfuly"
             };
 
-            return Ok(Message); // returns JSON { "username": "Andy123", "age": 29 }
+            return Ok(Message);
         }
     }
 }
