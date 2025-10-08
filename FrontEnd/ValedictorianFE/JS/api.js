@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:5000";
+const API_BASE = "http://localhost:7161/api";
 
 export async function apiRequest(endpoint, method, data){
     try{

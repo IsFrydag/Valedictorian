@@ -55,7 +55,7 @@ loginForm.addEventListener('submit', async (e) => {
   
   try {
     // Make a test API call to verify connection (no data needed)
-    const response = await apiRequest('/api/test', 'POST', {});
+    let response = await apiRequest('/Auth/GetLoginName', 'GET'); 
     
     // Expecting response like { message: "API connection successful" }
     alert(response.message);
