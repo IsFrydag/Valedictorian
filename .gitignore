@@ -13,3 +13,6 @@ FrontEnd/ValedictorianFE/*.log
 *.bak
 *.swp
 /ValedictorianAPI/.vs
+/ValedictorianAPI/bin
+/ValedictorianAPI/bin
+/ValedictorianAPI/obj

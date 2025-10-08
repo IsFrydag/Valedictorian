@@ -34,3 +34,38 @@ E:\University\3ed Year\SEN381\Assignments\repo\Valedictorian\ValedictorianAPI\ob
 E:\University\3ed Year\SEN381\Assignments\repo\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.pdb
 E:\University\3ed Year\SEN381\Assignments\repo\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.genruntimeconfig.cache
 E:\University\3ed Year\SEN381\Assignments\repo\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ref\ValedictorianAPI.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\appsettings.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\ValedictorianAPI.staticwebassets.endpoints.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\ValedictorianAPI.exe
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\ValedictorianAPI.deps.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\ValedictorianAPI.runtimeconfig.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\ValedictorianAPI.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\ValedictorianAPI.pdb
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.csproj.AssemblyReference.cache
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.AssemblyInfoInputs.cache
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.AssemblyInfo.cs
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.csproj.CoreCompileInputs.cache
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\scopedcss\bundle\ValedictorianAPI.styles.css
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\Valedict.4513D887.Up2Date
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\refint\ValedictorianAPI.dll
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.pdb
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.genruntimeconfig.cache
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ref\ValedictorianAPI.dll
