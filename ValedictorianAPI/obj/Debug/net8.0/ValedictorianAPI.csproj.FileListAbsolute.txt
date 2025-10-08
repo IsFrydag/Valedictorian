@@ -54,6 +54,7 @@ C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\ob
 C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.csproj.CoreCompileInputs.cache
 C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\ValedictorianAPI.sourcelink.json
 C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\Heiner\Desktop\SEN_381\desktopProject\Valedictorian\ValedictorianAPI\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
