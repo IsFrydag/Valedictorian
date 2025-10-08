@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "http://localhost:5500") // Angular app URL
+        policy.WithOrigins("http://localhost:4200", "http://127.0.0.1:5500") // Angular app URL
               .AllowAnyMethod()  // GET, POST, PUT, DELETE
               .AllowAnyHeader(); // Any headers
     });
