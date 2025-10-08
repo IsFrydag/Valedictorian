@@ -12,3 +12,4 @@ FrontEnd/ValedictorianFE/*.log
 # General
 *.bak
 *.swp
+/ValedictorianAPI/.vs
