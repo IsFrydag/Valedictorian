@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+673d771b9f9b813768a8e08b9f47bde4968cba6b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+99a64e5ad6bdaddce1cc1ef92b7fc6852c486894")]
 [assembly: System.Reflection.AssemblyProductAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
