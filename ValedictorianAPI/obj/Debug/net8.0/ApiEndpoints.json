@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.AuthController",
+    "Method": "GetLoginName",
+    "RelativePath": "api/Auth/GetLoginName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
