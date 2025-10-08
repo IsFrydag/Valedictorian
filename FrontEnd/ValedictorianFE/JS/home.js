@@ -1,103 +1,94 @@
-const logo = document.querySelector('.logo');
-
-logo.addEventListener('mouseover', () => {
-   
-    if (!logo.classList.contains('animateAfter')) {
-        logo.classList.add('animateAfter');
-     
-        setTimeout(() => {
-            logo.classList.remove('animateAfter');
-        }, 3000);
-    }
-});
-
-
-/* Logo effects */
-/* Tabs */
-
-
 document.addEventListener('DOMContentLoaded', () => {
-    const mainBox = document.querySelector('.mainBox');
-    const calBox = document.querySelector('.calBox');
-    const tabCal = document.querySelector('.tabCal');
-    const tabHome = document.querySelector('.tabHome');
+  const mainBox = document.querySelector('.mainBox');
+  const calBox  = document.querySelector('.calBox');
 
-    tabCal.addEventListener('click', () =>{
-        mainBox.style.display = 'none';
-        calBox.style.display = 'grid';
+  // support both old class-based selectors and your current data-tab attributes
+  const tabCal  = document.querySelector('.tabCal') || document.querySelector('[data-tab="cal"]');
+  const tabHome = document.querySelector('.tabHome') || document.querySelector('[data-tab="home"]');
+
+  const navLinks = document.querySelector('.navLinks');
+
+  if (!mainBox || !calBox) {
+    console.error('Error: .mainBox or .calBox not found in the DOM.');
+    return;
+  }
+
+  // initial state: show main, hide calendar
+  mainBox.style.display = 'grid';
+  calBox.style.display  = 'none';
+
+  function showCalendar() {
+    mainBox.style.display = 'none';
+    calBox.style.display  = 'grid';
+    // update active class visually (works for data-tab li or class selectors)
+    document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
+    const calLi = document.querySelector('[data-tab="cal"]');
+    if (calLi) calLi.classList.add('active');
+  }
+
+  function showHome() {
+    mainBox.style.display = 'grid';
+    calBox.style.display  = 'none';
+    document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
+    const homeLi = document.querySelector('[data-tab="home"]');
+    if (homeLi) homeLi.classList.add('active');
+  }
+
+  if (tabCal)  tabCal.addEventListener('click', showCalendar);
+  if (tabHome) tabHome.addEventListener('click', showHome);
+
+  // extra: event-delegation fallback in case clicks land on inner text nodes
+  if (navLinks) {
+    navLinks.addEventListener('click', (e) => {
+      const li = e.target.closest('li');
+      if (!li) return;
+      const tab = li.dataset.tab;
+      if (tab === 'cal') showCalendar();
+      if (tab === 'home') showHome();
     });
-
-    tabHome.addEventListener('click', () =>{
-        mainBox.style.display = 'grid';
-        calBox.style.display = 'none';
-    });
+  }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const parallaxLogo = document.querySelector(".parallaxLogo");
 
-/* Tabs */
-/* Dynamic Calender */
+  const strength = 30; // parallax motion strength (px)
+  const glowStrength = 40; // how far glow shifts (px)
+  let targetX = 0;
+  let targetY = 0;
+  let currentX = 0;
+  let currentY = 0;
+  let glowX = 0;
+  let glowY = 0;
 
+  document.addEventListener("mousemove", (e) => {
+    const rect = parallaxLogo.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-const calBox = document.querySelector('.calBox');
-const monthYear = document.getElementById('monthYear');
-const calendarTableBody = document.querySelector('#calendarTable tbody');
-const prevMonthBtn = document.getElementById('prevMonth');
-const nextMonthBtn = document.getElementById('nextMonth');
+    const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
+    const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
 
-let today = new Date();
-let currentMonth = today.getMonth();
-let currentYear = today.getFullYear();
+    // Opposite parallax movement
+    targetX = -deltaX * strength;
+    targetY = -deltaY * strength;
 
-function renderCalendar(month, year){
-    calendarTableBody.innerHTML = '';
+    // Glow follows cursor (same direction as mouse)
+    glowX = deltaX * glowStrength;
+    glowY = deltaY * glowStrength;
+  });
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
+  function animate() {
+    currentX += (targetX - currentX) * 0.1;
+    currentY += (targetY - currentY) * 0.1;
 
-    monthYear.textContent = `${new Date(year, month).toLocaleString('default', { month: 'long' })} ${year}`;
+    parallaxLogo.style.setProperty("--moveX", `${currentX}px`);
+    parallaxLogo.style.setProperty("--moveY", `${currentY}px`);
+    parallaxLogo.style.setProperty("--glowX", `${glowX}px`);
+    parallaxLogo.style.setProperty("--glowY", `${glowY}px`);
 
-    let date = 1;
-    for (let i = 0; i < 6; i++){
-        let row = document.createElement('tr');
+    requestAnimationFrame(animate);
+  }
 
-        for (let j = 0; j < 7; j++){
-            let cell = document.createElement('td');
-
-            if (i === 0 && j < firstDay){
-                cell.textContent = '';
-            } else if (date > daysInMonth){
-                cell.textContent = '';
-            } else{
-                cell.textContent = date;
-                date++;
-            }
-
-            row.appendChild(cell);
-        }
-
-        calendarTableBody.appendChild(row);
-    }
-}
-
-prevMonthBtn.addEventListener('click', () =>{
-    currentMonth--;
-    if (currentMonth < 0){
-        currentMonth = 11;
-        currentYear--;
-    }
-    renderCalendar(currentMonth, currentYear);
+  animate();
 });
-
-nextMonthBtn.addEventListener('click', () =>{
-    currentMonth++;
-    if (currentMonth > 11){
-        currentMonth = 0;
-        currentYear++;
-    }
-    renderCalendar(currentMonth, currentYear);
-});
-
-renderCalendar(currentMonth, currentYear);
-
-
-/* Dynamic Calender */

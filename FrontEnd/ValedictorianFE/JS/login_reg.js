@@ -11,65 +11,57 @@ loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
 
-const regForm = document.getElementById("register-form");
-const loginForm = document.getElementById("login-form");
+let users = JSON.parse(localStorage.getItem('users')) || [];
 
-const studentEmailRegex = /^[a-zA-Z0-9._%+-]+@student\.belgiumcampus\.ac\.za$/;
-
-if (regForm) {
-    regForm.addEventListener("submit", async e => {
-        e.preventDefault();
-
-        const accountType = document.getElementById("my-dropdown").value;
-        const name = document.getElementById("reg-name").value.trim();
-        const surname = document.getElementById("reg-surname").value.trim();
-        const email = document.getElementById("reg-email").value.trim();
-        const password = document.getElementById("reg-password").value.trim();
-
-        if (!studentEmailRegex.test(email)) {
-            alert("Please use a valid student email address");
-            return;
-        }
-
-        try {
-            const result = await apiRequest("/register", "POST", {
-                accountType,
-                name,
-                surname,
-                email,
-                password
-            });
-            alert("Registration successful!");
-            container.classList.remove("active");
-        } catch (err) {
-            alert(err.message);
-        }
-    });
+async function hashPassword(password) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
-if (loginForm) {
-    loginForm.addEventListener("submit", async e => {
-        e.preventDefault();
+// Registration
+const registerForm = document.getElementById('register-form');
+registerForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const type = document.getElementById('my-dropdown').value;
+  let domain, userType;
 
-        const email = document.getElementById("login-email").value.trim();
-        const password = document.getElementById("login-password").value.trim();
+  if (type === 'optStudent') { domain = '@student.belgiumcampus.ac.za'; userType = 'student'; }
+  else if (type === 'optTutor') { domain = '@tutor.belgiumcampus.ac.za'; userType = 'tutor'; }
+  else if (type === 'optAdmin') { domain = '@admin.belgiumcampus.ac.za'; userType = 'admin'; }
 
-        if (!studentEmailRegex.test(email)) {
-            alert("Please use a valid student email address");
-            return;
-        }
+  const name = document.getElementById('reg-name').value.trim();
+  const surname = document.getElementById('reg-surname').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const password = document.getElementById('reg-password').value;
 
-        try {
-            const result = await apiRequest("/login", "POST", {
-                email,
-                password
-            });
+  if (!name || !surname || !email || !password) { alert('All fields are required'); return; }
+  if (!email.endsWith(domain)) { alert('Email must end with the correct domain, example@<accountType>.belgiumcampus.ac.za'); return; }
+  if (users.some(u => u.email === email)) { alert('Email already registered'); return; }
 
-            localStorage.setItem("authToken", result.token);
-            alert("Login successful!");
-            window.location.href = "Home.html";
-        } catch (err) {
-            alert(err.message);
-        }
-    });
-}
+  const hashedPassword = await hashPassword(password);
+  users.push({ name, surname, email, type: userType, hashedPassword });
+  localStorage.setItem('users', JSON.stringify(users));
+  alert('Registration successful');
+  registerForm.reset();
+  window.location.href = "../HTML/login_reg.html";
+
+});
+
+const loginForm = document.getElementById('login-form');
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  try {
+    // Make a test API call to verify connection (no data needed)
+    const response = await apiRequest('/api/test', 'POST', {});
+    
+    // Expecting response like { message: "API connection successful" }
+    alert(response.message);
+    loginForm.reset();
+    window.location.href = "../HTML/Home.html";
+  } catch (err) {
+    alert(err.message || 'API connection failed - check console for details');
+  }
+});

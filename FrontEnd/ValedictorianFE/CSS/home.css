@@ -1,228 +1,164 @@
-body{
-
+body {
     background-color: black;
-
+    padding-top: 64px;
 }
 
 .hidden {
     display: none;
 }
 
-.hB{
+.wrapper{
     
-    box-shadow: 20px 20px 10px rgba(0, 0, 0, 0.3);
-    
-}
-
-@import url('https://fonts.googleapis.com/css2?family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
-
-.topBar{
-
-    position: absolute;
-    left: 0%;
-    bottom: 84%;
-    right: 35%;
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    column-gap: 0px;
-    height: 130px;
-
-}
-
-.topLeftCircle{
-
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background-color: white;
-    z-index: 10;
-    padding: 0;
-    margin: 10px 0px 0px 22px;
-
-    grid-column: 1/3;
-
-}
-
-.topLeftCircle:hover{
-
-    cursor: pointer;
-
-}
-
-.bellIcon{
-
-    background-size: contain;
-    color: white;
-    grid-column: 2;
-    align-self: center;
-    margin: -58px 0px 0px -15px;
-
-}
-
-.logo{
-
-    position: absolute;
-    width: 600px;
-    height: 107px;
-    grid-column: 3/7;
-    padding: 5px;
-    margin: 0px 0px 25px 0px;
-    background: 
-        linear-gradient(to right, rgba(0, 0, 0, 0.950), rgba(0, 0, 0, 0.050), rgba(0,0,0,0), rgba(0,0,0,0)), 
-        linear-gradient(to left, rgba(0,0,0,0.950), rgba(0,0,0,0.050), rgba(0,0,0,0), rgba(0,0,0,0)), 
-        url("../assets/images/Valedictorian1.jpg");
+    margin: 0;
+    width: 100vw;
+    min-height: 100vh;
     background-size: cover;
-    background-size: 110%;
-    background-position: -15px -65px;
-    border-radius: 40px;
-    border: none;
-
-}
-
-.logo::after{
-
-    content: '';
+    z-index: -15;
     position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: conic-gradient(from var(--angle), transparent 80%, #ffffff, rgb(255, 215, 0), rgb(255, 215, 0), rgb(255, 255, 255), #ffffff, rgb(255, 215, 0), rgb(255, 215, 0), #ffffff);
-    top: 50%;
+
+}
+
+.box div{
+    position: absolute;
+    height: 25px;
+    background-color: transparent;
+    border: 1px solid rgba(255, 253, 157, 0.8);
+}
+.box :nth-child(1) {
+    top: 12%;
+    left: 42%;
+    animation: animate 3s linear infinite;
+    animation-delay: 0s;
+}
+.box :nth-child(2) {
+    top: 70%;
     left: 50%;
-    translate: -50% -50%;
-    z-index: -5;
-    padding: 4px;
-    border-radius: 45px;
-    opacity: 0;
-
+    animation: animate 7s linear infinite;
+    animation-delay: 1s;
+}
+.box :nth-child(3) {
+    top: 17%;
+    left: 6%;
+    animation: animate 5s linear infinite;
+    animation-delay: 0.5s;
+}
+.box :nth-child(4) {
+    top: 20%;
+    left: 60%;
+    animation: animate 4s linear infinite;
+    animation-delay: 1.5s;
+}
+.box :nth-child(5) {
+    top: 67%;
+    left: 10%;
+    animation: animate 6s linear infinite;
+    animation-delay: 2s;
+}
+.box :nth-child(6) {
+    top: 80%;
+    left: 70%;
+    animation: animate 5s linear infinite;
+    animation-delay: 0.8s;
+}
+.box :nth-child(7) {
+    top: 60%;
+    left: 80%;
+    animation: animate 4s linear infinite;
+    animation-delay: 1.2s;
+}
+.box :nth-child(8) {
+    top: 32%;
+    left: 23%;
+    animation: animate 3s linear infinite;
+    animation-delay: 0.3s;
+}
+.box :nth-child(9) {
+    top: 90%;
+    left: 25%;
+    animation: animate 6s linear infinite;
+    animation-delay: 1.8s;
+}
+.box :nth-child(10) {
+    top: 20%;
+    left: 80%;
+    animation: animate 3s linear infinite;
+    animation-delay: 0.6s;
+}
+.box :nth-child(11) {
+    top: 45%;
+    left: 15%;
+    animation: animate 4.5s linear infinite;
+    animation-delay: 0.2s;
+}
+.box :nth-child(12) {
+    top: 25%;
+    left: 75%;
+    animation: animate 6.5s linear infinite;
+    animation-delay: 1.3s;
+}
+.box :nth-child(13) {
+    top: 85%;
+    left: 35%;
+    animation: animate 3.8s linear infinite;
+    animation-delay: 0.9s;
+}
+.box :nth-child(14) {
+    top: 10%;
+    left: 55%;
+    animation: animate 5.2s linear infinite;
+    animation-delay: 1.7s;
+}
+.box :nth-child(15) {
+    top: 50%;
+    left: 90%;
+    animation: animate 4.2s linear infinite;
+    animation-delay: 0.4s;
+}
+.box :nth-child(16) {
+    top: 75%;
+    left: 20%;
+    animation: animate 6.8s linear infinite;
+    animation-delay: 1.1s;
+}
+.box :nth-child(17) {
+    top: 30%;
+    left: 65%;
+    animation: animate 3.5s linear infinite;
+    animation-delay: 0.7s;
+}
+.box :nth-child(18) {
+    top: 95%;
+    left: 45%;
+    animation: animate 5.5s linear infinite;
+    animation-delay: 1.4s;
+}
+.box :nth-child(19) {
+    top: 40%;
+    left: 30%;
+    animation: animate 4.8s linear infinite;
+    animation-delay: 0.1s;
+}
+.box :nth-child(20) {
+    top: 15%;
+    left: 85%;
+    animation: animate 6.2s linear infinite;
+    animation-delay: 1.6s;
 }
 
-.logo.animateAfter::after {
-
-    animation: spinning2 3s linear forwards;
-
-}
-
-@keyframes spinning2{
-
+@keyframes animate{
     0% {
-        --angle: 0deg;
-        opacity: 0;
-    }
-    10% {
+        height: 0; /* Start with no height */
         opacity: 1;
     }
-    90% {
+    50% {
+        height: 50px; /* Grow to full height midway */
         opacity: 1;
     }
     100% {
-        --angle: 360deg;
-        opacity: 0;
+        height: 50px; /* Maintain height */
+        transform: translateY(90vh); /* Move downward off-screen */
+        opacity: 0; /* Fade out */
     }
-}
-
-.bellIcon i{
-    
-    font-size: 36px;
-    
-}
-
-.bellIcon i:hover{
-    
-    color: red;
-    cursor: pointer;
-    
-}
-
-.tab{
-    
-    border: solid transparent 1px;
-    
-}
-
-.tabHome{
-
-    display: flex;
-    grid-column: 8;
-    background-color: red;
-    color: white;
-    padding: 0px 0px 0px 0px;
-    border-top-left-radius: 12px;
-    text-align: center;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: Bold;
-    font-size: 20px;
-    height: 50px;
-    align-self: end;
-    margin: 0px 0px 0px 0px;
-
-}
-.tabCal{
-
-    display: flex;
-    grid-column: 9;
-    background-color: rgb(183,0,0);
-    color: white;
-    padding: 0px 0px 0px 0px;
-    text-align: center;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: Bold;
-    font-size: 20px;
-    height: 50px;
-    align-self: end;
-    margin: 0px 0px 0px 0px;
-
-}
-.tabMes{
-
-    display: flex;
-    grid-column: 10;
-    background-color: rgb(117,1,1);
-    color: white;
-    border-top-right-radius: 12px;
-    padding: 0px 0px 0px 0px;
-    text-align: center;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: Bold;
-    font-size: 20px;
-    height: 50px;
-    align-self: end;
-    margin: 0px 0px 0px 0px;
-
-}
-
-.tabHome p{
-    margin: 11px 0px 0px 35px;
-}
-.tabCal p{
-    margin: 11px 0px 0px 17px;
-}
-.tabMes p{
-    margin: 11px 0px 0px 12px;
-}
-
-.tabHome:hover{
-    
-    margin: 0px 0px 5px 0px;
-    cursor: pointer;
-    height: +4x;
-    
-}
-.tabCal:hover{
-    
-    margin: 0px 0px 5px 0px;
-    cursor: pointer;
-    height: +4x;
-    
-}
-.tabMes:hover{
-    
-    margin: 0px 0px 5px 0px;
-    cursor: pointer;
-    height: +4x;
-    
 }
 
 .mainBox{
@@ -230,51 +166,99 @@ body{
     position: absolute;
     left: 1%;
     right: 35%;
-    top: 15%;
-    border: solid transparent 2px;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    row-gap: -15px;
-    column-gap: 0px;
-    padding: 0px;
-
-    height: 80vh;
-    overflow-y:auto;
-    background: rgb(255, 255, 255);
+    top: 1%;
+    height: 99vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: rgba(255, 255, 255, 0);
     border-radius: 8px;
     justify-items: center;
     align-items: center;
+    perspective: 1px;
+    transform-style: preserve-3d;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
 }
 
 .mainBox::-webkit-scrollbar{
-
     display: none;
+}
+
+.parallaxLogo{
+
+    width: 100vw;
+    height: 100vh;
+    padding-top: 20vh;
+    box-sizing: border-box;
+    transform-style: preserve-3d;
+    z-index: -2;
 
 }
 
-.mainBox .hB:nth-child(3n+2){
+.parallaxLogo::before{
 
-    margin-top: 200px;
+    content: "";
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-image: url("../assets/images/Valedictorian3.png");
+    position: absolute;
+    background-size: 500px 500px;
+    background-repeat: no-repeat;
+    background-position: calc(510px + var(--moveX, 0px)) calc(190px + var(--moveY, 0px));
+    z-index: -2;
+    transform: translateZ(-1px) scale(2);
+    transition: background-position 0.1s ease-out;
 
 }
 
-.hB{
+.Announcements{
 
-    border: solid red 2pt;
-    border-radius: 20px;
-    width: 350px;
-    height: 350px;
+    width: 100vw;
+    height: 80vh;
+    padding-top: 20vh;
+    background-color: rgb(0, 0, 0);
+    z-index: 5;
+    position: relative;
+    border-radius: 25px 0px;
+
+}
+
+.annContent{
+
+    padding: 50px;
+    margin: -150px 720px 0px 30px;
+    height: 103%;
+    z-index: 1;
+
+    border: solid rgb(0, 255, 213) 5px;
     
-    display: flex;
-    align-items: center;
-    margin: -100px 0px -120px 0px;
+    box-shadow: 
+    0 0 5px rgb(0, 255, 213),
+    0 0 15px rgb(0, 255, 213),
+    0 0 30px rgb(0, 255, 213),
+    0 0 50px rgb(0, 255, 213);
+
+    background: black;
+    color: white;
+    border-radius: 25px 0px; 
 
 }
 
-.imageColumnContainer{
+.annHead {
 
+    text-align: center;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    margin: 0px 0px 0px 0px;
+
+}
+
+/* -------- image columns -------- */
+.imageColumnContainer {
     position: absolute;
     top: 1%;
     bottom: 1%;
@@ -282,14 +266,11 @@ body{
     width: 33%;
     display: flex;
     justify-content: space-between;
-
-    border: solid white 2px;
+    border: solid rgb(0, 255, 213) 2px;
     border-radius: 15px;
-
 }
 
-.imageColumn{
-    
+.imageColumn {
     width: 45%;
     height: 100%;
     overflow: hidden;
@@ -297,9 +278,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow: hidden;
-    padding: 0px 10px 0px 10px;
-
+    padding: 0 10px;
 }
 
 .scroller {
@@ -317,7 +296,7 @@ body{
     animation: scrollUp 13s linear infinite;
 }
 
-.lSquareBox, 
+.lSquareBox,
 .rSquareBox {
     width: 90%;
     aspect-ratio: 1 / 1;
@@ -329,819 +308,196 @@ body{
 }
 
 .lSquareBox:hover,
-.rSquareBox:hover{
-
+.rSquareBox:hover {
     padding: +2px;
     cursor: pointer;
-
 }
 
-#leftColImg1{
-
+/* Left column images */
+#leftColImg1 {
     background-image: url("../assets/images/Limg1.jpg");
     background-size: cover;
     background-position: center;
-
 }
-#leftColImg2{
-
+#leftColImg2 {
     background-image: url("../assets/images/Limg2.webp");
     background-size: cover;
     background-position: center;
-
 }
-#leftColImg3{
-
+#leftColImg3 {
     background-image: url("../assets/images/Limg3.jpg");
     background-size: cover;
     background-position: center;
-
 }
-#leftColImg4{
-
+#leftColImg4 {
     background-image: url("../assets/images/Limg4.jpg");
     background-size: cover;
     background-position: center;
-
 }
 
-#rightColImg1{
-
+/* Right column images */
+#rightColImg1 {
     background-image: url("../assets/images/Rimg1.jpg");
     background-size: cover;
     background-position: center;
-
 }
-#rightColImg2{
-
+#rightColImg2 {
     background-image: url("../assets/images/Rimg2.jpg");
     background-size: cover;
     background-position: center;
-
 }
-#rightColImg3{
-
+#rightColImg3 {
     background-image: url("../assets/images/Rimg3.jpg");
     background-size: cover;
     background-position: center;
-
 }
-#rightColImg4{
-
+#rightColImg4 {
     background-image: url("../assets/images/Rim4.jpg");
     background-size: cover;
     background-position: center;
-
 }
 
+/* -------- keyframes -------- */
 @keyframes scrollUp {
-    0%   { transform: translateY(0); }
+    0% { transform: translateY(0); }
     100% { transform: translateY(-50%); }
 }
 
 @keyframes scrollDown {
-    0%   { transform: translateY(-50%); }
+    0% { transform: translateY(-50%); }
     100% { transform: translateY(0%); }
 }
 
-/* MainBox */
-/* Calender Box */
-
-.calBox{
-
-    position: absolute;
-    left: 1%;
-    right: 35%;
-    top: 15%;
-    border: solid transparent 2px;
-
-    display: none;
-
-    height: 80vh;
-    overflow-y:auto;
-    background: rgb(255, 255, 255);
-    border-radius: 8px;
-    justify-items: center;
-    align-items: center;
-
-}
-
-#calendarHeader{
-    
+/* -------- navbar -------- */
+.glassNav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 999;
     display: flex;
     justify-content: space-between;
-    width: 90%;
-    margin: 10px auto;
+    align-items: center;
+    padding: 0 24px;
+    gap: 16px;
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.navLinks {
+    display: flex;
+    gap: 32px;
+    margin: 0px 10px 0px 20px;
+    padding: 0;
+    list-style: none;
+    flex: 0 1 auto;
+    align-items: center;
+    position: relative;
+}
+
+.navLinks li {
+    color: rgb(0, 255, 213);
     font-family: "Zalando Sans Expanded", sans-serif;
-
-}
-
-#calendarTable{
-
-    width: 90%;
-    border-collapse: collapse;
-    margin: 0 auto 20px auto;
-
-}
-
-#calendarTable th, #calendarTable td{
-
-    border: 1px solid #ccc;
-    text-align: center;
-    padding: 10px;
-
-}
-
-#calendarTable td{
-
-    height: 50px;
+    font-weight: 600;
     cursor: pointer;
-    text-align: left;
-    vertical-align: top;
-    padding: 5px; 
-
+    position: relative;
+    transition: color .25s;
 }
 
-#calendarTable td:hover{
-
-    background-color: #f0f0f0;
-
-}
-
-
-/* Calender Box */
-/* Modules */
-
-
-#moduleRec{
-
-    background-image: url('../assets/images/moduleRec.png');
-    background-size: cover;
-    background-position: center;
-    border: none;
-
-}
-
-#moduleRec:hover{
-
-    transition: 0.2s ease-in;
-    cursor: pointer;
-    padding: +2px;
-
-}
-
-#moduleRec:hover .moduleRecTxt{
-
-    opacity: 1;
-    transition: opacity 0.2s ease;
-
-}
-
-#moduleRec:hover .moduleRecTxt::after{
-
-    opacity: 1;
-    transition: opacity 0.2s ease;
-
-}
-
-.moduleRecTitle{
-
-    color: white;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
+.navLinks li::after {
+    content: "";
     position: absolute;
-    font-size: 30px;
-    border-radius: 9px;
-    padding: 7px;
-    z-index: 10;
-    background-color: rgba(0,0,0,0);
-
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 3px;
+    background: rgb(238, 255, 0);
+    transition: width .35s;
 }
 
-.moduleRecTxt{
+.navLinks li:hover {
+    color: rgb(238, 255, 0);
+}
 
+.navLinks li.active {
+    color: rgb(238, 255, 0);
+}
+
+.navLinks li.active::after,
+.navLinks li:hover::after {
+    width: 100%;
+}
+
+.navExtras {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 0 0 auto;
+}
+
+/* Dropdown styles */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
     position: absolute;
-    padding: 0px 164px 50px 0px;
-    margin: 300px 0px 0px 100px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#moduleRec .gradientMod{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    margin: 47px 844px 411px 115px;
-    padding: 2px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#moduleRec .gradientMod:hover{
-
-    opacity: 1;
-    cursor: pointer;
-    padding: 2px;
-
-}
-
-@keyframes spinning{
-
-    from{
-        --angle: 0deg;
-    }
-    to{
-        --angle: 360deg;
-    }
-
-}
-
-@property --angle{
-
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-
-}
-/* Modules */
-/* Claritas */
-
-#claritasRec{
-
-    background-size: cover;
-    background-position: center;
-    border: none;
-    overflow: hidden;
-    
-
-}
-
-#claritasRec .videoBg{
-
-    object-fit: cover;
-    margin: 0px 0px -80px -90px;
-    z-index: 1;
-
-}
-
-.claritasRecTitle{
-
-    color: white;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
-    position: absolute;
-    font-size: 30px;
-    border-radius: 9px;
-    padding: 7px;
-    z-index: 1;
-    background-color: rgba(0,0,0,0);
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-.claritasRecTxt{
-
-    position: absolute;
-    padding: 0px 165px 50px 0px;
-    margin: 300px 0px 0px 100px;
-    border-radius: 9px;
-    z-index: 10;
-
-}
-
-#claritasRec .gradientClaritas{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
+    top: 100%;
+    left: 0;
+    background: #2f2f2f;
     padding: 0px 0px 0px 0px;
-    margin: 200px 435px 260px 525px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
+    min-width: 120px;
+    list-style: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    text-align: left;
+    margin: 6px 0px 0px -36px;
 }
 
-#claritasRec .gradientClaritas:hover{
-
-    opacity: 1;
-    cursor: pointer;
-    padding: +2px;
-
+.dropdown:hover .dropdown-menu {
+    display: block;
 }
 
-.gradientClaritas:hover ~ .claritasRecTxt .claritasRecTitle{
-
-    opacity: 1;
-    transition: opacity 0.2s ease;
-
-}
-
-/* Claritas */
-/* Chatbot */
-
-#chatBotRec{
-
-    background-image: url('../assets/images/chatBotRec.jpg');
-    background-size: cover;
-    background-position: center;
-    border: none;
-    background-position: 0px 0px;
-
-}
-
-#chatBotRec:hover{
-
-    transition: 0.4s ease-in;
-    cursor: pointer;
-    padding: 2px;
-
-}
-
-#chatBotRec:hover .chatBotRecTxt{
-
-    opacity: 1;
-    transition: opacity 0.4s ease;
-
-}
-
-.chatBotRecTitle{
+.dropdown-menu li {
     
-    color: white;
+    color: rgb(0, 255, 213);
     font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
-    
-}
-
-.chatBotRecTitle{
-
-    position: absolute;
-    font-size: 30px;
-    border-radius: 9px;
-    padding: 7px;
-    z-index: 1;
-    background-color: rgba(0,0,0,0);
-
-}
-
-.chatBotRecTxt{
-
-    position: absolute;
-    padding: 0px 159px 50px 0px;
-    margin: 300px 0px 0px 100px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#chatBotRec .gradientChat{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    padding: 0px;
-    margin: 58px 26px 413px 933px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#chatBotRec .gradientChat:hover{
-
-    opacity: 1;
+    font-weight: 600;
     cursor: pointer;
-    padding: 2px;
-
-}
-
-/* Chatbot */
-/* FAQ */
-
-#faqRec{
-
-    background-image: url('../assets/images/faqRec.jpg');
-    background-size: cover;
-    background-position: center;
-    border: none;
-    background-position: 0px 0px;
-
-}
-
-#faqRec:hover{
-
-    transition: 0.4s ease-in;
-    cursor: pointer;
-    padding: 2px;
-
-}
-
-#faqRec:hover .faqRecTxt{
-
-    opacity: 1;
-    transition: opacity 0.4s ease;
-
-}
-
-.faqRecTitle{
-    
-    color: white;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
-    
-}
-
-.faqRecTitle{
-
-    position: absolute;
-    font-size: 30px;
-    border-radius: 9px;
-    padding: 7px;
-    z-index: 1;
-    background-color: rgba(0,0,0,0);
-
-}
-
-.faqRecTxt{
-
-    position: absolute;
-    padding: 0px 76px 50px 0px;
-    margin: 320px 0px 0px 140px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#faqRec .gradientFAQ{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    padding: 0px;
-    margin: 479px 843px -22px 116px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#faqRec .gradientFAQ:hover{
-
-    opacity: 1;
-    cursor: pointer;
-    padding: 2px;
-
-}
-
-/* FAQ */
-/* StudentResources */
-
-#resourcesRec{
-
-    background-image: url('../assets/images/resourcesRec.png');
-    background-size: cover;
-    background-position: center;
-    border: none;
-    background-position: 0px 0px;
-
-}
-
-#resourcesRec:hover{
-
-    transition: 0.4s ease-in;
-    cursor: pointer;
-
-}
-
-#resourcesRec:hover .resourcesRecTxt{
-
-    opacity: 1;
-    transition: opacity 0.4s ease;
-
-}
-
-.resourcesRecTitle{
-
-    color: white;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
-    position: absolute;
-    font-size: 30px;
-    border-radius: 9px;
-    padding: 7px;
-    z-index: 1;
-    background-color: rgba(0,0,0,0);
-
-}
-
-.resourcesRecTxt{
-
-    position: absolute;
-    padding: 0px 210px 83px 0px;
-    margin: 290px 0px 0px 80px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: color .25s;
     text-align: center;
-
+    padding: 15px 10px 15px 10px;
 }
 
-#resourcesRec .gradientRes{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    padding: 0px;
-    margin: 630px 434px -171px 525px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
+.dropdown-menu li:hover {
+    color: rgb(238, 255, 0);
 }
 
-#resourcesRec .gradientRes:hover{
-
-    opacity: 1;
+#bell {
+    font-size: 22px;
+    color: #fff;
     cursor: pointer;
-
+    transition: color .25s;
 }
 
-/* Resources */
-/* Sessions */
-
-#sessionRec{
-
-    background-image: url('../assets/images/sessionRec.png');
-    background-size: cover;
-    background-position: center;
-    border: none;
-    background-position: 0px 0px;
-
+#bell:hover {
+    color: rgb(0, 255, 213);
+    transform: translateY(-1px);
 }
 
-#sessionRec:hover{
-
-    transition: 0.4s ease-in;
-    cursor: pointer;
-    padding: 2px;
-
+.navBrand img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform .25s;
 }
 
-#sessionRec:hover .sessionRecTxt{
-
-    opacity: 1;
-    transition: opacity 0.4s ease;
-
-}
-
-.sessionRecTitle{
-
-    position: absolute;
-    font-size: 30px;
-    border-radius: 9px;
-    padding: 7px;
-    z-index: 1;
-    background-color: rgba(0,0,0,0);
-    color: white;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
-
-}
-
-.sessionRecTxt{
-
-    position: absolute;
-    padding: 0px 188px 50px 0px;
-    margin: 310px 0px 0px 85px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#sessionRec .gradientSes{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    padding: 0px;
-    margin: 473px 25px -22px 930px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#sessionRec .gradientSes:hover{
-
-    opacity: 1;
-    cursor: pointer;
-    padding: 2px;
-
-}
-
-/* Session */
-/* Dev */
-
-#inDev1Rec,
-#inDev2Rec,
-#inDev3Rec{
-
-    background-image: url('../assets/images/devRec.png');
-    background-size: cover;
-    background-position: center;
-    border: none;
-    background-position: 0px 0px;
-
-}
-
-#inDev1Rec:hover,
-#inDev3Rec:hover{
-
-    transition: 0.4s ease-in;
-    cursor: pointer;
-    padding: 2px;
-
-}
-
-#inDev2Rec:hover{
-
-    transition: 0.4s ease-in;
-    cursor: pointer;
-
-}
-
-#inDev1Rec:hover .dev1RecTxt,
-#inDev2Rec:hover .dev2RecTxt,
-#inDev3Rec:hover .dev3RecTxt{
-
-    opacity: 1;
-    transition: opacity 0.4s ease;
-
-}
-
-.dev1RecTitle,
-.dev2RecTitle,
-.dev3RecTitle{
-
-    position: absolute;
-    font-size: 30px;
-    border-radius: 9px;
-    padding: 7px;
-    z-index: 1;
-    background-color: rgba(0,0,0,0);
-    color: white;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
-
-}
-
-.dev1RecTxt{
-
-    position: absolute;
-    padding: 0px 243px 83px 0px;
-    margin: 290px 0px 0px 55px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    text-align: center;
-
-}
-
-.dev2RecTxt{
-
-    position: absolute;
-    padding: 0px 243px 83px 0px;
-    margin: 290px 0px 0px 55px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    text-align: center;
-
-}
-
-.dev3RecTxt{
-
-    position: absolute;
-    padding: 0px 243px 83px 0px;
-    margin: 290px 0px 0px 55px;
-    border-radius: 9px;
-    z-index: 10;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    text-align: center;
-
-}
-
-#inDev1Rec .gradientDev1{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    padding: 0px;
-    margin: 905px 840px -450px 113px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#inDev2Rec .gradientDev2{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    padding: 0px;
-    margin: 1056px 431px -600px 521px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#inDev3Rec .gradientDev3{
-
-    position: absolute;
-    top: 0;
-    left: -90px;
-    bottom: -80px;
-    right: 0;
-    background: linear-gradient(rgba(177, 163, 163, 0),rgba(0,0,0,0.69), rgba(0,0,0,0.76), rgb(0,0,0));
-    z-index: 2;
-    padding: 0px;
-    margin: 905px 25px -450px 930px;
-    border-radius: 15px;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-
-}
-
-#inDev1Rec .gradientDev1:hover{
-
-    opacity: 1;
-    cursor: pointer;
-    padding: 2px;
-
-}
-
-#inDev2Rec .gradientDev2:hover{
-
-    opacity: 1;
-    cursor: pointer;
-
-}
-
-#inDev3Rec .gradientDev3:hover{
-
-    opacity: 1;
-    cursor: pointer;
-    padding: 2px;
-
+.navBrand:hover img {
+    transform: scale(1.05);
 }

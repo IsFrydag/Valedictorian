@@ -1,0 +1,69 @@
+.calBox{
+
+    position: absolute;
+    left: 1%;
+    right: 35%;
+    top: 15%;
+    border: solid transparent 2px;
+    display: none;
+    height: 80vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 8px;
+    justify-items: center;
+    align-items: center;
+
+}
+
+#calendarHeader{
+
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: 10px auto;
+    font-family: "Zalando Sans Expanded", sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+
+}
+
+#calendarTable{
+
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto 20px auto;
+    table-layout: fixed;
+
+}
+
+#calendarTable th, #calendarTable td{
+
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    vertical-align: top;
+    width: 50px;
+    height: 70px;
+    font-size: 18px;
+
+}
+
+#calendarTable td{
+
+    height: 50px;
+    cursor: pointer;
+    text-align: left;
+    vertical-align: top;
+    padding: 5px;
+    background-color: #f3f4f6;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+#calendarTable td:hover{
+
+    background-color: #f0f0f0;
+    
+}

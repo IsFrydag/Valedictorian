@@ -3,121 +3,74 @@
     <head>
         <title>Home</title>
 
-        <link rel="stylesheet" href="../css/home.css">
+        <link rel="stylesheet" href="../CSS/home.css">
+        <link rel="stylesheet" href= "../CSS/calendar.css">
         <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 
     </head>
 
     <body>
 
-        <div class="topBar">
+        <nav class="glassNav">
 
-            <a href="../HTML/profile.html" style="text-decoration: none; color: inherit;">
-                <div class="topLeftCircle"></div>
-            </a>
-            
-
-            <div class="bellIcon"><i class='bxr  bx-bell-ring'></i></div>
-            <div class="logo"></div>
-            
-            <div class="tab tabHome">
-                <p>Home</p>
+            <ul class="navLinks">
+                <li data-tab="home" class="active dropdown">
+                    Home
+                    <ul class="dropdown-menu">
+                        <li data-tab="cla">Claritas</li>
+                        <li data-tab="cha">ChatBot</li>
+                        <li data-tab="faq">FAQ</li>
+                        <li data-tab="rec">Resources</li>
+                        <li data-tab="tut">Tutoring</li>
+                    </ul>
+                </li>
+                <li data-tab="cal">Calendar</li>
+                <li data-tab="mes">Messages</li>
+                <li data-tab="mod">Modules</li>
+            </ul>
+            <div class="navExtras">
+                <i class='bx bxs-bell-ring' id="bell"></i>
+                <a href="../HTML/profile.html" class="navBrand">
+                <img src="../assets/images/cap.jpg" alt="profile">
+                </a>
             </div>
-            <div class="tab tabCal">
-                <p>Calendar</p>
-            </div>
-            <div class="tab tabMes">
-                <p>Messages</p>
-            </div>
-
-        </div>
+        </nav>  
 
         <section class="mainBox">
 
-            <div class="hB" id="moduleRec">
+            <div class="wrapper">
 
-                <div class="gradientMod"></div>
-
-                <div class="moduleRecTxt">
-                    <div class="moduleRecTitle">MODULES</div>
+                <div class="box">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
                 </div>
 
             </div>
-            <div class="hB" id="claritasRec">
 
-                
-                <video autoplay muted loop playsinline class="videoBg">
-                    <source src="../assets/images/claritasRec.mp4" type="video/mp4">
-                </video>
-                <div class="gradientClaritas"></div>
-                
-                <div class="claritasRecTxt">
-                    <div class="claritasRecTitle">CLARITAS</div>
-                </div>
-
+            <div class="parallaxLogo">
             </div>
-            <div class="hB" id="chatBotRec">
-
-                <div class="gradientChat"></div>
-
-                <div class="chatBotRecTxt">
-                    <div class="chatBotRecTitle">CHATBOT</div>
+            <div class="Announcements">
+                <div class="annContent">
+                    <p class="annHead">Announcements</p>
                 </div>
-
-            </div>
-            <div class="hB" id="faqRec">
-
-                <div class="gradientFAQ"></div>
-
-                <div class="faqRecTxt">
-                    <div class="faqRecTitle">FAQ</div>
-                </div>
-
-            </div>
-            <div class="hB" id="resourcesRec">
-
-                <div class="gradientRes"></div>
-
-                <div class="resourcesRecTxt">
-                    <div class="resourcesRecTitle">STUDENT RESOURCES</div>
-                </div>
-
-            </div>
-            <div class="hB" id="sessionRec">
-
-                <div class="gradientSes"></div>
-
-                <div class="sessionRecTxt">
-                    <div class="sessionRecTitle">TUTORING?</div>
-                </div>
-
-            </div>
-            <div class="hB" id="inDev1Rec">
-
-                <div class="gradientDev1"></div>
-
-                <div class="dev1RecTxt">
-                    <div class="dev1RecTitle">UNDER DEVELOPMENT</div>
-                </div>
-
-            </div>
-            <div class="hB" id="inDev2Rec">
-
-                <div class="gradientDev2"></div>
-
-                <div class="dev2RecTxt">
-                    <div class="dev2RecTitle">UNDER DEVELOPMENT</div>
-                </div>
-
-            </div>
-            <div class="hB" id="inDev3Rec">
-
-                <div class="gradientDev3"></div>
-
-                <div class="dev3RecTxt">
-                    <div class="dev3RecTitle">UNDER DEVELOPMENT</div>
-                </div>
-
             </div>
 
         </section>
@@ -185,6 +138,7 @@
         </section>
         
         <script src="../JS/home.js"></script>
+        <script src="../JS/calendar.js"></script>
         <script src="../JS/renderer.js"></script>
 
     </body>

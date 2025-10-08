@@ -1,135 +1,137 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Profile</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/profile.css">
+</head>
+<body>
 
-        <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="../CSS/profile.css">
+    <button onclick="goHome()" class="homeBtn">
+        <i class='bx bxs-home'></i> Home
+    </button>
 
-    </head>
-    <body>
+    <div id="profileCard" class="profileCard">
+        <div class="bannerContainer">
+            <img id="bannerImg" class="bannerImg"
+                 src="https://placehold.co/1200x200/DC2626/FBBF24?text=Student+Banner+Image"
+                 onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23DC2626\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'40\' fill=\'%23FBBF24\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Student Banner Image</text></svg>'"
+                 alt="Profile Banner">
+        </div>
 
-        <div id="profileCard" class="profileCard">
-            
-            <div class="bannerContainer">
-                <img id="bannerImg" class="bannerImg"
-                    src="https://placehold.co/1200x200/DC2626/FBBF24?text=Student+Banner+Image"
-                    onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 200\'><rect width=\'100%\' height=\'100%\' fill=\'%23DC2626\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'40\' fill=\'%23FBBF24\' text-anchor=\'middle\' dominant-baseline=\'middle\'>Student Banner Image</text></svg>'"
-                    alt="Profile Banner">
-            </div>
+        <div class="profileContent">
+            <div class="headerRow">
+                <div class="pfpContainer">
+                    <img id="pfpImg" class="pfpImg"
+                         src="https://placehold.co/128x128/FBBF24/DC2626?text=AD"
+                         onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 128 128\'><circle cx=\'64\' cy=\'64\' r=\'64\' fill=\'%23FBBF24\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'40\' fill=\'%23DC2626\' text-anchor=\'middle\' dominant-baseline=\'middle\'>AD</text></svg>'"
+                         alt="Profile Picture">
 
-            <div class="profileContent">
-                <div class="headerRow">
-                    <div class="pfpContainer">
-
-                        <img id="pfpImg" class="pfpImg"
-                            src="https://placehold.co/128x128/FBBF24/DC2626?text=AD"
-                            onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 128 128\'><circle cx=\'64\' cy=\'64\' r=\'64\' fill=\'%23FBBF24\'/><text x=\'50%\' y=\'50%\' font-family=\'sans-serif\' font-size=\'40\' fill=\'%23DC2626\' text-anchor=\'middle\' dominant-baseline=\'middle\'>AD</text></svg>'"
-                            alt="Profile Picture">
-
-                        <button class="msgBtn" title="Send a message">
-                            <i class='bx bxs-message-dots'></i>
-                        </button>
-
-                    </div>
-
-                    <button onclick="openModal()" class="editBtn">
-                        <i class='bx bxs-edit-alt'></i> Edit Profile
+                    <button class="msgBtn" title="Send a message">
+                        <i class='bx bxs-message-dots'></i>
                     </button>
                 </div>
 
-                <h1 class="name">Alex <span class="highlight">Davis</span></h1>
+                <button onclick="openModal()" class="editBtn">
+                    <i class='bx bxs-edit-alt'></i> Edit Profile
+                </button>
+            </div>
 
-                <div class="statusTabs">
-                    <span class="statusRed">Student</span>
+            <h1 class="name">Heiner<span class="highlight">Freitag</span></h1>
+
+            <div class="statusTabs">
+                <span class="statusRed">Student</span>
+            </div>
+
+            <div class="infoGrid">
+                <div>
+                    <p class="label">Course / Major</p>
+                    <p class="infoTitle">Computer Science</p>
+                    <p class="infoSub">Focus on Software Engineering</p>
                 </div>
 
-                <div class="infoGrid">
-                    <div>
-                        <p class="label">Course / Major</p>
-                        <p class="infoTitle">Computer Science</p>
-                        <p class="infoSub">Focus on AI and Machine Learning</p>
-                    </div>
+                <div>
+                    <p class="label">Current Year</p>
+                    <p class="infoTitle">Year 3 of 4</p>
 
-                    <div>
-                        <p class="label">Current Year</p>
-                        <p class="infoTitle">Year 3 of 4</p>
-
-                        <div class="progressBar">
-                            <div class="progressFill" style="width:75%"></div>
-                        </div>
-                    </div>
-
-                    <div class="aboutSection">
-                        <p class="label">About Alex</p>
-
-                        <p id="aboutText" class="aboutText">
-                            Alex is a highly motivated third-year student with a passion for emerging technologies. In addition to excelling in core coursework, Alex volunteers as a peer tutor in introductory programming and leads the university's Robotics Club. Looking forward to applying theoretical knowledge in a practical internship setting next semester.
-                        </p>
+                    <div class="progressBar">
+                        <div class="progressFill" style="width:75%"></div>
                     </div>
                 </div>
 
-                <div class="modulesSection">
-                    <p class="label">Current Modules (Semester 6)</p>
+                <div class="aboutSection">
+                    <p class="label">About</p>
+                    <p id="aboutText" class="aboutText">
+                        Alex is a highly motivated third-year student with a passion for emerging technologies. In addition to excelling in core coursework, Alex volunteers as a peer tutor in introductory programming and leads the university's Robotics Club. Looking forward to applying theoretical knowledge in a practical internship setting next semester.
+                    </p>
+                </div>
+            </div>
 
-                    <div class="modulesGrid">
+            <div class="modulesSection">
+                <p class="label">Current Modules (Semester 6)</p>
 
-                        <div class="moduleCard yellow">
-                            <p class="moduleTitle">Advanced Algorithms (CS301)</p>
-                            <p class="moduleSub">Lecturer: Dr. J. Chen</p>
-                        </div>
-
-                        <div class="moduleCard red">
-                            <p class="moduleTitle">Neural Networks & Deep Learning (AI305)</p>
-                            <p class="moduleSub">Lecturer: Prof. E. Khan</p>
-                        </div>
-
-                        <div class="moduleCard yellow">
-                            <p class="moduleTitle">Database Systems II (DB302)</p>
-                            <p class="moduleSub">Tutor: L. Rodriguez</p>
-                        </div>
-
-                        <div class="moduleCard red">
-                            <p class="moduleTitle">Software Engineering Practice (SE301)</p>
-                            <p class="moduleSub">Lecturer: Dr. K. Gupta</p>
-                        </div>
+                <div class="modulesGrid">
+                    <div class="moduleCard yellow">
+                        <p class="moduleTitle">Advanced Algorithms (CS301)</p>
+                        <p class="moduleSub">Lecturer: Dr. J. Chen</p>
+                    </div>
+                    <div class="moduleCard red">
+                        <p class="moduleTitle">Neural Networks & Deep Learning (AI305)</p>
+                        <p class="moduleSub">Lecturer: Prof. E. Khan</p>
+                    </div>
+                    <div class="moduleCard yellow">
+                        <p class="moduleTitle">Database Systems II (DB302)</p>
+                        <p class="moduleSub">Tutor: L. Rodriguez</p>
+                    </div>
+                    <div class="moduleCard red">
+                        <p class="moduleTitle">Software Engineering Practice (SE301)</p>
+                        <p class="moduleSub">Lecturer: Dr. K. Gupta</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="editModal" class="editModal">
-            <div class="modalContent">
+    <!-- Edit Modal -->
+    <div id="editModal" class="editModal">
+        <div class="modalContent">
+            <h2>Edit Profile Details</h2>
 
-                <h2>Edit Profile Details</h2>
+            <form id="profileEditForm" onsubmit="saveProfile(event)">
+                <div class="formGroup">
+                    <label for="bannerUrl">Banner Image URL</label>
+                    <input type="url" id="bannerUrl">
+                </div>
+                <div class="formGroup">
+                    <label for="bannerFile">Upload Banner Image</label>
+                    <input type="file" id="bannerFile" accept="image/*">
+                </div>
 
-                <form id="profileEditForm" onsubmit="saveProfile(event)">
-                    <div class="formGroup">
-                        <label for="bannerUrl">Banner Image URL</label>
-                        <input type="url" id="bannerUrl">
-                    </div>
+                <div class="formGroup">
+                    <label for="pfpUrl">Profile Picture URL</label>
+                    <input type="url" id="pfpUrl">
+                </div>
+                <div class="formGroup">
+                    <label for="pfpFile">Upload Profile Picture</label>
+                    <input type="file" id="pfpFile" accept="image/*">
+                </div>
 
-                    <div class="formGroup">
-                        <label for="pfpUrl">Profile Picture URL</label>
-                        <input type="url" id="pfpUrl">
-                    </div>
+                <div class="formGroup">
+                    <label for="aboutTextarea">About Text</label>
+                    <textarea id="aboutTextarea" rows="4"></textarea>
+                </div>
 
-                    <div class="formGroup">
-                        <label for="aboutTextarea">About Text</label>
-                        <textarea id="aboutTextarea" rows="4"></textarea>
-                    </div>
-                    
-                    <div class="formActions">
-                        <button type="button" onclick="closeModal()" class="cancelBtn">Cancel</button>
-                        <button type="submit" class="saveBtn">Save Changes</button>
-                    </div>
-                </form>
-            </div>
+                <div class="formActions">
+                    <button type="button" onclick="closeModal()" class="cancelBtn">Cancel</button>
+                    <button type="submit" class="saveBtn">Save Changes</button>
+                </div>
+            </form>
         </div>
+    </div>
 
-        <script src="../JS/profile.js"></script>
-    </body>
+    <script src="../JS/profile.js"></script>
+</body>
 </html>
