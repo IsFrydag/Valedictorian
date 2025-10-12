@@ -8,7 +8,6 @@
         <title>Login Page</title>
     </head>
     <body>
-
         <div class="wrapper">
             <div id="stars"></div>
             <div id="stars2"></div>
@@ -34,6 +33,12 @@
             <div class="form-container sign-in">
                 <form id="login-form">
                     <h1>Sign In</h1>
+                    <select id="login-dropdown" name="login-dropdown-name" placeholder="Account Type" required>
+                        <option value="">Select Account Type</option>
+                        <option value="optStudent">Student</option>
+                        <option value="optTutor">Tutor</option>
+                        <option value="optAdmin">Admin</option>
+                    </select>
                     <input type="email" id="login-email" placeholder="Email" required />
                     <input type="password" id="login-password" placeholder="Password" required />
                     <a href="#">Forget Your Password?</a>

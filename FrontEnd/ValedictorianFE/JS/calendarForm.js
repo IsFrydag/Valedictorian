@@ -136,14 +136,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Please fill all fields');
                 return;
             }
+
+            // Assume StudentId is stored in localStorage after login
+            const studentId = localStorage.getItem('studentId'); // Adjust based on your auth setup
+            if (!studentId) {
+                alert('Error: Student ID not found. Please log in again.');
+                return;
+            }
+
+            // Convert date to StartTime (e.g., append default time "09:00")
+            const startTime = `${date}T09:00:00`; // Adjust time as needed
+
             try {
-                await apiRequest('/Sessions/Book', 'POST', {
-                    date,
-                    moduleId: moduleSelect.value,
-                    sessionType: sessionType.value,
-                    tutorId: tutorSelect.value
+                const response = await apiRequest('/TutorSessions/Record', 'POST', {
+                    StudentId: parseInt(studentId),
+                    TutorId: parseInt(tutorSelect.value),
+                    StartTime: startTime
+                    // EndTime is optional, omitted here
                 });
-                alert('Session booked successfully');
+                alert(response.Message || 'Session booked successfully');
                 closeForm();
             } catch (err) {
                 alert('Failed to book session: ' + (err.message || 'Unknown error'));

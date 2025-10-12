@@ -13,11 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cb640129b045fcf8bb75c30468f2486046842ca6")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a401ae76a38d41ca01cda8b56723bbd78e2479b4")]
->>>>>>> API-update
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2083793085ad95563c8bb3a810b8bde78cd8548e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

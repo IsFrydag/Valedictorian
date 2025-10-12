@@ -5,38 +5,26 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/Auth/GetLoginName": {
-      "get": {
-        "tags": [
-          "Auth"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/LearningMaterials/Upload": {
+    "/api/Auth/Login": {
       "post": {
         "tags": [
-          "LearningMaterials"
+          "Auth"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LearningMaterialDto"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/LearningMaterialDto"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/LearningMaterialDto"
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           }
@@ -48,19 +36,7 @@
         }
       }
     },
-    "/api/LearningMaterials/GetAll": {
-      "get": {
-        "tags": [
-          "LearningMaterials"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Notif/Notifications": {
+    "/api/Notif/NotificationReceived": {
       "get": {
         "tags": [
           "Notif"
@@ -72,53 +48,11 @@
         }
       }
     },
-    "/api/Profile/{id}": {
-      "get": {
-        "tags": [
-          "Profile"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Profile/SaveProfileInfo": {
-      "post": {
+      "get": {
         "tags": [
           "Profile"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProfileDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProfileDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ProfileDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -126,7 +60,7 @@
         }
       }
     },
-    "/api/Reg/RegisterStudent": {
+    "/api/Reg/Register": {
       "post": {
         "tags": [
           "Reg"
@@ -135,193 +69,21 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterStudentDto"
+                "$ref": "#/components/schemas/RegisterRequest"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterStudentDto"
+                "$ref": "#/components/schemas/RegisterRequest"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/RegisterStudentDto"
+                "$ref": "#/components/schemas/RegisterRequest"
               }
             }
           }
         },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Reg/RegisterTutor": {
-      "post": {
-        "tags": [
-          "Reg"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterTutorDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterTutorDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterTutorDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Reg/GetStudents": {
-      "get": {
-        "tags": [
-          "Reg"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Reg/GetTutors": {
-      "get": {
-        "tags": [
-          "Reg"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Topics/Save": {
-      "post": {
-        "tags": [
-          "Topics"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TopicDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TopicDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/TopicDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Topics/GetByModule/{moduleId}": {
-      "get": {
-        "tags": [
-          "Topics"
-        ],
-        "parameters": [
-          {
-            "name": "moduleId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/TutorSessions/Record": {
-      "post": {
-        "tags": [
-          "TutorSessions"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TutorSessionDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TutorSessionDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/TutorSessionDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/TutorSessions/GetByParticipants/{studentId}/{tutorId}": {
-      "get": {
-        "tags": [
-          "TutorSessions"
-        ],
-        "parameters": [
-          {
-            "name": "studentId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "tutorId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -332,157 +94,41 @@
   },
   "components": {
     "schemas": {
-      "LearningMaterialDto": {
+      "LoginRequest": {
         "type": "object",
         "properties": {
-          "learningMaterialTitle": {
+          "email": {
             "type": "string",
             "nullable": true
           },
-          "typeOfLearningMaterial": {
-            "type": "string",
-            "nullable": true
-          },
-          "replyId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ProfileDto": {
-        "type": "object",
-        "properties": {
-          "studentId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "studentFirstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "studentLastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "studentEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "subscribedTopic": {
-            "type": "string",
-            "nullable": true
-          },
-          "academicYear": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RegisterStudentDto": {
-        "type": "object",
-        "properties": {
-          "studentFirstName": {
-            "type": "string",
-            "nullable": true
-          },
-          "studentLastName": {
-            "type": "string",
-            "nullable": true
-          },
-          "studentEmail": {
-            "type": "string",
-            "nullable": true
-          },
-          "studentPassword": {
-            "type": "string",
-            "nullable": true
-          },
-          "academicYear": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "subscribedTopic": {
+          "password": {
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "RegisterTutorDto": {
+      "RegisterRequest": {
         "type": "object",
         "properties": {
-          "tutorName": {
+          "name": {
             "type": "string",
             "nullable": true
           },
-          "tutorPassword": {
+          "surname": {
             "type": "string",
             "nullable": true
           },
-          "tutorRate": {
-            "type": "number",
-            "format": "double",
-            "nullable": true
-          },
-          "tutorReviews": {
+          "email": {
             "type": "string",
             "nullable": true
           },
-          "modulesApprovedFor": {
+          "password": {
             "type": "string",
             "nullable": true
           },
-          "studentId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "studentEmail": {
+          "userType": {
             "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "TopicDto": {
-        "type": "object",
-        "properties": {
-          "topicTitle": {
-            "type": "string",
-            "nullable": true
-          },
-          "moduleId": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "TutorSessionDto": {
-        "type": "object",
-        "properties": {
-          "studentId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "tutorId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "startTime": {
-            "type": "string",
-            "format": "date-time",
-            "nullable": true
-          },
-          "endTime": {
-            "type": "string",
-            "format": "date-time",
             "nullable": true
           }
         },
