@@ -1,0 +1,86 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.blog-header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+main .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+   /* border: 2px solid blue; /* Sets a 2px solid blue border 
+    padding: 10px;           Adds space between text and border 
+    margin: 15px 0;          Adds space above and below the box */
+}
+
+.blog-post {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.blog-post h2 {
+    color: #333;
+    margin-top: 0;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.post-content p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.comments-section h3 {
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.comment-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.comment-text {
+    line-height: 1.5;
+}
+
+.reply {
+    margin-left: 30px;
+    margin-top: 10px;
+    padding-left: 15px;
+    border-left: 2px solid #ddd;
+}
+
+.blog-footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}

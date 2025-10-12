@@ -29,11 +29,32 @@ h1 {
 /* Section containing the columns */
 .All-Topics {
     display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px;
+    flex-shrink: 2;
+}
+
+.All-Topics .set1Topics{
+display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
     gap: 20px;
     padding: 20px;
+    flex-shrink: 2;
+}
+
+.All-Topics .set2Topics{
+display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    padding: 20px;
+    flex-shrink: 2;
 }
 
 /* Each Aside Column */
