@@ -1,110 +1,177 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modules Triangles</title>
-    <link rel="stylesheet" href="../CSS/modules.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Learning Material</title>
+  <style>
+    /* General Layout */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      margin: 0;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: #1a237e;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    /* Upload Box */
+    .upload-box {
+      background: white;
+      padding: 25px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .upload-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    label {
+      background-color: #3949ab;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    label:hover {
+      background-color: #283593;
+    }
+
+    /* PDF Viewer Card */
+    .pdf-card {
+      background: white;
+      margin-top: 30px;
+      padding: 10px;
+      width: 80%;
+      height: 80vh;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    iframe {
+      flex-grow: 1;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-radius: 10px;
+    }
+
+    .controls button {
+      background-color: #1e88e5;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+
+    .controls button:hover {
+      background-color: #1565c0;
+    }
+
+    .controls button:disabled {
+      background-color: #9e9e9e;
+      cursor: not-allowed;
+    }
+  </style>
 </head>
 <body>
-<header>
-    <h1>Modules:</h1>
-    <!--Using div's instead of semantic elements here to allow for more js aspects later, also will probably not have to read this content out to deaf stuents-->
-</header>
+  <h1>Upload Learning Material</h1>
 
-<div class="module-navigation">
-    <nav>
-        <a href="#">All Modules</a>
-        <a href="#">In Progress</a>
-        <a href="#">Past</a>
-        <a href="#">Starred</a>
-        <a href="#">Removed</a>
-    </nav>
-</div>
+  <!-- Upload Box -->
+  <div class="upload-box">
+    <label for="pdfUpload">Upload PDF</label>
+    <input type="file" id="pdfUpload" accept="application/pdf">
+  </div>
 
-<div class="module-triangles-top-row">
-    
-    <div class="triangle-up morph">
-        <img src="../assets/images/imgmodule1.jpg" alt="module1image" class="module-image">
-        
-        <div class="module-title triangle-title">Module 1</div>
-
-        <div class="module-details square-details">
-            <h3 class="module-title-square">Module 1</h3>
-            <p class="module-description">Description of Module 1</p>
-            <button class="square-button">View More</button>
-        </div>
+  <!-- PDF Display Card -->
+  <div class="pdf-card">
+    <div class="controls">
+      <button id="zoomIn" disabled>Zoom In (+)</button>
+      <button id="zoomOut" disabled>Zoom Out (-)</button>
+      <button id="downloadBtn" disabled>Download</button>
     </div>
+    <iframe id="pdfViewer"></iframe>
+  </div>
 
-    <div class="triangle-down morph">
-        <img src="../assets/images/imgmodule1.jpg" alt="module2image" class="module-image">
-        
-        <div class="module-title triangle-title">Module 2</div>
+  <script>
+    const pdfUpload = document.getElementById('pdfUpload');
+    const pdfViewer = document.getElementById('pdfViewer');
+    const zoomIn = document.getElementById('zoomIn');
+    const zoomOut = document.getElementById('zoomOut');
+    const downloadBtn = document.getElementById('downloadBtn');
 
-        <div class="module-details square-details">
-            <h3 class="module-title-square">Module 2</h3>
-            <p class="module-description">Content for Module 2</p>
-            <button class="square-button">View More</button>
-        </div>
-    </div>
-    
-    <div class="triangle-up morph">
-        <img src="../assets/images/imgmodule1.jpg" alt="module3image" class="module-image">
-        
-        <div class="module-title triangle-title">Module 3</div>
+    let zoomLevel = 1;
+    let currentFileURL = '';
 
-        <div class="module-details square-details">
-            <h3 class="module-title-square">Module 3</h3>
-            <p class="module-description">Content for Module 3</p>
-            <button class="square-button">View More</button>
-        </div>
-    </div>
-    
-</div>
+    pdfUpload.addEventListener('change', () => {
+      const file = pdfUpload.files[0];
+      if (file && file.type === 'application/pdf') {
+        currentFileURL = URL.createObjectURL(file);
+        pdfViewer.src = currentFileURL;
+        zoomIn.disabled = false;
+        zoomOut.disabled = false;
+        downloadBtn.disabled = false;
+      } else {
+        alert('Please upload a valid PDF file.');
+      }
+    });
 
-<div class="module-triangles-bottom-row">
-    
-    <div class="triangle-down morph">
-        <img src="../assets/images/imgmodule1.jpg" alt="module4image" class="module-image">
-        
-        <div class="module-title triangle-title">Module 4</div>
+    zoomIn.addEventListener('click', () => {
+      zoomLevel += 0.1;
+      pdfViewer.style.transform = `scale(${zoomLevel})`;
+      pdfViewer.style.transformOrigin = 'top';
+    });
 
-        <div class="module-details square-details">
-            <h3 class="module-title-square">Module 4</h3>
-            <p class="module-description">Content for Module 4</p>
-            <button class="square-button">View More</button>
-        </div>
-    </div>
+    zoomOut.addEventListener('click', () => {
+      if (zoomLevel > 0.5) {
+        zoomLevel -= 0.1;
+        pdfViewer.style.transform = `scale(${zoomLevel})`;
+      }
+    });
 
-    <div class="triangle-up morph">
-        <img src="../assets/images/imgmodule1.jpg" alt="module5image" class="module-image">
-        
-        <div class="module-title triangle-title">Module 5</div>
-
-        <div class="module-details square-details">
-            <h3 class="module-title-square">Module 5</h3>
-            <p class="module-description">Content for Module 5</p>
-            <button class="square-button">View More</button>
-        </div>
-    </div>
-
-    <div class="triangle-down morph">
-        <img src="../assets/images/imgmodule1.jpg" alt="module6image" class="module-image">
-        
-        <div class="module-title triangle-title">Module 6</div>
-
-        <div class="module-details square-details">
-            <h3 class="module-title-square">Module 6</h3>
-            <p class="module-description">Content for Module 6</p>
-            <button class="square-button">View More</button>
-        </div>
-    </div>
-</div>
-
-
-<div class="footer"></div>
-<div class="footer-end">
-    <p>&copy; <i>Valedictorian App 2025 Belgium Campus iTversity</i></p>
-</div>
+    downloadBtn.addEventListener('click', () => {
+      if (currentFileURL) {
+        const link = document.createElement('a');
+        link.href = currentFileURL;
+        link.download = pdfUpload.files[0].name;
+        link.click();
+      }
+    });
+  </script>
 </body>
 </html>
