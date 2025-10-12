@@ -1,105 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claritas Main Topics Page</title>
-    <link rel="stylesheet" href="../CSS/topic.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claritas Main Topics Page</title>
+  <link rel="stylesheet" href="../CSS/topic.css">
 </head>
 
 <body>
-    <h1>Claritas</h1>
-    <!--<section class="All-Topics">-->
-<section class="set1Topics">
+  <h1>Claritas</h1>
 
-<aside class="Column1">
-    <h4>LPR281</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
+  
+  <div>
+    <button id="createTopicBtn">Create New Topic</button>
+  </div>
 
-<aside class="Column2">
-    <h4>PRJ381</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
+  <section class="All-Topics">
+    <section class="set1Topics">
+      <aside class="Column1">
+        <h4>LPR281</h4>
+        <article>Discussion Topic 1:</article>
+        <article>Discussion Topic 2:</article>
+        <article>Discussion Topic 3:</article>
+        <article>Discussion Topic 4:</article>
+      </aside>
 
-<aside class="Column3">
-    <h4>STATS281</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
+      <aside class="Column2">
+        <h4>PRJ381</h4>
+        <article>Discussion Topic 1:</article>
+        <article>Discussion Topic 2:</article>
+        <article>Discussion Topic 3:</article>
+        <article>Discussion Topic 4:</article>
+      </aside>
 
-<aside class="Column4">
-    <h4>MLG381</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
-    
+      <aside class="Column3">
+        <h4>STATS281</h4>
+        <article>Discussion Topic 1:</article>
+        <article>Discussion Topic 2:</article>
+        <article>Discussion Topic 3:</article>
+        <article>Discussion Topic 4:</article>
+      </aside>
 
-    <aside class="Column5">
-    <h4>LPR281</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
-</section>
+      <aside class="Column4">
+        <h4>MLG381</h4>
+        <article>Discussion Topic 1:</article>
+        <article>Discussion Topic 2:</article>
+        <article>Discussion Topic 3:</article>
+        <article>Discussion Topic 4:</article>
+      </aside>
+    </section>
+  </section>
 
-<section class="set2Topics">
-<aside class="Column6">
-    <h4>PRJ381</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
-
-<aside class="Column7">
-    <h4>STATS281</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
-
-<aside class="Column8">
-    <h4>MLG381</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
-    
-<aside class="Column9">
-    <h4>STATS281</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
-
-<aside class="Column10">
-    <h4>MLG381</h4>
-<article>Discussion Topic 1:</article>
-<article>Discussion Topic 2:</article>
-<article>Discussion Topic 3:</article>
-<article>Discussion Topic 4:</article>
-</aside>
-</section>
-   <!--</section>--> 
+  <footer>Footer</footer>
 
 
+  <script>
+    // Select the button and the first column
+    const button = document.getElementById("createTopicBtn");
+    const column1 = document.querySelector(".Column1");
 
-    <footer>Footer</footer>
+    // When button is clicked
+    button.addEventListener("click", () => {
+      // Count how many topics already exist in Column1
+      const topics = column1.querySelectorAll("article");
+      const nextNumber = topics.length + 1;
 
+      // Create a new article element
+      const newTopic = document.createElement("article");
+      newTopic.textContent = `Discussion Topic ${nextNumber}:`;
+
+      // Append it to Column1
+      column1.appendChild(newTopic);
+    });
+  </script>
 </body>
 </html>

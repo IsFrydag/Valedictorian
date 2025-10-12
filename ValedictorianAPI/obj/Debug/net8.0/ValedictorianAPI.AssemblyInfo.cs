@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f9fb390c0b642d9ba124c4d5dc75640f8e0e53d9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59babe0ae64960dff4e519378c0396396816d457")]
 [assembly: System.Reflection.AssemblyProductAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ValedictorianAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
