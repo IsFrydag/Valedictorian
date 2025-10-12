@@ -1,29 +1,39 @@
+using Microsoft.EntityFrameworkCore;
+using ValedictorianAPI.Models; // <-- Add this to access CampusLearnDBContext
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add CORS and define a policy
+// Configure CORS policy
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyCorsPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "http://localhost:5500") // Angular app URL
-              .AllowAnyMethod()  // GET, POST, PUT, DELETE
-              .AllowAnyHeader(); // Any headers
+        policy.WithOrigins(
+                "http://localhost:4200", // Angular
+                "http://localhost:5500"  // Local test client
+            )
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
 
+// Configure EF Core with SQL Server
+builder.Services.AddDbContext<CampusLearnDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("CampusLearnDB"))
+);
+
+// Build the app
 var app = builder.Build();
 
-// Enable CORS middleware BEFORE routing
+// Enable CORS before routing
 app.UseCors("MyCorsPolicy");
 
-// Configure the HTTP request pipeline.
+// Configure middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

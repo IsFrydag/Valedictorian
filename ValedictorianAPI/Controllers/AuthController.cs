@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ValedictorianAPI.Models;
 
 namespace ValedictorianAPI.Controllers
 {
@@ -6,17 +8,25 @@ namespace ValedictorianAPI.Controllers
     [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        [HttpGet("GetLoginName")]
-        public IActionResult GetLoginName()
-        {
-            // Example static data
-            var userData = new
-            {
-                username = "Andy123",
-                age = 29
-            };
+        private readonly CampusLearnDbContext _context;
 
-            return Ok(userData); // returns JSON { "username": "Andy123", "age": 29 }
+        public AuthController(CampusLearnDbContext context)
+        {
+            _context = context;
+        }
+
+        // Example: GET /api/Auth/GetLoginName
+        [HttpGet("GetLoginName")]
+        public async Task<IActionResult> GetLoginName()
+        {
+            var users = await _context.Admins
+                .Select(a => new { a.AdminId, a.AdminName, a.AdminSurname })
+                .ToListAsync();
+
+            if (users == null || !users.Any())
+                return NotFound(new { Message = "No users found." });
+
+            return Ok(users);
         }
     }
 }

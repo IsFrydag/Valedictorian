@@ -8,5 +8,194 @@
     "Order": 0,
     "Parameters": [],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.LearningMaterialsController",
+    "Method": "GetAllLearningMaterials",
+    "RelativePath": "api/LearningMaterials/GetAll",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.LearningMaterialsController",
+    "Method": "UploadLearningMaterial",
+    "RelativePath": "api/LearningMaterials/Upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ValedictorianAPI.Controllers.LearningMaterialDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.NotifController",
+    "Method": "GetNotifications",
+    "RelativePath": "api/Notif/Notifications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.ProfileController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Profile/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.ProfileController",
+    "Method": "SaveProfileInfo",
+    "RelativePath": "api/Profile/SaveProfileInfo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "profile",
+        "Type": "ValedictorianAPI.Controllers.ProfileDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.RegController",
+    "Method": "GetStudents",
+    "RelativePath": "api/Reg/GetStudents",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.RegController",
+    "Method": "GetTutors",
+    "RelativePath": "api/Reg/GetTutors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.RegController",
+    "Method": "RegisterStudent",
+    "RelativePath": "api/Reg/RegisterStudent",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ValedictorianAPI.Controllers.RegisterStudentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.RegController",
+    "Method": "RegisterTutor",
+    "RelativePath": "api/Reg/RegisterTutor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ValedictorianAPI.Controllers.RegisterTutorDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.TopicsController",
+    "Method": "GetTopicsByModule",
+    "RelativePath": "api/Topics/GetByModule/{moduleId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "moduleId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.TopicsController",
+    "Method": "SaveTopic",
+    "RelativePath": "api/Topics/Save",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ValedictorianAPI.Controllers.TopicDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.TutorSessionsController",
+    "Method": "GetSessionsByParticipants",
+    "RelativePath": "api/TutorSessions/GetByParticipants/{studentId}/{tutorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "studentId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "tutorId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ValedictorianAPI.Controllers.TutorSessionsController",
+    "Method": "RecordSession",
+    "RelativePath": "api/TutorSessions/Record",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "ValedictorianAPI.Controllers.TutorSessionDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
