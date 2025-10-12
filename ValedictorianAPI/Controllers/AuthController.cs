@@ -9,7 +9,7 @@ namespace ValedictorianAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly CampusLearnDbContext _context;
-
+         
         public AuthController(CampusLearnDbContext context)
         {
             _context = context;
