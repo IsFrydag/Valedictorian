@@ -5,6 +5,7 @@
 
         <link rel="stylesheet" href="../CSS/home.css">
         <link rel="stylesheet" href= "../CSS/calendar.css">
+        <link rel="stylesheet" href="../CSS/calendarForm.css">
         <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 
     </head>
@@ -95,7 +96,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- JS will fill this -->
+                   <!-- JS will fill this  -->
                 </tbody>
             </table>
 
@@ -136,10 +137,53 @@
             </div>
 
         </section>
+
+        <div id="calendarModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Book a Session</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                <form id="sessionBookingForm">
+                    <div class="form-group">
+                        <label for="moduleSelect">Module:</label>
+                        <select id="moduleSelect" name="module" required>
+                            <option value="">Select a module</option>
+                    </select>
+                    </div>
+                    
+                    <div class="form-group">
+                    <label for="sessionType">Session Type:</label>
+                        <select id="sessionType" name="sessionType" required>
+                            <option value="">Select session type</option>
+                            <option value="Online">Online</option>
+                            <option value="Face to Face">Face to Face</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="tutorSelect">Available Tutors:</label>
+                        <select id="tutorSelect" name="tutor" required>
+                            <option value="">Select a tutor</option>
+                        </select>
+                    </div>
+                    
+                    <input type="hidden" id="selectedDate" name="date">
+                    
+                    <div class="form-actions">
+                        <button type="submit" id="bookSessionBtn">Book Session</button>
+                        <button type="button" id="cancelBooking">Cancel</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
         
         <script type="module" src="../JS/home.js"></script>
         <script src="../JS/calendar.js"></script>
         <script src="../JS/renderer.js"></script>
+        <script type="module" src="../JS/calendarForm.js"></script>
 
     </body>
 
