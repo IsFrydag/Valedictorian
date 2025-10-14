@@ -4,7 +4,7 @@ const container = document.getElementById('container');
 const loginBtn = document.getElementById('login');
 const registerBtn = document.getElementById('register');
 
-// Toggle between login and registration forms
+// Toggle between login and register UI
 registerBtn.addEventListener('click', () => {
     container.classList.add("active");
 });
@@ -12,123 +12,149 @@ loginBtn.addEventListener('click', () => {
     container.classList.remove("active");
 });
 
+// =======================
+// REGISTRATION
+// =======================
 const registerForm = document.getElementById('register-form');
 registerForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
-    const type = document.getElementById('my-dropdown').value;
-    let domain, userType;
 
-    if (type === 'optStudent') { 
-        domain = '@student.belgiumcampus.ac.za'; 
-        userType = 'student'; 
-    } else if (type === 'optTutor') { 
-        domain = '@tutor.belgiumcampus.ac.za'; 
-        userType = 'tutor'; 
-    } else if (type === 'optAdmin') { 
-        domain = '@admin.belgiumcampus.ac.za'; 
-        userType = 'admin'; 
-    }
-
+    const type = document.getElementById('my-dropdown').value; // optStudent, optTutor, optAdmin
     const name = document.getElementById('reg-name').value.trim();
     const surname = document.getElementById('reg-surname').value.trim();
     const email = document.getElementById('reg-email').value.trim();
     const password = document.getElementById('reg-password').value;
 
-    if (!name || !surname || !email || !password) { 
-        alert('All fields are required'); 
-        return; 
+    if (!type || !name || !surname || !email || !password) {
+        alert('All fields are required.');
+        return;
     }
-    if (!email.endsWith(domain)) { 
-        alert('Email must end with the correct domain, example@<accountType>.belgiumcampus.ac.za'); 
-        return; 
+
+    let userType = '';
+    let domain = '';
+    let userID = '';
+
+    if (type === 'optStudent') {
+        domain = '@student.belgiumcampus.ac.za';
+        userType = 'Student';
+    } else if (type === 'optTutor') {
+        domain = '@tutor.belgiumcampus.ac.za';
+        userType = 'Tutor';
+    } else if (type === 'optAdmin') {
+        alert('Admin registration not supported yet.');
+        return;
+    } else {
+        alert('Invalid account type.');
+        return;
     }
+
+    // Email domain validation
+    if (!email.endsWith(domain)) {
+        alert(`Email must end with ${domain}`);
+        return;
+    }
+
+    // Extract 6-digit ID from email (e.g. 123456@student.belgiumcampus.ac.za)
+    const match = email.match(/^(\d{6})@/);
+    if (!match) {
+        alert('Email must begin with a 6-digit ID.');
+        return;
+    }
+    userID = match[1];
+
+    const body = {
+        userName: name,
+        userSurname: surname,
+        userEmail: email,
+        password: password,
+        role: userType
+    };
 
     try {
-        // Prepare the data to send to the backend
-        const formData = {
-            name,
-            surname,
-            email,
-            password,
-            userType
-        };
-
-        // Make a POST request to send the form data
-        let response = await apiRequest('/Reg/Register', 'POST', formData);
-        
-        // Expecting response like { message: "Registration successful", name: "...", surname: "..." }
-        alert(`Thank you for registering, ${response.name} ${response.surname}`);
+        const res = await apiRequest('/Reg/RegisterUser', 'POST', body);
+        alert(res.message || 'Registration successful!');
         registerForm.reset();
-        container.classList.remove("active"); // Switch to login form after registration
+        container.classList.remove("active");
     } catch (err) {
-        alert(err.message || 'API connection failed - check console for details');
+        alert(err.message || 'Registration failed.');
         console.error('Registration error:', err);
     }
 });
 
+// =======================
+// LOGIN
+// =======================
 const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const type = document.getElementById('login-dropdown').value;
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value;
 
-    if (!type || !email || !password) { 
-        alert('All fields are required'); 
-        return; 
+    if (!type || !email || !password) {
+        alert('All fields are required.');
+        return;
     }
 
-    let domain, userType, id;
+    let expectedUserType = '';
+    let domain = '';
+    let userID = '';
+
     if (type === 'optStudent') {
         domain = '@student.belgiumcampus.ac.za';
-        userType = 'student';
-        const match = email.match(/^(\d{6})@student\.belgiumcampus\.ac\.za$/);
-        if (!match) {
-            alert('Student email must be 6 digits followed by @student.belgiumcampus.ac.za');
-            return;
-        }
-        id = match[1]; // Extract 6 digits
+        expectedUserType = 'Student';
     } else if (type === 'optTutor') {
         domain = '@tutor.belgiumcampus.ac.za';
-        userType = 'tutor';
-        const match = email.match(/^(\d{6})@tutor\.belgiumcampus\.ac\.za$/);
-        if (!match) {
-            alert('Tutor email must be 6 digits followed by @tutor.belgiumcampus.ac.za');
-            return;
-        }
-        id = match[1]; // Extract 6 digits
+        expectedUserType = 'Tutor';
     } else if (type === 'optAdmin') {
         domain = '@admin.belgiumcampus.ac.za';
-        userType = 'admin';
-        if (!email.endsWith(domain)) {
-            alert('Admin email must end with @admin.belgiumcampus.ac.za');
-            return;
-        }
-        id = email; // Use full email as ID for admins
+        expectedUserType = 'Admin';
+    } else {
+        alert('Invalid account type.');
+        return;
     }
 
+    if (!email.endsWith(domain)) {
+        alert(`Email must end with ${domain}`);
+        return;
+    }
+
+    const match = email.match(/^(\d{6})@/);
+    if (!match) {
+        alert('Email must start with a 6-digit user ID.');
+        return;
+    }
+
+    userID = match[1];
+
     try {
-        // Prepare the data to send to the backend
-        const formData = {
-            email,
-            password
-        };
+        const users = await apiRequest('/Reg/GetUsers', 'GET');
+        const user = users.find(u => u.userID === userID && u.email === email);
 
-        // Make a POST request to send the login data
-        let response = await apiRequest('/Auth/Login', 'POST', formData);
-        
-        // Store the extracted ID in localStorage
-        localStorage.setItem('studentId', id);
-        localStorage.setItem('userType', userType); // Store userType for potential use
+        if (!user) {
+            throw new Error('User not found.');
+        }
 
-        // Show welcome message with the extracted ID
-        alert(`Welcome back, ${userType.charAt(0).toUpperCase() + userType.slice(1)} ${id}`);
+        if (user.password !== password) {
+            throw new Error('Incorrect password.');
+        }
+
+        if (user.userType !== expectedUserType) {
+            throw new Error(`You're trying to log in as a ${expectedUserType}, but your account is a ${user.userType}.`);
+        }
+
+        localStorage.setItem('userId', user.userID);
+        localStorage.setItem('userName', user.name);
+        localStorage.setItem('userSurname', user.surname);
+        localStorage.setItem('userType', user.userType);
+
+        alert(`Welcome back, ${user.name}!`);
         loginForm.reset();
-        window.location.href = "../HTML/Home.html";
+        window.location.href = '../HTML/Home.html';
+
     } catch (err) {
-        alert(err.message || 'API connection failed - check console for details');
+        alert(err.message || 'Login failed.');
         console.error('Login error:', err);
     }
 });

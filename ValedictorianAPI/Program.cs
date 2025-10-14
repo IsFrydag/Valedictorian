@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using ValedictorianAPI.Models; // <-- Add this to access CampusLearnDBContext
+using ValedictorianAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
                 "http://localhost:4200", // Angular
-                "http://localhost:5500"  // Local test client
+                "http://127.0.0.1:5500"  // Local test client
             )
             .AllowAnyMethod()
             .AllowAnyHeader();
@@ -23,8 +23,8 @@ builder.Services.AddCors(options =>
 });
 
 // Configure EF Core with SQL Server
-builder.Services.AddDbContext<CampusLearnDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CampusLearnDB"))
+builder.Services.AddDbContext<ValedictorianDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ValedictorianDB"))
 );
 
 // Build the app
