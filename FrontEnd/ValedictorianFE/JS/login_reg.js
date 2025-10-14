@@ -97,19 +97,18 @@ loginForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    let expectedUserType = '';
+    let expectedRole = '';
     let domain = '';
-    let userID = '';
 
     if (type === 'optStudent') {
         domain = '@student.belgiumcampus.ac.za';
-        expectedUserType = 'Student';
+        expectedRole = 'Student';
     } else if (type === 'optTutor') {
         domain = '@tutor.belgiumcampus.ac.za';
-        expectedUserType = 'Tutor';
+        expectedRole = 'Tutor';
     } else if (type === 'optAdmin') {
         domain = '@admin.belgiumcampus.ac.za';
-        expectedUserType = 'Admin';
+        expectedRole = 'Admin';
     } else {
         alert('Invalid account type.');
         return;
@@ -120,39 +119,24 @@ loginForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    const match = email.match(/^(\d{6})@/);
-    if (!match) {
-        alert('Email must start with a 6-digit user ID.');
-        return;
-    }
-
-    userID = match[1];
+    const body = {
+        userEmail: email,
+        password: password,
+        role: expectedRole
+    };
 
     try {
-        const users = await apiRequest('/Reg/GetUsers', 'GET');
-        const user = users.find(u => u.userID === userID && u.email === email);
+        const res = await apiRequest('/Auth/Login', 'POST', body);
 
-        if (!user) {
-            throw new Error('User not found.');
-        }
+        // Store returned data
+        localStorage.setItem('userId', res.userID);
+        localStorage.setItem('userName', res.userName);
+        localStorage.setItem('userSurname', res.userSurname);
+        localStorage.setItem('userType', res.role);
 
-        if (user.password !== password) {
-            throw new Error('Incorrect password.');
-        }
-
-        if (user.userType !== expectedUserType) {
-            throw new Error(`You're trying to log in as a ${expectedUserType}, but your account is a ${user.userType}.`);
-        }
-
-        localStorage.setItem('userId', user.userID);
-        localStorage.setItem('userName', user.name);
-        localStorage.setItem('userSurname', user.surname);
-        localStorage.setItem('userType', user.userType);
-
-        alert(`Welcome back, ${user.name}!`);
+        alert(`Welcome back, ${res.userName}!`);
         loginForm.reset();
         window.location.href = '../HTML/Home.html';
-
     } catch (err) {
         alert(err.message || 'Login failed.');
         console.error('Login error:', err);
