@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chatbot - Intelligent Document Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .gradient-text { background: linear-gradient(135deg, #0d9488, #f59e0b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.1); }
+        .chat-bubble { animation: slideIn 0.3s ease-out; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .typing { animation: typing 1.5s infinite; }
+        @keyframes typing { 0%, 60%, 100% { opacity: 0.3; } 30% { opacity: 1; } }
+        .file-card { transition: all 0.3s ease; }
+        .file-card:hover { transform: translateY(-4px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        #p5-canvas { position: absolute; top: 0; left: 0; z-index: -1; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-amber-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">AI</span>
+                    </div>
+                    <span class="font-semibold text-slate-800">IntelliChat</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-teal-600 font-medium">Chat</a>
+                    <a href="files.html" class="text-slate-600 hover:text-teal-600 transition-colors">Files</a>
+                    <a href="settings.html" class="text-slate-600 hover:text-teal-600 transition-colors">Settings</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-20 pb-12 overflow-hidden">
+        <div id="p5-canvas"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="gradient-text">Intelligent</span> Document Learning
+                </h1>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+                    Upload your documents and watch as our AI learns from your content, 
+                    providing intelligent responses and insights based on your unique knowledge base.
+                </p>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center glass">
+                    <div class="text-3xl font-bold text-teal-600" id="files-processed">0</div>
+                    <div class="text-slate-600">Files Processed</div>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center glass">
+                    <div class="text-3xl font-bold text-amber-600" id="knowledge-nodes">0</div>
+                    <div class="text-slate-600">Knowledge Nodes</div>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center glass">
+                    <div class="text-3xl font-bold text-slate-600" id="chat-messages">0</div>
+                    <div class="text-slate-600">Chat Messages</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Interface -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- File Upload Panel -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold mb-4 text-slate-800">Upload Documents</h3>
+                    
+                    <!-- Drag & Drop Zone -->
+                    <div id="drop-zone" class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-teal-400 transition-colors cursor-pointer mb-4">
+                        <div class="text-slate-500 mb-2">
+                            <svg class="mx-auto h-12 w-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                        </div>
+                        <p class="text-sm text-slate-600">Drop files here or click to upload</p>
+                        <p class="text-xs text-slate-500 mt-1">PDF, DOCX, TXT, CSV, JSON</p>
+                    </div>
+                    
+                    <!-- Upload Progress -->
+                    <div id="upload-progress" class="hidden mb-4">
+                        <div class="flex justify-between text-sm text-slate-600 mb-1">
+                            <span>Processing...</span>
+                            <span id="progress-percent">0%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-2">
+                            <div id="progress-bar" class="bg-teal-500 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Files -->
+                    <div>
+                        <h4 class="text-sm font-medium text-slate-700 mb-3">Recent Files</h4>
+                        <div id="recent-files" class="space-y-2 max-h-64 overflow-y-auto">
+                            <!-- Files will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Interface -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-lg h-full flex flex-col">
+                    <!-- Chat Header -->
+                    <div class="border-b border-slate-200 p-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-gradient-to-br from-teal-500 to-amber-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-bold">AI</span>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-slate-800">AI Assistant</h3>
+                                <p class="text-sm text-slate-500">Online and ready to chat</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Messages -->
+                    <div id="chat-messages-container" class="flex-1 p-4 overflow-y-auto max-h-96">
+                        <div class="space-y-4">
+                            <!-- Welcome Message -->
+                            <div class="chat-bubble">
+                                <div class="flex items-start space-x-3">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-teal-500 to-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white text-xs font-bold">AI</span>
+                                    </div>
+                                    <div class="bg-slate-100 rounded-lg p-3 max-w-xs">
+                                        <p class="text-sm text-slate-800">Hello! I'm your AI assistant. Upload some documents and I'll learn from them to provide intelligent responses. What would you like to know?</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input -->
+                    <div class="border-t border-slate-200 p-4">
+                        <div class="flex space-x-3">
+                            <input 
+                                type="text" 
+                                id="chat-input" 
+                                placeholder="Type your message..." 
+                                class="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                maxlength="500"
+                            >
+                            <button 
+                                id="send-button" 
+                                class="px-6 py-2 bg-gradient-to-r from-teal-500 to-amber-500 text-white rounded-lg hover:from-teal-600 hover:to-amber-600 transition-all duration-200 font-medium"
+                            >
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Knowledge Panel -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                    <h3 class="text-lg font-semibold mb-4 text-slate-800">Knowledge Graph</h3>
+                    
+                    <!-- Knowledge Visualization -->
+                    <div id="knowledge-chart" class="h-64 mb-4"></div>
+                    
+                    <!-- Quick Insights -->
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-600">Processing Status</span>
+                            <span id="processing-status" class="text-sm font-medium text-green-600">Active</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-600">Last Update</span>
+                            <span id="last-update" class="text-sm text-slate-500">Just now</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-slate-600">Response Time</span>
+                            <span id="response-time" class="text-sm text-slate-500">~2.3s</span>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="mt-6">
+                        <h4 class="text-sm font-medium text-slate-700 mb-3">Quick Actions</h4>
+                        <div class="space-y-2">
+                            <button id="clear-chat" class="w-full text-left px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                Clear Chat History
+                            </button>
+                            <button id="export-knowledge" class="w-full text-left px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                Export Knowledge Base
+                            </button>
+                            <button id="reprocess-all" class="w-full text-left px-3 py-2 text-sm text-slate-600 hover:bg-slate-100 rounded-lg transition-colors">
+                                Reprocess All Files
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- File Input (Hidden) -->
+    <input type="file" id="file-input" multiple accept=".pdf,.docx,.txt,.csv,.json" class="hidden">
+
+    <script src="main.js"></script>
+</body>
+</html>
