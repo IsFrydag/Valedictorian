@@ -3,25 +3,29 @@ import { apiRequest } from '../JS/api.js';
 document.addEventListener('DOMContentLoaded', () => {
   const mainBox = document.querySelector('.mainBox');
   const calBox  = document.querySelector('.calBox');
+  const mesBox  = document.querySelector('.mesBox'); // Add messaging box
 
   // support both old class-based selectors and your current data-tab attributes
   const tabCal  = document.querySelector('.tabCal') || document.querySelector('[data-tab="cal"]');
   const tabHome = document.querySelector('.tabHome') || document.querySelector('[data-tab="home"]');
+  const tabMes  = document.querySelector('.tabMes') || document.querySelector('[data-tab="mes"]'); // Add messages tab
 
   const navLinks = document.querySelector('.navLinks');
 
-  if (!mainBox || !calBox) {
-    console.error('Error: .mainBox or .calBox not found in the DOM.');
+  if (!mainBox || !calBox || !mesBox) {
+    console.error('Error: .mainBox, .calBox, or .mesBox not found in the DOM.');
     return;
   }
 
-  // initial state: show main, hide calendar
+  // initial state: show main, hide calendar and messages
   mainBox.style.display = 'grid';
   calBox.style.display  = 'none';
+  mesBox.style.display  = 'none';
 
   function showCalendar() {
     mainBox.style.display = 'none';
     calBox.style.display  = 'grid';
+    mesBox.style.display  = 'none';
     // update active class visually (works for data-tab li or class selectors)
     document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
     const calLi = document.querySelector('[data-tab="cal"]');
@@ -31,13 +35,24 @@ document.addEventListener('DOMContentLoaded', () => {
   function showHome() {
     mainBox.style.display = 'grid';
     calBox.style.display  = 'none';
+    mesBox.style.display  = 'none';
     document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
     const homeLi = document.querySelector('[data-tab="home"]');
     if (homeLi) homeLi.classList.add('active');
   }
 
+  function showMessages() {
+    mainBox.style.display = 'none';
+    calBox.style.display  = 'none';
+    mesBox.style.display  = 'grid';
+    document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
+    const mesLi = document.querySelector('[data-tab="mes"]');
+    if (mesLi) mesLi.classList.add('active');
+  }
+
   if (tabCal)  tabCal.addEventListener('click', showCalendar);
   if (tabHome) tabHome.addEventListener('click', showHome);
+  if (tabMes)  tabMes.addEventListener('click', showMessages);
 
   // extra: event-delegation fallback in case clicks land on inner text nodes
   if (navLinks) {
@@ -47,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const tab = li.dataset.tab;
       if (tab === 'cal') showCalendar();
       if (tab === 'home') showHome();
+      if (tab === 'mes') showMessages();
     });
   }
 });
