@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coze Chatbot</title>
+</head>
+<body>
+  <h1>Welcome</h1>
+  <p>Chat with our AI Assistant below</p>
+
+  <!-- Coze embed script -->
+  <script src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/1.2.0-beta.6/libs/oversea/index.js"></script>
+<script>
+  new CozeWebSDK.WebChatClient({
+    config: {
+      bot_id: '7561376117522251832',
+    },
+    componentProps: {
+      title: 'Coze',
+    },
+    auth: {
+      type: 'token',
+      token: 'pat_TCYAXNn8yyvI6RjqXrwt1XVxJe9Seg3sAIuG9qEI0FGQMc94zAf1IHxdLuBXxxGn',
+      onRefreshToken: function () {
+        return 'pat_TCYAXNn8yyvI6RjqXrwt1XVxJe9Seg3sAIuG9qEI0FGQMc94zAf1IHxdLuBXxxGn'
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
