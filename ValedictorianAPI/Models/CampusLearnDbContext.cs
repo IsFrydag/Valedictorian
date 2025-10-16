@@ -7,7 +7,7 @@ namespace ValedictorianAPI.Models
         public ValedictorianDbContext(DbContextOptions<ValedictorianDbContext> options): base(options)
         {
         }
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserModel> Users { get; set; }
         public DbSet<TutorSession> TutorSessions { get; set; }
         public DbSet<Upload> Uploads { get; set; }
         public DbSet<Topic> Topics { get; set; }
