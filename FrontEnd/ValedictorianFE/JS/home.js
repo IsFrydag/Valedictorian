@@ -3,13 +3,11 @@ import { apiRequest } from '../JS/api.js';
 document.addEventListener('DOMContentLoaded', () => {
   const mainBox = document.querySelector('.mainBox');
   const calBox  = document.querySelector('.calBox');
-  const mesBox  = document.querySelector('.mesBox'); // Add messaging box
+  const mesBox  = document.querySelector('.mesBox');
 
-  // support both old class-based selectors and your current data-tab attributes
   const tabCal  = document.querySelector('.tabCal') || document.querySelector('[data-tab="cal"]');
   const tabHome = document.querySelector('.tabHome') || document.querySelector('[data-tab="home"]');
-  const tabMes  = document.querySelector('.tabMes') || document.querySelector('[data-tab="mes"]'); // Add messages tab
-
+  const tabMes  = document.querySelector('.tabMes') || document.querySelector('[data-tab="mes"]');
   const navLinks = document.querySelector('.navLinks');
 
   if (!mainBox || !calBox || !mesBox) {
@@ -17,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // initial state: show main, hide calendar and messages
+  // Initial state
   mainBox.style.display = 'grid';
   calBox.style.display  = 'none';
   mesBox.style.display  = 'none';
@@ -26,58 +24,58 @@ document.addEventListener('DOMContentLoaded', () => {
     mainBox.style.display = 'none';
     calBox.style.display  = 'grid';
     mesBox.style.display  = 'none';
-    // update active class visually (works for data-tab li or class selectors)
-    document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
-    const calLi = document.querySelector('[data-tab="cal"]');
-    if (calLi) calLi.classList.add('active');
+    setActiveTab('cal');
   }
 
   function showHome() {
     mainBox.style.display = 'grid';
     calBox.style.display  = 'none';
     mesBox.style.display  = 'none';
-    document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
-    const homeLi = document.querySelector('[data-tab="home"]');
-    if (homeLi) homeLi.classList.add('active');
+    setActiveTab('home');
   }
 
   function showMessages() {
     mainBox.style.display = 'none';
     calBox.style.display  = 'none';
     mesBox.style.display  = 'grid';
+    setActiveTab('mes');
+  }
+
+  function goToModules() {
+    window.location.href = '../HTML/moduleList.html';
+  }
+
+  function setActiveTab(tabName) {
     document.querySelectorAll('.navLinks li').forEach(li => li.classList.remove('active'));
-    const mesLi = document.querySelector('[data-tab="mes"]');
-    if (mesLi) mesLi.classList.add('active');
+    const activeLi = document.querySelector(`[data-tab="${tabName}"]`);
+    if (activeLi) activeLi.classList.add('active');
   }
 
   if (tabCal)  tabCal.addEventListener('click', showCalendar);
   if (tabHome) tabHome.addEventListener('click', showHome);
   if (tabMes)  tabMes.addEventListener('click', showMessages);
 
-  // extra: event-delegation fallback in case clicks land on inner text nodes
   if (navLinks) {
     navLinks.addEventListener('click', (e) => {
       const li = e.target.closest('li');
       if (!li) return;
       const tab = li.dataset.tab;
+
       if (tab === 'cal') showCalendar();
-      if (tab === 'home') showHome();
-      if (tab === 'mes') showMessages();
+      else if (tab === 'home') showHome();
+      else if (tab === 'mes') showMessages();
+      else if (tab === 'mod') goToModules();
     });
   }
 });
 
+// Parallax logo animation
 document.addEventListener("DOMContentLoaded", () => {
   const parallaxLogo = document.querySelector(".parallaxLogo");
 
-  const strength = 30; // parallax motion strength (px)
-  const glowStrength = 40; // how far glow shifts (px)
-  let targetX = 0;
-  let targetY = 0;
-  let currentX = 0;
-  let currentY = 0;
-  let glowX = 0;
-  let glowY = 0;
+  const strength = 30;
+  const glowStrength = 40;
+  let targetX = 0, targetY = 0, currentX = 0, currentY = 0, glowX = 0, glowY = 0;
 
   document.addEventListener("mousemove", (e) => {
     const rect = parallaxLogo.getBoundingClientRect();
@@ -87,11 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const deltaX = (e.clientX - centerX) / (window.innerWidth / 2);
     const deltaY = (e.clientY - centerY) / (window.innerHeight / 2);
 
-    // Opposite parallax movement
     targetX = -deltaX * strength;
     targetY = -deltaY * strength;
-
-    // Glow follows cursor (same direction as mouse)
     glowX = deltaX * glowStrength;
     glowY = deltaY * glowStrength;
   });
@@ -111,16 +106,14 @@ document.addEventListener("DOMContentLoaded", () => {
   animate();
 });
 
+// Notification bell
 document.addEventListener('DOMContentLoaded', () => {
   const bell = document.getElementById('bell');
 
   if (bell) {
     bell.addEventListener('click', async () => {
       try {
-        // Call backend notification endpoint
         const response = await apiRequest('/Notif/NotificationReceived', 'GET');
-        
-        // Show message in an alert
         alert(response.message);
       } catch (err) {
         console.error('Notification fetch error:', err);

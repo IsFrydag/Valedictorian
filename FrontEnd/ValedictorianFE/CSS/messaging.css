@@ -126,7 +126,7 @@
 }
 
 .new-chat-btn {
-    background: #25d366;
+    background: #ff0000;
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -140,7 +140,7 @@
 }
 
 .new-chat-btn:hover {
-    background: #128c7e;
+    background: #940000;
     transform: scale(1.05);
 }
 
@@ -196,7 +196,7 @@
 
 .chat-item.active {
     background: #e3f2fd;
-    border-left: 4px solid #25d366;
+    border-left: 4px solid #ff0000;
 }
 
 .chat-avatar {
@@ -248,7 +248,7 @@
 }
 
 .chat-unread {
-    background: #25d366;
+    background: #ff0000;
     color: white;
     border-radius: 50%;
     width: 20px;
@@ -297,6 +297,10 @@
     color: white;
     font-weight: bold;
     font-size: 16px;
+}
+
+.avatar .avatar {
+    margin: 0px;
 }
 
 .chat-header .avatar img {
@@ -381,6 +385,7 @@
     display: flex;
     align-items: flex-end;
     gap: 8px;
+    background: rgb(116,115,115);
 }
 
 .message.sent {
@@ -415,13 +420,30 @@
 
 .message-time {
     font-size: 11px;
-    color: #999;
+    color: white;
     margin-top: 4px;
     text-align: right;
 }
 
 .message.sent .message-time {
     color: #85b56c;
+}
+.me{
+
+    justify-content: right;
+    margin: 0px 0px 15px 300px;
+
+}
+.them{
+    
+    margin: 0px 300px 15px 0px;
+    
+}
+
+.them .message-time{
+
+    text-align: left;
+    
 }
 
 /* Input Area */
@@ -471,7 +493,7 @@
 }
 
 .send-btn {
-    background: #25d366 !important;
+    background: #ff0000 !important;
     color: white !important;
     border: none;
     border-radius: 50%;
@@ -486,7 +508,7 @@
 }
 
 .send-btn:hover {
-    background: #128c7e !important;
+    background: #940000 !important;
     transform: scale(1.05);
 }
 

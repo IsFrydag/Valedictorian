@@ -2,20 +2,15 @@
 <html>
     <head>
         <title>Home</title>
-
         <link rel="stylesheet" href="../CSS/home.css">
         <link rel="stylesheet" href= "../CSS/calendar.css">
         <link rel="stylesheet" href="../CSS/calendarForm.css">
         <link rel="stylesheet" href="../CSS/messaging.css">
         <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css ' rel='stylesheet'>
-
     <base target="_blank">
 </head>
-
     <body>
-
         <nav class="glassNav">
-
             <ul class="navLinks">
                 <li data-tab="home" class="active dropdown">
                     Home
@@ -38,11 +33,8 @@
                 </a>
             </div>
         </nav>  
-
         <section class="mainBox">
-
             <div class="wrapper">
-
                 <div class="box">
                     <div></div>
                     <div></div>
@@ -65,9 +57,7 @@
                     <div></div>
                     <div></div>
                 </div>
-
             </div>
-
             <div class="parallaxLogo">
             </div>
             <div class="Announcements">
@@ -75,11 +65,8 @@
                     <p class="annHead">Announcements</p>
                 </div>
             </div>
-
         </section>
-
         <section class="calBox">
-
             <div id="calendarHeader">
                 <button id="prevMonth">&lt;</button>
                 <span id="monthYear"></span>
@@ -98,16 +85,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                   <!-- JS will fill this  -->
                 </tbody>
             </table>
-
         </section>
-
-        <!-- Messaging Section -->
         <section class="mesBox">
             <div class="messaging-container">
-                <!-- Left Sidebar - Chat List -->
                 <div class="chat-sidebar">
                     <div class="sidebar-header">
                         <h2>Chats</h2>
@@ -120,11 +102,8 @@
                         <i class='bx bx-search'></i>
                     </div>
                     <div class="chat-list" id="chatList">
-                        <!-- Chat items will be populated by JavaScript -->
                     </div>
                 </div>
-
-                <!-- Main Chat Area -->
                 <div class="chat-main">
                     <div class="chat-header" id="chatHeader">
                         <div class="chat-header-info">
@@ -145,7 +124,6 @@
                             </button>
                         </div>
                     </div>
-
                     <div class="chat-messages" id="chatMessages">
                         <div class="no-chat-selected">
                             <div class="no-chat-icon">
@@ -155,7 +133,6 @@
                             <p>Select a chat to start messaging</p>
                         </div>
                     </div>
-
                     <div class="chat-input-container">
                         <div class="chat-input">
                             <button class="emoji-btn">
@@ -176,43 +153,32 @@
                 </div>
             </div>
         </section>
-
         <section class="imageColumnContainer">
-
             <div class="imageColumn leftImageColumn">
-                
                 <div class="scroller leftScroller">
                     <div class="lSquareBox" id="leftColImg1"></div>
                     <div class="lSquareBox" id="leftColImg2"></div>
                     <div class="lSquareBox" id="leftColImg3"></div>
                     <div class="lSquareBox" id="leftColImg4"></div>
-
                     <div class="lSquareBox" id="leftColImg1"></div>
                     <div class="lSquareBox" id="leftColImg2"></div>
                     <div class="lSquareBox" id="leftColImg3"></div>
                     <div class="lSquareBox" id="leftColImg4"></div>
                 </div>
-
             </div>
-
             <div class="imageColumn rightImageColumn">
-
                 <div class="scroller rightScroller">
                     <div class="rSquareBox" id="rightColImg1"></div>
                     <div class="rSquareBox" id="rightColImg2"></div>
                     <div class="rSquareBox" id="rightColImg3"></div>
                     <div class="rSquareBox" id="rightColImg4"></div>
-
                     <div class="rSquareBox" id="rightColImg1"></div>
                     <div class="rSquareBox" id="rightColImg2"></div>
                     <div class="rSquareBox" id="rightColImg3"></div>
                     <div class="rSquareBox" id="rightColImg4"></div>
                 </div>
-
             </div>
-
         </section>
-
         <div id="calendarModal" class="modal" style="display: none;">
             <div class="modal-content">
                 <div class="modal-header">
@@ -227,7 +193,6 @@
                             <option value="">Select a module</option>
                     </select>
                     </div>
-                    
                     <div class="form-group">
                     <label for="sessionType">Session Type:</label>
                         <select id="sessionType" name="sessionType" required>
@@ -236,16 +201,13 @@
                             <option value="Face to Face">Face to Face</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
                         <label for="tutorSelect">Available Tutors:</label>
                         <select id="tutorSelect" name="tutor" required>
                             <option value="">Select a tutor</option>
                         </select>
                     </div>
-                    
                     <input type="hidden" id="selectedDate" name="date">
-                    
                     <div class="form-actions">
                         <button type="submit" id="bookSessionBtn">Book Session</button>
                         <button type="button" id="cancelBooking">Cancel</button>
@@ -254,14 +216,14 @@
                 </div>
             </div>
         </div>
-        
+        <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="EikTFqQGFuY4aizTDzUOu";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+        </script>
         <script type="module" src="../JS/home.js"></script>
         <script src="../JS/calendar.js"></script>
         <script src="../JS/messaging.js"></script>
         <script src="../JS/renderer.js"></script>
         <script type="module" src="../JS/calendarForm.js"></script>
         <script src="/errorCatcher.js"></script>
-
     </body>
-
 </html>

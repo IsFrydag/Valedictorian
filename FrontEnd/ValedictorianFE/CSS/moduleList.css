@@ -1,161 +1,135 @@
+:root {
+    --primary: #2C3E50;
+    --secondary: #D4A574;
+    --accent: #5DADE2;
+    --neutral: #F8F9FA;
+    --text-dark: #2C3E50;
+    --text-light: #6C757D;
+}
+
 body {
-    background: black;
-    text-align: center;
-    font-family: sans-serif;
-    color: crimson;
-}
-/*module nav*/
-.module-navigation {
-    margin-bottom: 30px;
-}
-
-.module-navigation a {
-    margin: 0 5px;
-    text-decoration: none;
-    color: white;
-}
-
-.module-triangles-top-row,
-.module-triangles-bottom-row {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    padding-bottom: 10px;
-}
-
-/* Shared base style for all triangles */
-.morph {
-    width: 250px;
-    height: 250px;
-    background: crimson;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* Default Up-triangle clip */
-    transition: all 1.5s ease-in-out;
-    cursor: pointer;
-    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--primary) 0%, #34495e 50%, var(--neutral) 100%);
+    min-height: 100vh;
     position: relative;
-    overflow: hidden; /* Hides content outside the clip-path */
+    overflow-x: hidden;
 }
 
-/* Triangle pointing up (confirms base clip-path) */
-.triangle-up {
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* Triangle pointing down (overrides base clip-path) */
-.triangle-down {
-    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-    background: #555;
+.module-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
 }
 
-/* IMAGE STYLING */
-.module-image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.2; /* Dims the image slightly */
-    transition: opacity 0.8s;
-}
-.morph:hover .module-image {
-    opacity: 0.1; /* Dims the image more on hover */
+.module-card:hover {
+    transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-
-/* --- TRIANGLE STATE CONTENT (Always Visible) --- */
-
-/* Style and position the title visible in the triangle state */
-.triangle-title {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2; /* Ensures it's above the details container */
-    
-    /* Center the "Module X" text */
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-    
-    color: white; /* Changed to white for better contrast */
-    font-size: 20px;
-    font-weight: bold;
-    text-align: center;
-    
-    /* Transition for the fade-out on hover */
-    transition: opacity 0.8s ease-in-out, visibility 0.8s; 
-    
-}
-
-
-/* --- SQUARE STATE CONTENT (Hidden by Default) --- */
-
-/* The full details container, hidden initially */
-.square-details {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 15px; /* Spacing inside the square */
-    z-index: 3; /* Ensures it's on top */
-    
-    /* Layout for details: stacked text and button */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-    /* HIDE BY DEFAULT */
+.profile-dropdown {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transform: translateY(-10px);
     opacity: 0;
     visibility: hidden;
-    color: black; /* Text color for the square state */
-    transition: opacity 0.8s ease-in-out, visibility 0.8s;
+    transition: all 0.3s ease;
 }
 
-.square-details h3 {
-    margin-bottom: 5px;
-    font-size: 24px;
-}
-.square-details p {
-    margin: 5px 0 15px 0;
-    font-size: 16px;
-}
-.square-details .square-button {
-    padding: 8px 15px;
-    background: crimson;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.square-details .square-button:hover {
-    background: darkred;
-}
-
-/* --- HOVER EFFECTS --- */
-
-/* Morph into a square on hover */
-.morph:hover {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    background: goldenrod;
-    transform: scale(1.2);
-    z-index: 5;
-}
-
-/* 1. Hide the Module Title in the Triangle State */
-.morph:hover .triangle-title {
-    opacity: 0;
-    visibility: hidden;
-}
-
-/* 2. Show the Module Details in the Square State */
-.morph:hover .square-details {
+.profile-dropdown.active {
+    transform: translateY(0);
     opacity: 1;
     visibility: visible;
 }
 
-.footer-end {
-    color: goldenrod;
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.form-input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    background: rgba(255, 255, 255, 1);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(93, 173, 226, 0.1);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(93, 173, 226, 0.3);
+}
+
+.particle-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.search-highlight {
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}
+
+.stats-counter {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.filter-chip {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+.filter-chip.active {
+    background: var(--accent);
+    color: white;
+}
+
+.empty-state {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .module-card:hover {
+        transform: translateY(-4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
