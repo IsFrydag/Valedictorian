@@ -1,229 +1,263 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Home</title>
-        <link rel="stylesheet" href="../CSS/home.css">
-        <link rel="stylesheet" href= "../CSS/calendar.css">
-        <link rel="stylesheet" href="../CSS/calendarForm.css">
-        <link rel="stylesheet" href="../CSS/messaging.css">
-        <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css ' rel='stylesheet'>
-    <base target="_blank">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusLearn - Your Hub for Learning and Collaboration</title>
+    <link rel="stylesheet" href="../CSS/home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<base target="_blank">
 </head>
-    <body>
-        <nav class="glassNav">
-            <ul class="navLinks">
-                <li data-tab="home" class="active dropdown">
-                    Home
-                    <ul class="dropdown-menu">
-                        <li data-tab="cla">Claritas</li>
-                        <li data-tab="cha">ChatBot</li>
-                        <li data-tab="faq">FAQ</li>
-                        <li data-tab="rec">Resources</li>
-                        <li data-tab="tut">Tutoring</li>
-                    </ul>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>CampusLearn</h2>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
                 </li>
-                <li data-tab="cal">Calendar</li>
-                <li data-tab="mes">Messages</li>
-                <li data-tab="mod">Modules</li>
+                <li class="nav-item">
+                    <a href="#calendar" class="nav-link">Calendar</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#messages" class="nav-link">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#modules" class="nav-link">Modules</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#forum" class="nav-link">Forum</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#faq" class="nav-link">FAQ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tutoring" class="nav-link">Tutoring</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item profile-item">
+                    <a href="#profile" class="nav-link profile-link">
+                        <i class="fas fa-user-circle"></i>
+                    </a>
+                </li>
             </ul>
-            <div class="navExtras">
-                <i class='bx bxs-bell-ring' id="bell"></i>
-                <a href="../HTML/profile.html" class="navBrand">
-                <img src="../assets/images/cap.jpg" alt="profile">
-                </a>
+            
+            <!-- Mobile Hamburger Menu -->
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
-        </nav>  
-        <section class="mainBox">
-            <div class="wrapper">
-                <div class="box">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Welcome to CampusLearn
+                </h1>
+                <p class="hero-subtitle">
+                    Your Hub for Learning and Collaboration
+                </p>
+                <div class="hero-description">
+                    <p>Connect with peers, access course materials, manage your schedule, and enhance your academic journey in one unified platform designed for modern education.</p>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#modules" class="btn btn-primary">Explore Modules</a>
+                    <a href="#calendar" class="btn btn-secondary">View Calendar</a>
                 </div>
             </div>
-            <div class="parallaxLogo">
-            </div>
-            <div class="Announcements">
-                <div class="annContent">
-                    <p class="annHead">Announcements</p>
-                </div>
-            </div>
-        </section>
-        <section class="calBox">
-            <div id="calendarHeader">
-                <button id="prevMonth">&lt;</button>
-                <span id="monthYear"></span>
-                <button id="nextMonth">&gt;</button>
-            </div>
-            <table id="calendarTable">
-                <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
-        <section class="mesBox">
-            <div class="messaging-container">
-                <div class="chat-sidebar">
-                    <div class="sidebar-header">
-                        <h2>Chats</h2>
-                        <button class="new-chat-btn">
-                            <i class='bx bx-plus'></i>
-                        </button>
-                    </div>
-                    <div class="chat-search">
-                        <input type="text" placeholder="Search or start new chat" id="chatSearch">
-                        <i class='bx bx-search'></i>
-                    </div>
-                    <div class="chat-list" id="chatList">
-                    </div>
-                </div>
-                <div class="chat-main">
-                    <div class="chat-header" id="chatHeader">
-                        <div class="chat-header-info">
-                            <div class="avatar">
-                                <img src="../assets/images/default-avatar.png" alt="Avatar" id="currentChatAvatar">
-                            </div>
-                            <div class="chat-info">
-                                <h3 id="currentChatName">Select a chat</h3>
-                                <span id="currentChatStatus">No chat selected</span>
-                            </div>
-                        </div>
-                        <div class="chat-header-actions">
-                            <button class="search-btn">
-                                <i class='bx bx-search'></i>
-                            </button>
-                            <button class="menu-btn">
-                                <i class='bx bx-dots-vertical-rounded'></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="chat-messages" id="chatMessages">
-                        <div class="no-chat-selected">
-                            <div class="no-chat-icon">
-                                <i class='bx bx-message-square-detail'></i>
-                            </div>
-                            <h3>Welcome to Messages</h3>
-                            <p>Select a chat to start messaging</p>
-                        </div>
-                    </div>
-                    <div class="chat-input-container">
-                        <div class="chat-input">
-                            <button class="emoji-btn">
-                                <i class='bx bx-smile'></i>
-                            </button>
-                            <input type="text" placeholder="Type a message" id="messageInput" disabled>
-                            <button class="attach-btn">
-                                <i class='bx bx-paperclip'></i>
-                            </button>
-                            <button class="voice-btn">
-                                <i class='bx bx-microphone'></i>
-                            </button>
-                        </div>
-                        <button class="send-btn" id="sendButton" disabled>
-                            <i class='bx bx-send'></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="imageColumnContainer">
-            <div class="imageColumn leftImageColumn">
-                <div class="scroller leftScroller">
-                    <div class="lSquareBox" id="leftColImg1"></div>
-                    <div class="lSquareBox" id="leftColImg2"></div>
-                    <div class="lSquareBox" id="leftColImg3"></div>
-                    <div class="lSquareBox" id="leftColImg4"></div>
-                    <div class="lSquareBox" id="leftColImg1"></div>
-                    <div class="lSquareBox" id="leftColImg2"></div>
-                    <div class="lSquareBox" id="leftColImg3"></div>
-                    <div class="lSquareBox" id="leftColImg4"></div>
-                </div>
-            </div>
-            <div class="imageColumn rightImageColumn">
-                <div class="scroller rightScroller">
-                    <div class="rSquareBox" id="rightColImg1"></div>
-                    <div class="rSquareBox" id="rightColImg2"></div>
-                    <div class="rSquareBox" id="rightColImg3"></div>
-                    <div class="rSquareBox" id="rightColImg4"></div>
-                    <div class="rSquareBox" id="rightColImg1"></div>
-                    <div class="rSquareBox" id="rightColImg2"></div>
-                    <div class="rSquareBox" id="rightColImg3"></div>
-                    <div class="rSquareBox" id="rightColImg4"></div>
-                </div>
-            </div>
-        </section>
-        <div id="calendarModal" class="modal" style="display: none;">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Book a Session</h2>
-                    <span class="close">&times;</span>
-                </div>
-                <div class="modal-body">
-                <form id="sessionBookingForm">
-                    <div class="form-group">
-                        <label for="moduleSelect">Module:</label>
-                        <select id="moduleSelect" name="module" required>
-                            <option value="">Select a module</option>
-                    </select>
-                    </div>
-                    <div class="form-group">
-                    <label for="sessionType">Session Type:</label>
-                        <select id="sessionType" name="sessionType" required>
-                            <option value="">Select session type</option>
-                            <option value="Online">Online</option>
-                            <option value="Face to Face">Face to Face</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="tutorSelect">Available Tutors:</label>
-                        <select id="tutorSelect" name="tutor" required>
-                            <option value="">Select a tutor</option>
-                        </select>
-                    </div>
-                    <input type="hidden" id="selectedDate" name="date">
-                    <div class="form-actions">
-                        <button type="submit" id="bookSessionBtn">Book Session</button>
-                        <button type="button" id="cancelBooking">Cancel</button>
-                    </div>
-                </form>
+            <div class="hero-image">
+                <div class="hero-visual">
+                    <i class="fas fa-graduation-cap"></i>
                 </div>
             </div>
         </div>
-        <script>
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="EikTFqQGFuY4aizTDzUOu";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-        </script>
-        <script type="module" src="../JS/home.js"></script>
-        <script src="../JS/calendar.js"></script>
-        <script src="../JS/messaging.js"></script>
-        <script src="../JS/renderer.js"></script>
-        <script type="module" src="../JS/calendarForm.js"></script>
-        <script src="/errorCatcher.js"></script>
-    </body>
+    </section>
+
+    <!-- Announcements Section -->
+    <section class="announcements" id="announcements">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Announcements</h2>
+                <p class="section-subtitle">Stay updated with the latest news and information</p>
+            </div>
+            
+            <div class="announcements-grid">
+                <div class="announcement-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">Semester Registration Open</h3>
+                            <span class="card-date">October 15, 2025</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Registration for the Spring 2026 semester is now open. Students can register for courses through the student portal until November 30th.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-tag">Academic</span>
+                    </div>
+                </div>
+
+                <div class="announcement-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">Midterm Schedule Released</h3>
+                            <span class="card-date">October 12, 2025</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>The midterm examination schedule for Fall 2025 has been published. Please check your student dashboard for specific dates and times.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-tag">Examinations</span>
+                    </div>
+                </div>
+
+                <div class="announcement-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">New Tutoring Programs</h3>
+                            <span class="card-date">October 10, 2025</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Additional tutoring sessions are now available for STEM courses. Book your sessions through the tutoring module to get personalized academic support.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-tag">Support</span>
+                    </div>
+                </div>
+
+                <div class="announcement-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">Platform Maintenance</h3>
+                            <span class="card-date">October 8, 2025</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p>Scheduled maintenance will occur this Saturday from 2:00 AM to 6:00 AM EST. Some features may be temporarily unavailable during this period.</p>
+                    </div>
+                    <div class="card-footer">
+                        <span class="card-tag">Technical</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="announcements-footer">
+                <button class="btn btn-outline" id="viewAllBtn">View All Announcements</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access">
+        <div class="container">
+            <div class="quick-access-grid">
+                <div class="quick-access-card">
+                    <div class="card-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Course Materials</h3>
+                    <p>Access lecture notes, assignments, and resources</p>
+                    <a href="#modules" class="btn btn-text">Explore <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="quick-access-card">
+                    <div class="card-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Discussion Forum</h3>
+                    <p>Join academic discussions and collaborate</p>
+                    <a href="#forum" class="btn btn-text">Join Discussion <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="quick-access-card">
+                    <div class="card-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Schedule Management</h3>
+                    <p>Organize your academic calendar and events</p>
+                    <a href="#calendar" class="btn btn-text">Manage Schedule <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notification Button -->
+    <div class="notification-btn" id="notificationBtn">
+        <i class="fas fa-bell"></i>
+        <span class="notification-badge">3</span>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>CampusLearn</h3>
+                    <p>Empowering academic excellence through innovative digital solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#modules">Modules</a></li>
+                        <li><a href="#calendar">Calendar</a></li>
+                        <li><a href="#messages">Messages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#tutoring">Tutoring</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CampusLearn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS/home.js"></script>
+</body>
 </html>
