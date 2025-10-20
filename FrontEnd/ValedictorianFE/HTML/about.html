@@ -7,6 +7,7 @@
         <meta name="description" content="Learn about BelgiumCampus IT versity's mission, faculty, facilities, and commitment to excellence in technology education.">
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
@@ -29,69 +30,45 @@
                 }
             }
         </script>
-        <style>
-            .reveal-text {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            .reveal-text.revealed {
-                opacity: 1;
-                transform: translateY(0);
-                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            .stat-card {
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            .stat-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            }
-        </style>
+        <link rel="stylesheet" href="../CSS/about.css">
     </head>
-    <body class="bg-gray-50 text-charcoal font-display">
-        <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center h-16">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 bg-gradient-to-br from-navy to-copper rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold text-sm">BC</span>
-                        </div>
-                        <span class="font-bold text-xl text-navy">BelgiumCampus IT</span>
+    <body class=" text-charcoal font-display">
+        <div id="particle-bg" class="particle-bg"></div>
+        <nav class="nav-fixed">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="nav-logo">
+                        <span class="nav-logo-text">Valedictorian</span>
                     </div>
-                    <div class="hidden md:flex items-center space-x-8">
-                        <a href="../HTML/faq.html" class="text-gray-600 hover:text-copper transition-colors">FAQ</a>
-                        <a href="../HTML/contact.html" class="text-gray-600 hover:text-copper transition-colors">Contact</a>
+                    <div class="nav-links md-visible">
+                        <a href="../HTML/Home.html" class="nav-link">Home</a>
+                        <a href="../HTML/faq.html" class="nav-link">FAQ</a>
+                        <a href="../HTML/contact.html" class="nav-link">Contact</a>
                     </div>
-                    <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" id="mobile-menu-btn">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
                 </div>
             </div>
         </nav>
         <section class="pt-24 pb-16 bg-gradient-to-br from-navy to-charcoal text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
+                <div class="grid lg:grid-cols-2 gap-12 items-center justify-items-center">
+                    <div class="text-center lg:text-left">
                         <h1 class="text-5xl lg:text-6xl font-bold mb-6 leading-tight reveal-text">
-                            Shaping the Future of <span class="text-copper">Technology</span>
+                            A Belgiumcampus <span class="highlight-text">Learning Platform</span>
                         </h1>
                         <p class="text-xl text-gray-300 mb-8 leading-relaxed reveal-text">
-                            BelgiumCampus IT versity is Belgium's premier institution for technology education, 
-                            preparing the next generation of IT professionals for successful careers in the digital economy.
+                            Shaping the future of those who <span class="font-bold">SHAPE THE FUTURE.</span>
                         </p>
-                        <div class="flex flex-wrap gap-4 reveal-text">
+                        <div class="flex flex-wrap gap-4 justify-center lg:justify-start reveal-text">
                             <div class="px-6 py-3 bg-copper rounded-lg font-semibold">
-                                95% Job Placement Rate
+                                100% Job Placement Rate
                             </div>
                             <div class="px-6 py-3 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
-                                15+ Industry Partners
+                                38+ Industry Partners
                             </div>
                         </div>
                     </div>
-                    <div class="relative">
-                        <img src="resources/hero-main.jpg" alt="BelgiumCampus IT Learning Environment" 
+                    <div class="relative w-full max-w-lg mx-auto">
+                        <img src="../assets/images/aboutImage.png" alt="BelgiumCampus IT Learning Environment" 
                             class="rounded-2xl shadow-2xl w-full h-auto">
                         <div class="absolute inset-0 bg-gradient-to-t from-navy/20 to-transparent rounded-2xl"></div>
                     </div>
@@ -101,28 +78,25 @@
         <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-navy mb-4 reveal-text">Our Mission & Vision</h2>
+                    <h2 class="text-4xl font-bold text-navy mb-4 reveal-text">Our Mission</h2>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto reveal-text">
-                        Empowering students with cutting-edge technology skills and practical experience 
-                        to excel in Belgium's thriving digital economy.
+                        Providing a modern, centralized platform where students can learn the way of software and earn their keep in the workplace
                     </p>
                 </div>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="grid md:grid-cols-1 gap-5 items-center">
                     <div class="reveal-text">
-                        <h3 class="text-3xl font-bold text-navy mb-6">Our Mission</h3>
+                        <h3 class="text-3xl font-bold text-navy mb-6">Our Vision</h3>
                         <p class="text-gray-600 mb-6 leading-relaxed">
-                            To provide world-class IT education that combines theoretical knowledge with practical application, 
-                            preparing students for successful careers in technology. We bridge the gap between academic learning 
-                            and industry requirements through hands-on projects, internships, and partnerships with leading tech companies.
+                            To empower students with cutting-edge, industry-relevant software skills through a modern, centralized learning platform, ensuring they are not just academically proficient but are also workplace-ready. We are dedicated to providing a transformative educational experience that seamlessly integrates academic theory with intensive practical application, enabling every graduate to successfully 'earn their keep' by meeting the demanding needs of the global technology sector.
                         </p>
                         <ul class="space-y-3 text-gray-600">
-                            <li class="flex items-start">
+                            <li class="flex justify-start">
                                 <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
                                 Deliver industry-relevant curriculum updated annually
                             </li>
-                            <li class="flex items-start">
+                            <li class="flex justify-start">
                                 <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
@@ -132,35 +106,7 @@
                                 <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
-                                Foster innovation and entrepreneurial thinking
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="reveal-text">
-                        <h3 class="text-3xl font-bold text-navy mb-6">Our Vision</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            To be recognized as Belgium's leading institution for technology education, known for producing 
-                            highly skilled IT professionals who drive innovation and digital transformation across industries. 
-                            We aim to create a vibrant learning community that attracts talent from around the world.
-                        </p>
-                        <ul class="space-y-3 text-gray-600">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Become the top choice for IT education in Belgium
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Establish global partnerships and recognition
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                </svg>
-                                Lead in technology research and innovation
+                                Foster innovative thinking
                             </li>
                         </ul>
                     </div>
@@ -177,22 +123,22 @@
                     <div class="stat-card text-center bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
                         <div class="text-4xl font-bold text-copper mb-2" data-count="2500">0</div>
                         <div class="text-white text-lg font-semibold">Students Enrolled</div>
-                        <div class="text-gray-400 text-sm mt-1">From 45+ countries</div>
+                        <div class="text-gray-400 text-sm mt-1">From multiple countries</div>
                     </div>
                     <div class="stat-card text-center bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-                        <div class="text-4xl font-bold text-copper mb-2" data-count="95">0</div>
+                        <div class="text-4xl font-bold text-copper mb-2" data-count="100">0</div>
                         <div class="text-white text-lg font-semibold">% Job Placement</div>
                         <div class="text-gray-400 text-sm mt-1">Within 6 months</div>
                     </div>
                     <div class="stat-card text-center bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-                        <div class="text-4xl font-bold text-copper mb-2" data-count="150">0</div>
+                        <div class="text-4xl font-bold text-copper mb-2" data-count="38">0</div>
                         <div class="text-white text-lg font-semibold">Industry Partners</div>
                         <div class="text-gray-400 text-sm mt-1">Leading tech companies</div>
                     </div>
                     <div class="stat-card text-center bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-                        <div class="text-4xl font-bold text-copper mb-2" data-count="15">0</div>
+                        <div class="text-4xl font-bold text-copper mb-2" data-count="26">0</div>
                         <div class="text-white text-lg font-semibold">Years of Excellence</div>
-                        <div class="text-gray-400 text-sm mt-1">Established 2008</div>
+                        <div class="text-gray-400 text-sm mt-1">Established 1999</div>
                     </div>
                 </div>
             </div>
@@ -209,257 +155,68 @@
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-2xl p-8 border border-blue-200 reveal-text">
                         <div class="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mb-6">
-                            <span class="text-white text-2xl font-bold">DM</span>
+                            <span class="text-white text-2xl font-bold">FV</span>
                         </div>
-                        <h3 class="text-xl font-bold text-navy mb-2">Dr. Marie Dubois</h3>
-                        <p class="text-blue-600 font-medium mb-3">Head of AI & Data Science</p>
+                        <h3 class="text-xl font-bold text-navy mb-2">Francois Venter</h3>
+                        <p class="text-blue-600 font-medium mb-3">Head Lecturer</p>
                         <p class="text-gray-600 text-sm mb-4">
-                            PhD in Machine Learning from KU Leuven, 15+ years at Google AI, 
-                            published researcher with 50+ papers in top-tier conferences.
+                            Venter serves as Head Lecturer at Belgium Campus ITversity, where he leads academic initiatives and fosters international collaborations. He spearheads projects like BusIT Week, an global student exchange program focused on smart cities and sustainable solutions such as FoodRescue, emphasizing cross-cultural teamwork and innovation in IT education to prepare students for global challenges.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs">AI/ML</span>
-                            <span class="px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs">Data Science</span>
+                            <span class="px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs">Internationalization in IT education</span>
+                            <span class="px-3 py-1 bg-blue-200 text-blue-800 rounded-full text-xs">Smart cities and sustainable technology</span>
                         </div>
                     </div>
                     <div class="bg-gradient-to-br from-green-50 to-emerald-100 rounded-2xl p-8 border border-green-200 reveal-text">
                         <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-6">
-                            <span class="text-white text-2xl font-bold">JV</span>
+                            <span class="text-white text-2xl font-bold">AM</span>
                         </div>
-                        <h3 class="text-xl font-bold text-navy mb-2">Prof. Jan Vermeulen</h3>
-                        <p class="text-green-600 font-medium mb-3">Cybersecurity Program Director</p>
+                        <h3 class="text-xl font-bold text-navy mb-2">Anila Mundackal</h3>
+                        <p class="text-green-600 font-medium mb-3">Department Head - Programming Science</p>
                         <p class="text-gray-600 text-sm mb-4">
-                            Former CISO at Proximus, CISSP certified, consultant for NATO cybersecurity projects, 
-                            author of "Enterprise Security Architecture".
+                            Anila Mundackal heads the Programming Science department at the Pretoria Campus of Belgium Campus ITversity, guiding students through practical coding and software development curricula.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-green-200 text-green-800 rounded-full text-xs">Cybersecurity</span>
-                            <span class="px-3 py-1 bg-green-200 text-green-800 rounded-full text-xs">Risk Management</span>
+                            <span class="px-3 py-1 bg-green-200 text-green-800 rounded-full text-xs">Programming languages and methodologies</span>
+                            <span class="px-3 py-1 bg-green-200 text-green-800 rounded-full text-xs">Software engineering principles</span>
                         </div>
                     </div>
                     <div class="bg-gradient-to-br from-purple-50 to-violet-100 rounded-2xl p-8 border border-purple-200 reveal-text">
                         <div class="w-20 h-20 bg-purple-500 rounded-full flex items-center justify-center mb-6">
-                            <span class="text-white text-2xl font-bold">SL</span>
+                            <span class="text-white text-2xl font-bold">AM</span>
                         </div>
-                        <h3 class="text-xl font-bold text-navy mb-2">Dr. Sarah Lee</h3>
-                        <p class="text-purple-600 font-medium mb-3">Software Engineering Lead</p>
+                        <h3 class="text-xl font-bold text-navy mb-2">Alfred Mazorodze</h3>
+                        <p class="text-purple-600 font-medium mb-3">Software Engineering Lecturer</p>
                         <p class="text-gray-600 text-sm mb-4">
-                            Ex-Microsoft Principal Engineer, 20+ years in software architecture, 
-                            expert in cloud-native applications and DevOps practices.
+                            Alfred Mazorodze is a dedicated lecturer in software engineering at Belgium Campus ITversity, where he delivers engaging courses that emphasize agile development and collaborative project work.
                         </p>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1 bg-purple-200 text-purple-800 rounded-full text-xs">Software Engineering</span>
-                            <span class="px-3 py-1 bg-purple-200 text-purple-800 rounded-full text-xs">Cloud Computing</span>
+                            <span class="px-3 py-1 bg-purple-200 text-purple-800 rounded-full text-xs">Software Engineering practices</span>
+                            <span class="px-3 py-1 bg-purple-200 text-purple-800 rounded-full text-xs">Agile development and project management</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="py-20 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-navy mb-4 reveal-text">State-of-the-Art Facilities</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto reveal-text">
-                        Modern learning environments equipped with the latest technology 
-                        to support your educational journey.
-                    </p>
-                </div>
-                <div class="grid lg:grid-cols-2 gap-12 items-center mb-16">
-                    <div class="reveal-text">
-                        <h3 class="text-3xl font-bold text-navy mb-6">Advanced Technology Labs</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Our campus features 12 specialized computer labs equipped with high-end workstations, 
-                            GPU clusters for AI research, cybersecurity labs with isolated networks, and maker spaces 
-                            with 3D printers and IoT equipment. All labs are accessible 24/7 for student use.
-                        </p>
-                        <ul class="space-y-3 text-gray-600">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                AI Lab with NVIDIA GPU clusters
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                Cybersecurity simulation environment
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                IoT and embedded systems workshop
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="reveal-text">
-                        <img src="resources/hero-main.jpg" alt="Technology Lab" 
-                            class="rounded-2xl shadow-lg w-full h-auto">
-                    </div>
-                </div>
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div class="reveal-text lg:order-2">
-                        <h3 class="text-3xl font-bold text-navy mb-6">Collaborative Learning Spaces</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Our campus is designed for collaborative learning with modern lecture halls, 
-                            project rooms, and informal meeting areas. Students have access to high-speed WiFi, 
-                            cloud computing resources, and a comprehensive digital library with 50,000+ resources.
-                        </p>
-                        <ul class="space-y-3 text-gray-600">
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                24/7 library and study areas
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                Modern lecture halls with hybrid capabilities
-                            </li>
-                            <li class="flex items-start">
-                                <svg class="w-5 h-5 text-copper mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                Student innovation center and startup incubator
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="reveal-text lg:order-1">
-                        <img src="resources/hero-main.jpg" alt="Study Space" 
-                            class="rounded-2xl shadow-lg w-full h-auto">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="py-20 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-bold text-navy mb-4 reveal-text">Industry Partnerships</h2>
-                    <p class="text-xl text-gray-600 max-w-3xl mx-auto reveal-text">
-                        Strong connections with leading companies ensure our curriculum remains relevant 
-                        and our graduates are highly sought after.
-                    </p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-                    <div class="bg-gray-50 rounded-xl p-6 text-center reveal-text">
-                        <div class="w-16 h-16 bg-blue-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-blue-600 font-bold text-xl">D</span>
-                        </div>
-                        <h3 class="font-bold text-navy mb-2">Deloitte</h3>
-                        <p class="text-gray-600 text-sm">Strategic consulting and internship programs</p>
-                    </div>
-                    <div class="bg-gray-50 rounded-xl p-6 text-center reveal-text">
-                        <div class="w-16 h-16 bg-green-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-green-600 font-bold text-xl">M</span>
-                        </div>
-                        <h3 class="font-bold text-navy mb-2">Microsoft</h3>
-                        <p class="text-gray-600 text-sm">Cloud computing and AI research collaboration</p>
-                    </div>
-                    <div class="bg-gray-50 rounded-xl p-6 text-center reveal-text">
-                        <div class="w-16 h-16 bg-purple-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-purple-600 font-bold text-xl">S</span>
-                        </div>
-                        <h3 class="font-bold text-navy mb-2">SAP</h3>
-                        <p class="text-gray-600 text-sm">Enterprise software and certification programs</p>
-                    </div>
-                    <div class="bg-gray-50 rounded-xl p-6 text-center reveal-text">
-                        <div class="w-16 h-16 bg-orange-100 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                            <span class="text-orange-600 font-bold text-xl">P</span>
-                        </div>
-                        <h3 class="font-bold text-navy mb-2">Proximus</h3>
-                        <p class="text-gray-600 text-sm">Telecommunications and 5G technology initiatives</p>
-                    </div>
-                </div>
-                <div class="text-center reveal-text">
-                    <p class="text-gray-600 mb-6">
-                        Our partnerships provide students with internship opportunities, real-world projects, 
-                        and direct pathways to employment with leading technology companies.
-                    </p>
-                    <a href="programs.html" class="inline-flex items-center px-8 py-3 bg-copper text-white rounded-lg hover:bg-copper/90 transition-colors font-semibold">
-                        Explore Our Programs
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </section>
-        <footer class="bg-white border-t border-gray-200 py-12">
+        <footer class="bg-navy border-t border-gray-200 py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid md:grid-cols-4 gap-8">
                     <div class="col-span-2">
                         <div class="flex items-center space-x-3 mb-6">
-                            <div class="w-10 h-10 bg-gradient-to-br from-navy to-copper rounded-xl flex items-center justify-center">
-                                <span class="text-white font-bold">BC</span>
-                            </div>
-                            <span class="font-bold text-2xl text-navy">BelgiumCampus IT</span>
+                            <span class="font-bold text-2xl text-white">Valedictorian</span>
                         </div>
-                        <p class="text-gray-600 mb-6 max-w-md">
-                            Leading IT education in Belgium, preparing students for successful careers in technology 
-                            through innovative programs and industry partnerships.
+                        <p class="aboutFooterSloganTxt text-600 mb-6 max-w-md">
+                            Empowering Excellence, Simplifying Success.
                         </p>
                     </div>
-                    <div>
-                        <h4 class="font-bold text-navy mb-4">Quick Links</h4>
-                        <ul class="space-y-2">
-                            <li><a href="index.html" class="text-gray-600 hover:text-copper transition-colors">FAQ</a></li>
-                            <li><a href="about.html" class="text-gray-600 hover:text-copper transition-colors">About Us</a></li>
-                            <li><a href="programs.html" class="text-gray-600 hover:text-copper transition-colors">Programs</a></li>
-                            <li><a href="contact.html" class="text-gray-600 hover:text-copper transition-colors">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-navy mb-4">Support</h4>
-                        <ul class="space-y-2">
-                            <li><a href="index.html" class="text-gray-600 hover:text-copper transition-colors">Help Center</a></li>
-                            <li><a href="index.html" class="text-gray-600 hover:text-copper transition-colors">Admissions</a></li>
-                            <li><a href="index.html" class="text-gray-600 hover:text-copper transition-colors">Technical Support</a></li>
-                            <li><a href="#" class="text-gray-600 hover:text-copper transition-colors">Privacy Policy</a></li>
-                        </ul>
-                    </div>
                 </div>
-                <div class="border-t border-gray-200 mt-12 pt-8 text-center text-gray-600">
-                    <p>&copy; 2025 BelgiumCampus IT versity. All rights reserved. | Empowering the next generation of IT professionals.</p>
+                <div class="aboutFooterTxt border-t border-gray-200 mt-12 pt-8 text-center text-600">
+                    <p>&copy; 2025 BelgiumCampus. All rights reserved.</p>
                 </div>
             </div>
         </footer>
-        <script>
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('revealed');
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('.reveal-text').forEach(el => {
-                observer.observe(el);
-            });
-            const statsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounters();
-                        statsObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-            document.querySelectorAll('[data-count]').forEach(counter => {
-                statsObserver.observe(counter.parentElement);
-            });
-            function animateCounters() {
-                document.querySelectorAll('[data-count]').forEach(counter => {
-                    const target = parseInt(counter.dataset.count);
-                    anime({
-                        targets: counter,
-                        innerHTML: [0, target],
-                        duration: 2000,
-                        easing: 'easeOutQuart',
-                        round: 1
-                    });
-                });
-            }
-        </script>
+        <script src="../JS/about.js"></script>
     </body>
+    
+
 </html>

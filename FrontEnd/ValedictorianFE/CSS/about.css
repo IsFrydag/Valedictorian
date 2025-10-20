@@ -1,0 +1,223 @@
+:root {
+    --primary: #2C3E50;
+    --secondary: #D4A574;
+    --neutral: #F8F9FA;
+    --accent: #5DADE2;
+    --text-dark: #2C3E50;
+    --text-light: #6C757D;
+}
+
+.highlight-text {
+    background: linear-gradient(135deg, var(--secondary), var(--accent)); /* Matches moduleList */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+body {
+    background: linear-gradient(135deg, var(--primary) 0%, #34495e 50%, var(--neutral) 100%);
+    /*color: var(--charcoal);*/
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.particle-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    opacity: 1;
+}
+
+.reveal-text {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.reveal-text.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Stat Card Hover Effects */
+.stat-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Hero Section Overlay */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(26, 35, 50, 0.2), transparent);
+    border-radius: 1rem;
+}
+
+/* Custom Layout Adjustments */
+.nav-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 50;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nav-logo-text {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #ffffff; /* Adjusted for dark background */
+}
+
+.nav-links {
+    display: none;
+}
+
+.md-visible {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .md-visible {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+.nav-link {
+    color: rgb(255, 255, 255); /* Matches moduleList */
+    transition: color 0.2s;
+}
+
+.nav-link:hover {
+    color: #c17a5b;
+}
+
+/* Hero Section Grid */
+section:first-child .grid {
+    justify-items: center; /* Center grid items horizontally */
+}
+
+section:first-child .text-center {
+    text-align: center;
+}
+
+section:first-child .lg:text-left {
+    text-align: left;
+}
+
+section:first-child .max-w-lg {
+    max-width: 32rem; /* Constrain image width for better centering */
+}
+
+/* Stat Card Styling */
+.stat-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Faculty Card Styling */
+.faculty-card {
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.faculty-card .avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.faculty-card .tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+}
+
+/* Partnership Card Styling */
+.partnership-card {
+    background-color: #f9fafb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.partnership-card .logo {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.75rem;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 1024px) {
+    .hero-content {
+        max-width: 50%;
+    }
+
+    .faculty-grid,
+    .partnership-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+h3 {
+    text-align: center;
+}
+
+.md\:grid-cols-2.gap-12 .reveal-text {
+    text-align: center;
+}
+
+.aboutFooterTxt{
+
+    color: #D4A574;
+
+}
+
+.aboutFooterSloganTxt{
+
+    color: white;
+
+}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT Versity - Module Management</title>
+    <title>Modules</title>
     
     <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,9 +17,9 @@
     <nav class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
+                
                 <div class="flex items-center space-x-3">
-                    <img src="../assets/images/university-logo.jpg" alt="IT Versity" class="h-10 w-10 rounded-lg">
+                    
                     <div>
                         <h1 class="text-white font-bold text-lg">Valedictorian</h1>
                         <p class="text-white/70 text-xs">BelgiumCampus</p>
@@ -40,17 +40,15 @@
                     </div>
                 </div>
                 
-                <!-- Profile Section -->
                 <div class="relative">
                     <button id="profileBtn" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-white/20 transition-colors">
                         <img src="../assets/images/profile-avatar.jpg" alt="Profile" class="h-10 w-10 rounded-full border-2 border-white/30">
                         <div class="hidden sm:block text-right">
-                            <p class="text-white font-medium text-sm">Alex Student</p>
-                            <p class="text-white/70 text-xs">Computer Science</p>
+                            <p class="text-white font-medium text-sm">Name Surname</p>
+                            <p class="text-white/70 text-xs">BCOMP</p>
                         </div>
                     </button>
                     
-                    <!-- Profile Dropdown -->
                     <div id="profileDropdown" class="profile-dropdown absolute right-0 mt-2 w-64 rounded-lg shadow-lg py-2">
                         <div class="px-4 py-3 border-b border-gray-200">
                             <div class="flex items-center space-x-3">
@@ -73,10 +71,9 @@
         </div>
     </nav>
     
-    <!-- Main Content -->
     <main class="pt-20 pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Hero Section -->
+            
             <section class="text-center mb-12">
                 <h1 class="hero-title text-5xl md:text-6xl font-bold mb-4" data-splitting>
                     IT Versity Modules
@@ -102,7 +99,7 @@
                 </button>
             </section>
             
-            <!-- Filter Section -->
+            
             <section class="mb-8">
                 <div class="flex flex-wrap gap-3 justify-center">
                     <button class="filter-chip active px-4 py-2 rounded-full text-sm font-medium" data-filter="all">
@@ -115,12 +112,12 @@
                 </div>
             </section>
             
-            <!-- Modules Grid -->
+            
             <section id="modulesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                 <!-- Modules will be dynamically loaded here -->
             </section>
             
-            <!-- Empty State -->
+            
             <div id="emptyState" class="empty-state rounded-lg p-12 text-center hidden">
                 <svg class="mx-auto h-16 w-16 text-white/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
@@ -134,7 +131,7 @@
         </div>
     </main>
     
-    <!-- Add Module Modal -->
+    
     <div id="addModuleModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center hidden">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 transform scale-95 opacity-0 transition-all duration-300">
             <div class="p-6">
@@ -228,11 +225,10 @@
     <footer class="bg-white/10 backdrop-blur-md border-t border-white/20 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div class="flex items-center justify-center space-x-3 mb-4">
-                <img src="../assets/images/university-logo.jpg" alt="IT Versity" class="h-8 w-8 rounded">
                 <span class="text-white font-semibold">A Belgium Campus Learning Platform</span>
             </div>
             <p class="text-white/70 text-sm">
-                © 2024. Empowering Excellence, Simplifying Success.
+                © 2025. Empowering Excellence, Simplifying Success.
             </p>
         </div>
     </footer>
