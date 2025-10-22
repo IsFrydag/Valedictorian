@@ -18,10 +18,8 @@ namespace ValedictorianAPI.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            if (dto == null ||
-                string.IsNullOrWhiteSpace(dto.UserEmail) ||
-                string.IsNullOrWhiteSpace(dto.Password) ||
-                string.IsNullOrWhiteSpace(dto.Role))
+            if (dto == null || string.IsNullOrWhiteSpace(dto.UserEmail) ||
+                string.IsNullOrWhiteSpace(dto.Password) || string.IsNullOrWhiteSpace(dto.Role))
             {
                 return BadRequest(new { Message = "Invalid login credentials." });
             }
@@ -33,14 +31,15 @@ namespace ValedictorianAPI.Controllers
             );
 
             if (user == null)
-                return NotFound(new { Message = $"No {dto.Role} account found with those credentials." });
+                return NotFound(new { Message = $"No such {dto.Role.ToLower()} account found." });
 
+            // Send user data for local storage
             return Ok(new
             {
-                userID = user.UserID,           // now INT from DB
-                userName = user.UserName,
-                userSurname = user.UserSurname,
-                role = user.Role
+                user.StudentID,
+                user.UserName,
+                user.UserSurname,
+                user.Role
             });
         }
     }
@@ -49,6 +48,6 @@ namespace ValedictorianAPI.Controllers
     {
         public string UserEmail { get; set; }
         public string Password { get; set; }
-        public string Role { get; set; }
+        public string Role { get; set; } // "Student", "Tutor", "Admin"
     }
 }
