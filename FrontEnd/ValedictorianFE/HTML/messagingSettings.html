@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>WhatsApp Settings</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../CSS/messagingSettings.css">
+    
+    </head>
+    <body class="min-h-screen">
+        <!-- Header -->
+        <div class="bg-white border-b border-gray-200 sticky top-0 z-10">
+            <div class="max-w-4xl mx-auto px-6 py-4">
+                <div class="flex items-center space-x-4">
+                    <button onclick="window.location.href='index.html'" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-arrow-left text-gray-600"></i>
+                    </button>
+                    <h1 class="text-xl font-semibold text-gray-800">Settings</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="max-w-4xl mx-auto p-6">
+            <!-- Profile Section -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-6">Profile</h2>
+                    
+                    <!-- Avatar -->
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="avatar-upload" onclick="changeAvatar()">
+                            <div class="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center relative">
+                                <i class="fas fa-user text-2xl text-gray-600"></i>
+                                <div class="avatar-overlay">
+                                    <i class="fas fa-camera text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-800">Your Name</h3>
+                            <p class="text-sm text-gray-500">Click to change profile photo</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Name -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="editName()">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-gray-800">Name</p>
+                                <p id="userName" class="text-sm text-gray-600">John Doe</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- About -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer" onclick="editAbout()">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-gray-800">About</p>
+                                <p id="userAbout" class="text-sm text-gray-600">Hey there! I'm using WhatsApp.</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Account Section -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-6">Account</h2>
+                    
+                    <!-- Privacy -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="showPrivacySettings()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-lock text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">Privacy</p>
+                                <p class="text-sm text-gray-600">Last seen, profile photo, status</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Security -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer" onclick="showSecuritySettings()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-shield-alt text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">Security</p>
+                                <p class="text-sm text-gray-600">Two-step verification</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Section -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-6">Notifications</h2>
+                    
+                    <!-- Message Notifications -->
+                    <div class="flex items-center justify-between p-4 mb-4">
+                        <div>
+                            <p class="font-medium text-gray-800">Message notifications</p>
+                            <p class="text-sm text-gray-600">Show notifications for new messages</p>
+                        </div>
+                        <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                    </div>
+                    
+                    <!-- Sound -->
+                    <div class="flex items-center justify-between p-4 mb-4">
+                        <div>
+                            <p class="font-medium text-gray-800">Sound</p>
+                            <p class="text-sm text-gray-600">Play sound for notifications</p>
+                        </div>
+                        <div class="toggle-switch active" onclick="toggleSetting(this)"></div>
+                    </div>
+                    
+                    <!-- Desktop Notifications -->
+                    <div class="flex items-center justify-between p-4 mb-4">
+                        <div>
+                            <p class="font-medium text-gray-800">Desktop notifications</p>
+                            <p class="text-sm text-gray-600">Show notifications on desktop</p>
+                        </div>
+                        <div class="toggle-switch" onclick="toggleSetting(this)"></div>
+                    </div>
+                    
+                    <!-- Preview -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer" onclick="showNotificationPreview()">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-gray-800">Notification preview</p>
+                                <p class="text-sm text-gray-600">Show message content in notifications</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Storage and Data -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-6">Storage and Data</h2>
+                    
+                    <!-- Storage Usage -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="showStorageDetails()">
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">Storage usage</p>
+                                <p class="text-sm text-gray-600 mb-2">2.4 GB of 5 GB used</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 48%"></div>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Auto-download -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="showAutoDownloadSettings()">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-gray-800">Media auto-download</p>
+                                <p class="text-sm text-gray-600">WiFi: Photos, Videos • Cellular: Photos</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Data Usage Chart -->
+                    <div class="mt-6">
+                        <h3 class="font-medium text-gray-800 mb-4">Data Usage</h3>
+                        <div id="dataUsageChart" style="height: 200px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Settings -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-6">Chat Settings</h2>
+                    
+                    <!-- Wallpaper -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="changeWallpaper()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-image text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">Wallpaper</p>
+                                <p class="text-sm text-gray-600">Change chat background</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Font Size -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="changeFontSize()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-font text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">Font size</p>
+                                <p class="text-sm text-gray-600">Medium</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Archived Chats -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer" onclick="window.location.href='archived.html'">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-archive text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">Archived chats</p>
+                                <p class="text-sm text-gray-600">View and manage archived conversations</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Section -->
+            <div class="bg-white rounded-lg shadow-sm mb-6">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-6">Help</h2>
+                    
+                    <!-- FAQ -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="showFAQ()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-question-circle text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">FAQ</p>
+                                <p class="text-sm text-gray-600">Frequently asked questions</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- Contact Support -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer mb-4" onclick="contactSupport()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-headset text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">Contact us</p>
+                                <p class="text-sm text-gray-600">Get help from our support team</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                    
+                    <!-- App Info -->
+                    <div class="setting-item p-4 rounded-lg cursor-pointer" onclick="showAppInfo()">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-info-circle text-gray-400 w-5"></i>
+                            <div class="flex-1">
+                                <p class="font-medium text-gray-800">App info</p>
+                                <p class="text-sm text-gray-600">Version, updates, and legal</p>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <!-- Edit Name Modal -->
+        <div id="editNameModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Edit Name</h3>
+                    <input type="text" id="nameInput" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 mb-4" placeholder="Enter your name">
+                    <div class="flex space-x-3">
+                        <button onclick="closeEditName()" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
+                        <button onclick="saveName()" class="flex-1 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="notificationToast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50">
+            <p>Settings saved successfully!</p>
+        </div>
+
+        <script>
+            // Initialize data usage chart
+            document.addEventListener('DOMContentLoaded', function() {
+                initDataUsageChart();
+            });
+
+            function initDataUsageChart() {
+                const chartDom = document.getElementById('dataUsageChart');
+                const myChart = echarts.init(chartDom);
+                
+                const option = {
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: 'MB'
+                    },
+                    series: [{
+                        data: [120, 200, 150, 80, 70, 110],
+                        type: 'line',
+                        smooth: true,
+                        lineStyle: {
+                            color: '#25D366'
+                        },
+                        itemStyle: {
+                            color: '#25D366'
+                        },
+                        areaStyle: {
+                            color: {
+                                type: 'linear',
+                                x: 0,
+                                y: 0,
+                                x2: 0,
+                                y2: 1,
+                                colorStops: [{
+                                    offset: 0, color: 'rgba(37, 211, 102, 0.3)'
+                                }, {
+                                    offset: 1, color: 'rgba(37, 211, 102, 0.1)'
+                                }]
+                            }
+                        }
+                    }]
+                };
+                
+                myChart.setOption(option);
+            }
+
+            function toggleSetting(element) {
+                element.classList.toggle('active');
+                showNotification();
+            }
+
+            function changeAvatar() {
+                // Simulate avatar change
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        showNotification();
+                    }
+                };
+                input.click();
+            }
+
+            function editName() {
+                const currentName = document.getElementById('userName').textContent;
+                document.getElementById('nameInput').value = currentName;
+                document.getElementById('editNameModal').classList.remove('hidden');
+            }
+
+            function closeEditName() {
+                document.getElementById('editNameModal').classList.add('hidden');
+            }
+
+            function saveName() {
+                const newName = document.getElementById('nameInput').value.trim();
+                if (newName) {
+                    document.getElementById('userName').textContent = newName;
+                    closeEditName();
+                    showNotification();
+                }
+            }
+
+            function editAbout() {
+                const currentAbout = document.getElementById('userAbout').textContent;
+                const newAbout = prompt('Edit your status:', currentAbout);
+                if (newAbout !== null && newAbout.trim()) {
+                    document.getElementById('userAbout').textContent = newAbout.trim();
+                    showNotification();
+                }
+            }
+
+            function showPrivacySettings() {
+                alert('Privacy settings would open here in a real app');
+            }
+
+            function showSecuritySettings() {
+                alert('Security settings would open here in a real app');
+            }
+
+            function showNotificationPreview() {
+                alert('Notification preview settings would open here');
+            }
+
+            function showStorageDetails() {
+                alert('Storage management would open here in a real app');
+            }
+
+            function showAutoDownloadSettings() {
+                alert('Auto-download settings would open here');
+            }
+
+            function changeWallpaper() {
+                alert('Wallpaper selection would open here');
+            }
+
+            function changeFontSize() {
+                const sizes = ['Small', 'Medium', 'Large'];
+                const currentSize = 'Medium';
+                const newSize = prompt(`Select font size (${sizes.join(', ')}):`, currentSize);
+                if (newSize && sizes.includes(newSize)) {
+                    showNotification();
+                }
+            }
+
+            function showFAQ() {
+                alert('FAQ page would open here');
+            }
+
+            function contactSupport() {
+                alert('Support contact form would open here');
+            }
+
+            function showAppInfo() {
+                alert('WhatsApp Desktop v1.0.0\n© 2024 WhatsApp Inc.');
+            }
+
+            function showNotification() {
+                const toast = document.getElementById('notificationToast');
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 3000);
+            }
+
+            // Close modal when clicking outside
+            document.getElementById('editNameModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeEditName();
+                }
+            });
+        </script>
+    </body>
+</html>

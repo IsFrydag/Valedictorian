@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Archived Chats - WhatsApp</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../CSS/messagingArchived.css">
+    </head>
+    <body class="min-h-screen">
+        <!-- Header -->
+        <div class="bg-white border-b border-gray-200 sticky top-0 z-10">
+            <div class="max-w-4xl mx-auto px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <button onclick="window.location.href='index.html'" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-arrow-left text-gray-600"></i>
+                        </button>
+                        <h1 class="text-xl font-semibold text-gray-800">Archived Chats</h1>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button onclick="toggleSelectMode()" id="selectButton" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-check-square text-gray-600"></i>
+                        </button>
+                        <button onclick="showArchiveSettings()" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-cog text-gray-600"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-4xl mx-auto px-6 py-4">
+            <div class="relative">
+                <input type="text" 
+                    id="searchInput" 
+                    placeholder="Search archived chats..." 
+                    class="w-full pl-10 pr-4 py-3 bg-white rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-500"
+                    onkeyup="filterArchivedChats()">
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+            </div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="max-w-4xl mx-auto px-6 mb-6">
+            <div class="flex space-x-1 bg-gray-100 rounded-lg p-1">
+                <button onclick="setFilter('all')" id="filter-all" class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors bg-white text-gray-800 shadow-sm">
+                    All
+                </button>
+                <button onclick="setFilter('individual')" id="filter-individual" class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-800">
+                    Individual
+                </button>
+                <button onclick="setFilter('group')" id="filter-group" class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-800">
+                    Groups
+                </button>
+                <button onclick="setFilter('muted')" id="filter-muted" class="flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-800">
+                    Muted
+                </button>
+            </div>
+        </div>
+
+        <!-- Archived Chats List -->
+        <div class="max-w-4xl mx-auto px-6">
+            <div id="archivedChatsList" class="bg-white rounded-lg shadow-sm overflow-hidden">
+                <!-- Chats will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="max-w-4xl mx-auto px-6 text-center py-16 hidden">
+            <div class="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
+                <i class="fas fa-archive text-3xl text-gray-400"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-800 mb-2">No archived chats</h3>
+            <p class="text-gray-600 mb-6">Your archived conversations will appear here</p>
+            <button onclick="window.location.href='index.html'" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                Back to Chats
+            </button>
+        </div>
+
+        <!-- Bulk Actions Bar -->
+        <div id="bulkActionsBar" class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 bulk-actions">
+            <div class="max-w-4xl mx-auto flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <span id="selectedCount" class="text-sm text-gray-600">0 selected</span>
+                    <button onclick="selectAll()" class="text-sm text-green-600 hover:underline">Select all</button>
+                    <button onclick="clearSelection()" class="text-sm text-gray-600 hover:underline">Clear</button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="unarchiveSelected()" class="p-2 text-green-600 hover:bg-green-50 rounded-full">
+                        <i class="fas fa-archive"></i>
+                    </button>
+                    <button onclick="deleteSelected()" class="p-2 text-red-600 hover:bg-red-50 rounded-full">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                    <button onclick="toggleMuteSelected()" class="p-2 text-gray-600 hover:bg-gray-100 rounded-full">
+                        <i class="fas fa-bell-slash"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Archive Settings Modal -->
+        <div id="archiveSettingsModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4">
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Archive Settings</h3>
+                        <button onclick="closeArchiveSettings()" class="p-1 rounded hover:bg-gray-100">
+                            <i class="fas fa-times text-gray-600"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-gray-800">Auto-archive old chats</p>
+                                <p class="text-sm text-gray-600">Archive chats older than 6 months</p>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleAutoArchive(this)"></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-gray-800">Keep archived chats muted</p>
+                                <p class="text-sm text-gray-600">Don't show notifications for archived chats</p>
+                            </div>
+                            <div class="toggle-switch active" onclick="toggleMuteArchived(this)"></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-medium text-gray-800">Delete archived chats</p>
+                                <p class="text-sm text-gray-600">Remove chats archived for over 1 year</p>
+                            </div>
+                            <div class="toggle-switch" onclick="toggleAutoDelete(this)"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-4 border-t border-gray-200">
+                        <button onclick="clearAllArchived()" class="w-full py-2 text-red-600 hover:bg-red-50 rounded-lg">
+                            Clear All Archived Chats
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification Toast -->
+        <div id="notificationToast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50">
+            <p id="notificationText">Action completed successfully!</p>
+        </div>
+
+        <script>
+            // Sample archived chats data
+            const archivedChats = [
+                {
+                    id: 'archived1',
+                    name: 'Old Project Team',
+                    avatar: null,
+                    type: 'group',
+                    participants: 8,
+                    lastMessage: 'Project completed successfully!',
+                    timestamp: new Date(Date.now() - 30 * 24 * 3600000), // 30 days ago
+                    muted: false,
+                    selected: false
+                },
+                {
+                    id: 'archived2',
+                    name: 'John Smith',
+                    avatar: 'https://kimi-web-img.moonshot.cn/img/img.freepik.com/386f17cf0d2b522fb8b48dcc3f0007b904a28eac.jpg',
+                    type: 'individual',
+                    lastMessage: 'Thanks for your help!',
+                    timestamp: new Date(Date.now() - 45 * 24 * 3600000), // 45 days ago
+                    muted: true,
+                    selected: false
+                },
+                {
+                    id: 'archived3',
+                    name: 'College Alumni',
+                    avatar: null,
+                    type: 'group',
+                    participants: 25,
+                    lastMessage: 'Great reunion photos!',
+                    timestamp: new Date(Date.now() - 60 * 24 * 3600000), // 60 days ago
+                    muted: false,
+                    selected: false
+                },
+                {
+                    id: 'archived4',
+                    name: 'Sarah Wilson',
+                    avatar: 'https://kimi-web-img.moonshot.cn/img/images.rawpixel.com/324884317d1b6b22a5f9923c5f923fcf4c936c17.jpg',
+                    type: 'individual',
+                    lastMessage: 'Let me know if you need anything else.',
+                    timestamp: new Date(Date.now() - 90 * 24 * 3600000), // 90 days ago
+                    muted: false,
+                    selected: false
+                },
+                {
+                    id: 'archived5',
+                    name: 'Temp Contractors',
+                    avatar: null,
+                    type: 'group',
+                    participants: 12,
+                    lastMessage: 'Contract period ended.',
+                    timestamp: new Date(Date.now() - 120 * 24 * 3600000), // 120 days ago
+                    muted: true,
+                    selected: false
+                }
+            ];
+
+            let currentFilter = 'all';
+            let selectMode = false;
+
+            document.addEventListener('DOMContentLoaded', function() {
+                renderArchivedChats();
+            });
+
+            function renderArchivedChats() {
+                const container = document.getElementById('archivedChatsList');
+                const emptyState = document.getElementById('emptyState');
+                
+                let filteredChats = archivedChats;
+                
+                // Apply filter
+                if (currentFilter !== 'all') {
+                    filteredChats = archivedChats.filter(chat => {
+                        switch(currentFilter) {
+                            case 'individual':
+                                return chat.type === 'individual';
+                            case 'group':
+                                return chat.type === 'group';
+                            case 'muted':
+                                return chat.muted;
+                            default:
+                                return true;
+                        }
+                    });
+                }
+                
+                // Apply search filter
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                if (searchTerm) {
+                    filteredChats = filteredChats.filter(chat => 
+                        chat.name.toLowerCase().includes(searchTerm) ||
+                        chat.lastMessage.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                if (filteredChats.length === 0) {
+                    container.innerHTML = '';
+                    emptyState.classList.remove('hidden');
+                    return;
+                }
+                
+                emptyState.classList.add('hidden');
+                container.innerHTML = '';
+                
+                filteredChats.forEach(chat => {
+                    const chatElement = createChatElement(chat);
+                    container.appendChild(chatElement);
+                });
+            }
+
+            function createChatElement(chat) {
+                const div = document.createElement('div');
+                div.className = `chat-item p-4 border-b border-gray-100 last:border-b-0 ${chat.selected ? 'bg-blue-50' : ''}`;
+                
+                const timeAgo = getTimeAgo(chat.timestamp);
+                const displayName = chat.type === 'group' ? 
+                    `${chat.name} (${chat.participants})` : 
+                    chat.name;
+                
+                div.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        ${selectMode ? `
+                            <div class="checkbox-custom ${chat.selected ? 'checked' : ''}" onclick="toggleSelection('${chat.id}')">
+                                ${chat.selected ? '<i class="fas fa-check text-xs"></i>' : ''}
+                            </div>
+                        ` : ''}
+                        <div class="relative">
+                            ${chat.avatar ? 
+                                `<img src="${chat.avatar}" alt="${chat.name}" class="w-12 h-12 rounded-full object-cover">` :
+                                `<div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-${chat.type === 'group' ? 'users' : 'user'} text-gray-600"></i>
+                                </div>`
+                            }
+                        </div>
+                        <div class="flex-1 min-w-0" onclick="${selectMode ? '' : "openChat('" + chat.id + "')"}">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-gray-800 truncate">${displayName}</h3>
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-xs text-gray-500">${timeAgo}</span>
+                                    ${chat.muted ? '<i class="fas fa-bell-slash text-gray-400 text-xs"></i>' : ''}
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 truncate">${chat.lastMessage}</p>
+                        </div>
+                    </div>
+                `;
+                
+                return div;
+            }
+
+            function setFilter(filter) {
+                currentFilter = filter;
+                
+                // Update tab styles
+                document.querySelectorAll('[id^="filter-"]').forEach(tab => {
+                    tab.className = 'flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors text-gray-600 hover:text-gray-800';
+                });
+                
+                document.getElementById(`filter-${filter}`).className = 'flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors bg-white text-gray-800 shadow-sm';
+                
+                renderArchivedChats();
+            }
+
+            function filterArchivedChats() {
+                renderArchivedChats();
+            }
+
+            function toggleSelectMode() {
+                selectMode = !selectMode;
+                
+                if (!selectMode) {
+                    // Clear all selections when exiting select mode
+                    archivedChats.forEach(chat => chat.selected = false);
+                    updateBulkActionsBar();
+                }
+                
+                renderArchivedChats();
+                
+                // Update select button icon
+                const selectButton = document.getElementById('selectButton');
+                selectButton.innerHTML = selectMode ? 
+                    '<i class="fas fa-times text-gray-600"></i>' : 
+                    '<i class="fas fa-check-square text-gray-600"></i>';
+            }
+
+            function toggleSelection(chatId) {
+                const chat = archivedChats.find(c => c.id === chatId);
+                if (chat) {
+                    chat.selected = !chat.selected;
+                    renderArchivedChats();
+                    updateBulkActionsBar();
+                }
+            }
+
+            function updateBulkActionsBar() {
+                const selectedCount = archivedChats.filter(chat => chat.selected).length;
+                const bulkActionsBar = document.getElementById('bulkActionsBar');
+                const selectedCountElement = document.getElementById('selectedCount');
+                
+                if (selectedCount > 0) {
+                    bulkActionsBar.classList.add('show');
+                    selectedCountElement.textContent = `${selectedCount} selected`;
+                } else {
+                    bulkActionsBar.classList.remove('show');
+                }
+            }
+
+            function selectAll() {
+                const visibleChats = getVisibleChats();
+                visibleChats.forEach(chat => chat.selected = true);
+                renderArchivedChats();
+                updateBulkActionsBar();
+            }
+
+            function clearSelection() {
+                archivedChats.forEach(chat => chat.selected = false);
+                renderArchivedChats();
+                updateBulkActionsBar();
+            }
+
+            function getVisibleChats() {
+                let filteredChats = archivedChats;
+                
+                if (currentFilter !== 'all') {
+                    filteredChats = archivedChats.filter(chat => {
+                        switch(currentFilter) {
+                            case 'individual':
+                                return chat.type === 'individual';
+                            case 'group':
+                                return chat.type === 'group';
+                            case 'muted':
+                                return chat.muted;
+                            default:
+                                return true;
+                        }
+                    });
+                }
+                
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                if (searchTerm) {
+                    filteredChats = filteredChats.filter(chat => 
+                        chat.name.toLowerCase().includes(searchTerm) ||
+                        chat.lastMessage.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                return filteredChats;
+            }
+
+            function unarchiveSelected() {
+                const selectedChats = archivedChats.filter(chat => chat.selected);
+                
+                // In a real app, this would move chats back to main list
+                showNotification(`${selectedChats.length} chats unarchived`);
+                
+                // Clear selection
+                clearSelection();
+            }
+
+            function deleteSelected() {
+                const selectedChats = archivedChats.filter(chat => chat.selected);
+                
+                if (confirm(`Delete ${selectedChats.length} archived chats permanently?`)) {
+                    // In a real app, this would delete the chats
+                    showNotification(`${selectedChats.length} chats deleted`);
+                    
+                    // Clear selection
+                    clearSelection();
+                }
+            }
+
+            function toggleMuteSelected() {
+                const selectedChats = archivedChats.filter(chat => chat.selected);
+                const allMuted = selectedChats.every(chat => chat.muted);
+                
+                selectedChats.forEach(chat => {
+                    chat.muted = !allMuted;
+                });
+                
+                const action = allMuted ? 'unmuted' : 'muted';
+                showNotification(`${selectedChats.length} chats ${action}`);
+                
+                renderArchivedChats();
+            }
+
+            function openChat(chatId) {
+                // In a real app, this would open the chat
+                alert(`Opening chat ${chatId}`);
+            }
+
+            function showArchiveSettings() {
+                document.getElementById('archiveSettingsModal').classList.remove('hidden');
+            }
+
+            function closeArchiveSettings() {
+                document.getElementById('archiveSettingsModal').classList.add('hidden');
+            }
+
+            function toggleAutoArchive(element) {
+                element.classList.toggle('active');
+                showNotification('Auto-archive settings updated');
+            }
+
+            function toggleMuteArchived(element) {
+                element.classList.toggle('active');
+                showNotification('Mute archived chats setting updated');
+            }
+
+            function toggleAutoDelete(element) {
+                element.classList.toggle('active');
+                showNotification('Auto-delete settings updated');
+            }
+
+            function clearAllArchived() {
+                if (confirm('Delete all archived chats permanently? This action cannot be undone.')) {
+                    showNotification('All archived chats cleared');
+                    closeArchiveSettings();
+                    // In a real app, this would clear all archived chats
+                }
+            }
+
+            function getTimeAgo(date) {
+                const now = new Date();
+                const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
+                
+                if (diffInDays < 7) return `${diffInDays}d ago`;
+                if (diffInDays < 30) return `${Math.floor(diffInDays / 7)}w ago`;
+                if (diffInDays < 365) return `${Math.floor(diffInDays / 30)}mo ago`;
+                return `${Math.floor(diffInDays / 365)}y ago`;
+            }
+
+            function showNotification(message) {
+                const toast = document.getElementById('notificationToast');
+                const text = document.getElementById('notificationText');
+                
+                text.textContent = message;
+                toast.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 3000);
+            }
+
+            // Close modal when clicking outside
+            document.getElementById('archiveSettingsModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeArchiveSettings();
+                }
+            });
+        </script>
+    </body>
+</html>

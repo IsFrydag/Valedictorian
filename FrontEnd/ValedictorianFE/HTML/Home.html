@@ -1,263 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusLearn - Your Hub for Learning and Collaboration</title>
-    <link rel="stylesheet" href="../CSS/home.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<base target="_blank">
-</head>
-<body>
-    <!-- Navigation Bar -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <h2>CampusLearn</h2>
-            </div>
-            
-            <!-- Desktop Navigation -->
-            <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#calendar" class="nav-link">Calendar</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#messages" class="nav-link">Messages</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#modules" class="nav-link">Modules</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#forum" class="nav-link">Forum</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#faq" class="nav-link">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#tutoring" class="nav-link">Tutoring</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item profile-item">
-                    <a href="#profile" class="nav-link profile-link">
-                        <i class="fas fa-user-circle"></i>
-                    </a>
-                </li>
-            </ul>
-            
-            <!-- Mobile Hamburger Menu -->
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1 class="hero-title">
-                    Welcome to CampusLearn
-                </h1>
-                <p class="hero-subtitle">
-                    Your Hub for Learning and Collaboration
-                </p>
-                <div class="hero-description">
-                    <p>Connect with peers, access course materials, manage your schedule, and enhance your academic journey in one unified platform designed for modern education.</p>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#modules" class="btn btn-primary">Explore Modules</a>
-                    <a href="#calendar" class="btn btn-secondary">View Calendar</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="hero-visual">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Announcements Section -->
-    <section class="announcements" id="announcements">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Announcements</h2>
-                <p class="section-subtitle">Stay updated with the latest news and information</p>
-            </div>
-            
-            <div class="announcements-grid">
-                <div class="announcement-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <div class="card-meta">
-                            <h3 class="card-title">Semester Registration Open</h3>
-                            <span class="card-date">October 15, 2025</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <p>Registration for the Spring 2026 semester is now open. Students can register for courses through the student portal until November 30th.</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-tag">Academic</span>
-                    </div>
-                </div>
-
-                <div class="announcement-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <div class="card-meta">
-                            <h3 class="card-title">Midterm Schedule Released</h3>
-                            <span class="card-date">October 12, 2025</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <p>The midterm examination schedule for Fall 2025 has been published. Please check your student dashboard for specific dates and times.</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-tag">Examinations</span>
-                    </div>
-                </div>
-
-                <div class="announcement-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="card-meta">
-                            <h3 class="card-title">New Tutoring Programs</h3>
-                            <span class="card-date">October 10, 2025</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <p>Additional tutoring sessions are now available for STEM courses. Book your sessions through the tutoring module to get personalized academic support.</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-tag">Support</span>
-                    </div>
-                </div>
-
-                <div class="announcement-card">
-                    <div class="card-header">
-                        <div class="card-icon">
-                            <i class="fas fa-laptop"></i>
-                        </div>
-                        <div class="card-meta">
-                            <h3 class="card-title">Platform Maintenance</h3>
-                            <span class="card-date">October 8, 2025</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <p>Scheduled maintenance will occur this Saturday from 2:00 AM to 6:00 AM EST. Some features may be temporarily unavailable during this period.</p>
-                    </div>
-                    <div class="card-footer">
-                        <span class="card-tag">Technical</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="announcements-footer">
-                <button class="btn btn-outline" id="viewAllBtn">View All Announcements</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Quick Access Section -->
-    <section class="quick-access">
-        <div class="container">
-            <div class="quick-access-grid">
-                <div class="quick-access-card">
-                    <div class="card-icon">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h3>Course Materials</h3>
-                    <p>Access lecture notes, assignments, and resources</p>
-                    <a href="#modules" class="btn btn-text">Explore <i class="fas fa-arrow-right"></i></a>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" href="../CSS/home.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <base target="_blank">
+    </head>
+    <body>
+        
+        <nav class="navbar" id="navbar">
+            <div class="nav-container">
+                <div class="nav-brand">
+                    <h2>Home</h2>
                 </div>
                 
-                <div class="quick-access-card">
-                    <div class="card-icon">
-                        <i class="fas fa-comments"></i>
+                <ul class="nav-menu" id="navMenu">
+                    <li class="nav-item">
+                        <a href="../HTML/messaging.html" class="nav-link" target="_self">Messages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../HTML/claritasLanding.html" class="nav-link" target="_self">Claritas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../HTML/faq.html" class="nav-link" target="_self">FAQ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../HTML/contact.html" class="nav-link" target="_self">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link" target="_self">Tutoring</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../HTML/about.html" class="nav-link" target="_self">About</a>
+                    </li>
+                    <li class="nav-item profile-item">
+                        <a href="../HTML/profile.html" class="nav-link profile-link" target="_self">
+                            <i class="fas fa-user-circle"></i>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        VALEDICTORIAN
+                    </h1>
+                    <p class="hero-subtitle">
+                        Empowering Excellence, Simplifying Success
+                    </p>
+                    <div class="hero-description">
+                        <p>Connect with peers, access course material, manage your schedule, and level up your experience in one unified platform designed for modern education.</p>
                     </div>
-                    <h3>Discussion Forum</h3>
-                    <p>Join academic discussions and collaborate</p>
-                    <a href="#forum" class="btn btn-text">Join Discussion <i class="fas fa-arrow-right"></i></a>
+                    <div class="hero-buttons">
+                        <a href="../HTML/moduleList.html" class="btn btn-primary" target="_self">Modules</a>
+                        <a href="#calendar" class="btn btn-secondary" target="_self">Calendar</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-visual">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="announcements" id="announcements">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Announcements</h2>
+                    <p class="section-subtitle">Stay updated with the latest news and information</p>
                 </div>
                 
-                <div class="quick-access-card">
-                    <div class="card-icon">
-                        <i class="fas fa-calendar-check"></i>
+                <div class="announcements-grid">
+                    <div class="announcement-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="card-meta">
+                                <h3 class="card-title">Semester Registration Open</h3>
+                                <span class="card-date">October 15, 2025</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p>Registration for the Spring 2026 semester is now open. Students can register for courses through the student portal until November 30th.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-tag">Academic</span>
+                        </div>
                     </div>
-                    <h3>Schedule Management</h3>
-                    <p>Organize your academic calendar and events</p>
-                    <a href="#calendar" class="btn btn-text">Manage Schedule <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Notification Button -->
-    <div class="notification-btn" id="notificationBtn">
-        <i class="fas fa-bell"></i>
-        <span class="notification-badge">3</span>
-    </div>
+                    <div class="announcement-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div class="card-meta">
+                                <h3 class="card-title">Midterm Schedule Released</h3>
+                                <span class="card-date">October 12, 2025</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p>The midterm examination schedule for Fall 2025 has been published. Please check your student dashboard for specific dates and times.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-tag">Examinations</span>
+                        </div>
+                    </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>CampusLearn</h3>
-                    <p>Empowering academic excellence through innovative digital solutions.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#modules">Modules</a></li>
-                        <li><a href="#calendar">Calendar</a></li>
-                        <li><a href="#messages">Messages</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                        <li><a href="#tutoring">Tutoring</a></li>
-                        <li><a href="#about">About</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Connect</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    <div class="announcement-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="card-meta">
+                                <h3 class="card-title">New Tutoring Programs</h3>
+                                <span class="card-date">October 10, 2025</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p>Additional tutoring sessions are now available for STEM courses. Book your sessions through the tutoring module to get personalized academic support.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-tag">Support</span>
+                        </div>
+                    </div>
+
+                    <div class="announcement-card">
+                        <div class="card-header">
+                            <div class="card-icon">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="card-meta">
+                                <h3 class="card-title">Platform Maintenance</h3>
+                                <span class="card-date">October 8, 2025</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <p>Scheduled maintenance will occur this Saturday from 2:00 AM to 6:00 AM EST. Some features may be temporarily unavailable during this period.</p>
+                        </div>
+                        <div class="card-footer">
+                            <span class="card-tag">Technical</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 CampusLearn. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
-    <script src="../JS/home.js"></script>
-</body>
+                <div class="announcements-footer">
+                    <button class="btn btn-outline" id="viewAllBtn">View All Announcements</button>
+                </div>
+            </div>
+        </section>
+        
+        <div class="notification-btn" id="notificationBtn">
+            <i class="fas fa-bell"></i>
+            <span class="notification-badge">3</span>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Valedictorian</h3>
+                        <p>A Belgiumcampus learning platform</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Connect</h4>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 CampusLearn. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="EikTFqQGFuY4aizTDzUOu";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+        </script>
+        <script src="../JS/home.js"></script>
+    </body>
 </html>

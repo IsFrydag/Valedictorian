@@ -1,5 +1,3 @@
-// WhatsApp-style Messaging JavaScript
-
 class MessagingApp {
     constructor() {
         this.currentChat = null;
@@ -15,7 +13,6 @@ class MessagingApp {
     }
 
     bindEvents() {
-        // Chat search functionality
         const chatSearch = document.getElementById('chatSearch');
         if (chatSearch) {
             chatSearch.addEventListener('input', (e) => {
@@ -23,7 +20,6 @@ class MessagingApp {
             });
         }
 
-        // New chat button
         const newChatBtn = document.querySelector('.new-chat-btn');
         if (newChatBtn) {
             newChatBtn.addEventListener('click', () => {
@@ -31,7 +27,6 @@ class MessagingApp {
             });
         }
 
-        // Message input handlers
         const messageInput = document.getElementById('messageInput');
         const sendButton = document.getElementById('sendButton');
         
@@ -54,7 +49,6 @@ class MessagingApp {
             });
         }
 
-        // Header action buttons
         const searchBtn = document.querySelector('.search-btn');
         const menuBtn = document.querySelector('.menu-btn');
         
@@ -176,7 +170,6 @@ class MessagingApp {
     selectChat(chatId) {
         this.currentChat = chatId;
         
-        // Update active chat in sidebar
         document.querySelectorAll('.chat-item').forEach(item => {
             item.classList.remove('active');
         });
@@ -186,26 +179,22 @@ class MessagingApp {
             activeChat.classList.add('active');
         }
 
-        // Update chat header
         const chat = this.chats.find(c => c.id === chatId);
         if (chat) {
             document.getElementById('currentChatName').textContent = chat.name;
             document.getElementById('currentChatStatus').textContent = chat.online ? 'Online' : 'Last seen recently';
             
-            // Update avatar
             const avatar = document.getElementById('currentChatAvatar');
             if (avatar && avatar.parentElement) {
                 avatar.parentElement.innerHTML = `<div class="avatar">${chat.avatar}</div>`;
             }
         }
 
-        // Clear unread count
         if (chat.unread > 0) {
             chat.unread = 0;
             this.renderChatList();
         }
 
-        // Enable input
         const messageInput = document.getElementById('messageInput');
         const sendButton = document.getElementById('sendButton');
         
@@ -218,7 +207,6 @@ class MessagingApp {
             sendButton.disabled = false;
         }
 
-        // Render messages
         this.renderMessages();
     }
 
@@ -257,7 +245,6 @@ class MessagingApp {
             chatMessages.appendChild(messageElement);
         });
 
-        // Scroll to bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
@@ -280,29 +267,24 @@ class MessagingApp {
             time: timeString
         };
 
-        // Add message to chat
         if (!this.messages[this.currentChat]) {
             this.messages[this.currentChat] = [];
         }
         
         this.messages[this.currentChat].push(newMessage);
 
-        // Update last message in chat list
         const chat = this.chats.find(c => c.id === this.currentChat);
         if (chat) {
             chat.lastMessage = messageText;
             chat.time = timeString;
         }
 
-        // Clear input
         messageInput.value = '';
         this.toggleSendButton();
 
-        // Re-render
         this.renderMessages();
         this.renderChatList();
 
-        // Simulate typing indicator and response
         this.simulateTypingIndicator();
     }
 
@@ -310,7 +292,6 @@ class MessagingApp {
         const chatMessages = document.getElementById('chatMessages');
         if (!chatMessages) return;
 
-        // Add typing indicator
         const typingIndicator = document.createElement('div');
         typingIndicator.className = 'typing-indicator';
         typingIndicator.innerHTML = `
@@ -322,14 +303,11 @@ class MessagingApp {
         chatMessages.appendChild(typingIndicator);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // Simulate response after 2-3 seconds
         setTimeout(() => {
-            // Remove typing indicator
             if (typingIndicator.parentNode) {
                 typingIndicator.remove();
             }
 
-            // Add response message
             const responses = [
                 'Thanks for your message!',
                 'I understand. Let me get back to you on that.',
@@ -362,7 +340,6 @@ class MessagingApp {
             
             this.messages[this.currentChat].push(responseMessage);
 
-            // Update last message in chat list
             const chat = this.chats.find(c => c.id === this.currentChat);
             if (chat) {
                 chat.lastMessage = randomResponse;
@@ -399,7 +376,6 @@ class MessagingApp {
     }
 
     showNewChatDialog() {
-        // For now, show an alert. In a real app, this would open a modal
         alert('New chat functionality would open here. You can search for users and start a new conversation.');
     }
 
@@ -412,7 +388,6 @@ class MessagingApp {
     }
 
     setupInputHandlers() {
-        // Emoji button
         const emojiBtn = document.querySelector('.emoji-btn');
         if (emojiBtn) {
             emojiBtn.addEventListener('click', () => {
@@ -420,7 +395,6 @@ class MessagingApp {
             });
         }
 
-        // Attach button
         const attachBtn = document.querySelector('.attach-btn');
         if (attachBtn) {
             attachBtn.addEventListener('click', () => {
@@ -428,7 +402,6 @@ class MessagingApp {
             });
         }
 
-        // Voice button
         const voiceBtn = document.querySelector('.voice-btn');
         if (voiceBtn) {
             voiceBtn.addEventListener('click', () => {
@@ -438,15 +411,7 @@ class MessagingApp {
     }
 }
 
-// Initialize messaging app when DOM is loaded
+// Initialize messaging app
 document.addEventListener('DOMContentLoaded', () => {
-    // Only initialize if we're on a page with messaging
-    if (document.querySelector('.mesBox')) {
-        window.messagingApp = new MessagingApp();
-    }
+    window.messagingApp = new MessagingApp();
 });
-
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = MessagingApp;
-}

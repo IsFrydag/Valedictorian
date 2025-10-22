@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Messages</title>
+        <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="../CSS/messaging.css">
+    </head>
+    <body>
+        <!-- Messaging Section -->
+        <section class="mesBox">
+            <button onclick="window.location.href='../HTML/Home.html'" class="homeBtn">Home</button>
+            <div class="messaging-container">
+                <!-- Left Sidebar - Chat List -->
+                <div class="chat-sidebar">
+                    <div class="sidebar-header">
+                        <h2>Chats</h2>
+                        <button class="new-chat-btn">
+                            <i class='bx bx-plus'></i>
+                        </button>
+                    </div>
+                    <div class="chat-search">
+                        <input type="text" placeholder="Search or start new chat" id="chatSearch">
+                        <i class='bx bx-search'></i>
+                    </div>
+                    <div class="chat-list" id="chatList">
+                        <!-- Chat items will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Main Chat Area -->
+                <div class="chat-main">
+                    <div class="chat-header" id="chatHeader">
+                        <div class="chat-header-info">
+                            <div class="avatar">
+                                <img src="https://via.placeholder.com/45" alt="Avatar" id="currentChatAvatar">
+                            </div>
+                            <div class="chat-info">
+                                <h3 id="currentChatName">Select a chat</h3>
+                                <span id="currentChatStatus">No chat selected</span>
+                            </div>
+                        </div>
+                        <div class="chat-header-actions">
+                            <button class="search-btn">
+                                <i class='bx bx-search'></i>
+                            </button>
+                            <button class="menu-btn">
+                                <i class='bx bx-dots-vertical-rounded'></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="no-chat-selected">
+                            <div class="no-chat-icon">
+                                <i class='bx bx-message-square-detail'></i>
+                            </div>
+                            <h3>Welcome to Messages</h3>
+                            <p>Select a chat to start messaging</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container">
+                        <div class="chat-input">
+                            <button class="emoji-btn">
+                                <i class='bx bx-smile'></i>
+                            </button>
+                            <input type="text" placeholder="Type a message" id="messageInput" disabled>
+                            <button class="attach-btn">
+                                <i class='bx bx-paperclip'></i>
+                            </button>
+                            <button class="voice-btn">
+                                <i class='bx bx-microphone'></i>
+                            </button>
+                        </div>
+                        <button class="send-btn" id="sendButton" disabled>
+                            <i class='bx bx-send'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script src="../JS/messaging.js"></script>
+    </body>
+</html>

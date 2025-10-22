@@ -88,7 +88,6 @@ body {
 }
 
 .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
     color: var(--secondary);
     transform: translateY(-1px);
 }
@@ -462,7 +461,7 @@ body {
 .notification-btn {
     position: fixed;
     bottom: 30px;
-    right: 30px;
+    left: 30px;
     width: 60px;
     height: 60px;
     background: linear-gradient(135deg, var(--accent), var(--secondary));
@@ -486,7 +485,7 @@ body {
 .notification-badge {
     position: absolute;
     top: -5px;
-    right: -5px;
+    left: -5px;
     background-color: #E74C3C;
     color: var(--white);
     font-size: 0.75rem;
@@ -823,3 +822,4 @@ body {
         color: black;
     }
 }
+
