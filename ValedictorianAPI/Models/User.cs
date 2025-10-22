@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ValedictorianAPI.Models
 {
-
     [Table("User")] // Explicitly map to the SQL table [User]
     public class UserModel
     {
@@ -29,14 +27,5 @@ namespace ValedictorianAPI.Models
         public string Password { get; set; }
 
         public string? StudentID { get; set; }
-    }
-    public class User : Controller
-    {
-        
-        public IActionResult Index()
-        {
-            return View();
-        }
-        public User() { }
     }
 }

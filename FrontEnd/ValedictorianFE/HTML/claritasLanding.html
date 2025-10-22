@@ -56,62 +56,7 @@
             </div>
         </section>
 
-        <section class="forum-section">
-            <div class="container">
-                <h2 class="section-title text-center reveal-text">Browse Topics</h2>
-                <div class="categories-grid" id="categories-grid">
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer">
-            <div class="container text-center">
-                <div class="footer-logo">
-                    <span class="footer-logo-text">Valedictorian</span>
-                </div>
-                <p class="footer-description">
-                    Empowering Excellence, Simplifying Success.
-                </p>
-                <div class="footer-copyright">
-                    <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
-
-        <div id="new-discussion-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Start New Discussion</h3>
-                    <button class="close-btn" onclick="closeNewDiscussionModal()">&times;</button>
-                </div>
-                <form id="new-discussion-form">
-                    <div class="form-group">
-                        <label class="form-label" for="discussion-title">Title</label>
-                        <input type="text" id="discussion-title" class="form-input" placeholder="Enter discussion title..." required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="discussion-category">Category</label>
-                        <select id="discussion-category" class="form-select" required>
-                            <option value="">Select a category</option>
-                            <option value="general">General Discussion</option>
-                            <option value="academics">Academics</option>
-                            <option value="technical">Technical Support</option>
-                            <option value="career">Career & Jobs</option>
-                            <option value="projects">Projects & Portfolio</option>
-                            <option value="events">Events & Meetups</option>
-                            <option value="resources">Resources & Tutorials</option>
-                            <option value="lifestyle">Student Life</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="discussion-content">Content</label>
-                        <textarea id="discussion-content" class="form-textarea" placeholder="Share your thoughts or ask your question..." required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Create Discussion</button>
-                </form>
-            </div>
-        </div>
-
+        
         <div class="text-center">
             <button class="new-discussion-btn" onclick="openTopicModal()">
                 + Create Topic
@@ -148,6 +93,33 @@
             </div>
         </div>
 
-        <script src="../JS/claritasLanding.js"></script>
+        <section class="forum-section">
+            <div class="container">
+                <h2 class="section-title text-center reveal-text">Browse Topics</h2>
+                <div class="categories-grid" id="categories-grid">
+                </div>
+            </div>
+        </section>
+
+
+
+        <footer class="footer">
+            <div class="container text-center">
+                <div class="footer-logo">
+                    <span class="footer-logo-text">Valedictorian</span>
+                </div>
+                <p class="footer-description">
+                    Empowering Excellence, Simplifying Success.
+                </p>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        
+
+        
+        <script type="module" src="../JS/claritasLanding.js"></script>
     </body>
 </html>

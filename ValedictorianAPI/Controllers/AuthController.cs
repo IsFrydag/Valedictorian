@@ -36,10 +36,11 @@ namespace ValedictorianAPI.Controllers
             // Send user data for local storage
             return Ok(new
             {
-                user.StudentID,
-                user.UserName,
-                user.UserSurname,
-                user.Role
+                userID = user.UserID, 
+                studentID = user.StudentID,
+                userName = user.UserName,
+                userSurname = user.UserSurname,
+                role = user.Role
             });
         }
     }

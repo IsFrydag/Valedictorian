@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using ValedictorianAPI.Models;
 
 namespace ValedictorianAPI.Controllers
@@ -15,20 +16,47 @@ namespace ValedictorianAPI.Controllers
             _context = context;
         }
 
-        [HttpPost("AddPost")]
-        public async Task<IActionResult> AddPost([FromBody] Post dto)
+        public class PostCreateDto
         {
-            if (dto == null || string.IsNullOrWhiteSpace(dto.PostName) || string.IsNullOrWhiteSpace(dto.PostBody))
-                return BadRequest(new { Message = "Post name and body are required." });
+            [Required]
+            public int TopicID { get; set; }
+
+            [Required]
+            public int UserID { get; set; }
+
+            [Required]
+            [StringLength(500)]
+            public string PostName { get; set; }
+
+            [Required]
+            public string PostBody { get; set; }
+
+            public string? Status { get; set; }
+
+            public int PostReplies { get; set; }
+
+            public int? Upvotes { get; set; }
+
+            // Optional: allows frontend to send a custom timestamp, otherwise backend sets it
+            public DateTime? CreatedAt { get; set; }
+        }
+
+        [HttpPost("AddPost")]
+        public async Task<IActionResult> AddPost([FromBody] PostCreateDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             var post = new Post
             {
                 TopicID = dto.TopicID,
+                UserID = dto.UserID,
                 PostName = dto.PostName,
                 PostBody = dto.PostBody,
                 Status = dto.Status,
                 PostReplies = dto.PostReplies,
-                Upvotes = dto.Upvotes ?? 0
+                Upvotes = dto.Upvotes ?? 0,
+                CreatedAt = dto.CreatedAt ?? DateTime.UtcNow // set automatically if not provided
             };
 
             _context.Posts.Add(post);
@@ -37,58 +65,79 @@ namespace ValedictorianAPI.Controllers
             return Ok(new
             {
                 Message = "Post added successfully.",
-                post.PostID
+                post.PostID,
+                post.CreatedAt
             });
         }
 
         [HttpGet("GetPosts")]
         public async Task<IActionResult> GetPosts()
         {
-            var posts = await _context.Posts.ToListAsync();
-            return Ok(posts);
+            try
+            {
+                var posts = await _context.Posts
+                    .Include(p => p.User)
+                    .Select(p => new
+                    {
+                        p.PostID,
+                        p.TopicID,
+                        p.PostName,
+                        p.PostBody,
+                        p.Status,
+                        p.PostReplies,
+                        p.Upvotes,
+                        p.CreatedAt,
+                        AuthorName = p.User != null
+                            ? p.User.UserName + " " + p.User.UserSurname
+                            : "Unknown",
+                        AuthorInitials = p.User != null
+                            ? (p.User.UserName.Substring(0, 1) + p.User.UserSurname.Substring(0, 1)).ToUpper()
+                            : "??"
+                    })
+                    .ToListAsync();
+
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return StatusCode(500, new { Message = "Internal server error", Details = ex.Message });
+            }
         }
 
-        [HttpGet("GetPost/{id}")]
-        public async Task<IActionResult> GetPost(int id)
+        [HttpGet("GetPostsByTopic/{id}")]
+        public async Task<IActionResult> GetPostsByTopic(int id)
         {
-            var post = await _context.Posts.FindAsync(id);
-            if (post == null)
-                return NotFound(new { Message = $"Post with ID {id} not found." });
+            try
+            {
+                var posts = await _context.Posts
+                    .Where(p => p.TopicID == id)
+                    .Include(p => p.User)
+                    .Select(p => new
+                    {
+                        p.PostID,
+                        p.TopicID,
+                        p.PostName,
+                        p.PostBody,
+                        p.Status,
+                        p.PostReplies,
+                        p.Upvotes,
+                        p.CreatedAt,
+                        AuthorName = p.User != null
+                            ? p.User.UserName + " " + p.User.UserSurname
+                            : "Unknown",
+                        AuthorInitials = p.User != null
+                            ? (p.User.UserName.Substring(0, 1) + p.User.UserSurname.Substring(0, 1)).ToUpper()
+                            : "??"
+                    })
+                    .ToListAsync();
 
-            return Ok(post);
-        }
-
-        [HttpPut("UpdatePost/{id}")]
-        public async Task<IActionResult> UpdatePost(int id, [FromBody] Post dto)
-        {
-            var post = await _context.Posts.FindAsync(id);
-            if (post == null)
-                return NotFound(new { Message = "Post not found." });
-
-            post.TopicID = dto.TopicID;
-            post.PostName = dto.PostName;
-            post.PostBody = dto.PostBody;
-            post.Status = dto.Status;
-            post.PostReplies = dto.PostReplies;
-            post.Upvotes = dto.Upvotes;
-
-            _context.Posts.Update(post);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { Message = "Post updated successfully." });
-        }
-
-        [HttpDelete("DeletePost/{id}")]
-        public async Task<IActionResult> DeletePost(int id)
-        {
-            var post = await _context.Posts.FindAsync(id);
-            if (post == null)
-                return NotFound(new { Message = "Post not found." });
-
-            _context.Posts.Remove(post);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { Message = "Post deleted successfully." });
+                return Ok(posts);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Internal server error", Details = ex.Message });
+            }
         }
     }
 }

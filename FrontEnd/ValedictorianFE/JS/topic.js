@@ -1,141 +1,62 @@
-// Sample posts data
-const posts = [
-    {
-        id: 1,
-        title: "Python list comprehension not working as expected",
-        author: "Alex Chen",
-        authorAvatar: "AC",
-        flair: "help",
-        content: "I'm trying to create a list comprehension that filters and transforms data, but I'm getting unexpected results. Here's my code:\n\n```python\nnumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\nresult = [x * 2 for x in numbers if x % 2 == 0 and x > 5]\nprint(result)  # Expected: [12, 14, 16, 20]\n```\n\nThe output is `[12, 14, 16, 20]` which seems correct, but when I try to use this in my actual project with different data, it's not filtering properly. Any ideas?",
-        votes: 45,
-        comments: 12,
-        time: "4 hours ago",
-        image: null,
-        solved: false
-    },
-    {
-        id: 2,
-        title: "React useState hook causing infinite re-renders",
-        author: "Maria Rodriguez",
-        authorAvatar: "MR",
-        flair: "help",
-        content: "I have a React component that's stuck in an infinite loop when I update state. The component fetches data and then updates the state, but it keeps re-rendering.\n\nI've tried using useEffect with dependencies but can't figure out the right combination. What's the proper way to handle async data fetching with useState?",
-        votes: 32,
-        comments: 8,
-        time: "6 hours ago",
-        image: null,
-        solved: true
-    },
-    {
-        id: 3,
-        title: "Best VS Code extensions for web development in 2025",
-        author: "David Kim",
-        authorAvatar: "DK",
-        flair: "resource",
-        content: "After using VS Code for 3 years, here are my top extensions that have significantly improved my workflow:\n\n🎯 Essential Extensions:\n• Live Server - Instant browser refresh\n• Prettier - Code formatting\n• ESLint - Code linting\n• Auto Rename Tag - HTML tag renaming\n• Bracket Pair Colorizer - Visual bracket matching\n• GitLens - Git superpowers\n• Thunder Client - API testing\n• Docker - Container management\n\nWhat are your favorite extensions? Share in the comments!",
-        votes: 128,
-        comments: 23,
-        time: "1 day ago",
-        image: null,
-        solved: false
-    },
-    {
-        id: 4,
-        title: "SQL query optimization - need help with JOIN performance",
-        author: "James Wilson",
-        authorAvatar: "JW",
-        flair: "help",
-        content: "I'm working with a large database and my JOIN queries are running very slowly. Here's the query:\n\n```sql\nSELECT u.name, u.email, o.total, o.created_at\nFROM users u\nLEFT JOIN orders o ON u.id = o.user_id\nWHERE u.created_at >= '2024-01-01'\nORDER BY o.created_at DESC;\n```\n\nThe users table has ~100k records and orders table has ~500k records. The query takes about 8 seconds to run. I've added indexes on user_id and created_at columns but it's still slow. Any optimization tips?",
-        votes: 67,
-        comments: 15,
-        time: "2 days ago",
-        image: null,
-        solved: false
-    },
-    {
-        id: 5,
-        title: "Setting up Git workflow for team projects",
-        author: "Sarah Thompson",
-        authorAvatar: "ST",
-        flair: "discussion",
-        content: "Our team is growing and we need to establish a proper Git workflow. Currently everyone commits directly to main and it's becoming chaotic.\n\nWe're considering:\n1. Git Flow with feature branches\n2. GitHub Flow with PRs\n3. Trunk-based development\n\nWhat workflow does your team use? What are the pros and cons you've experienced?",
-        votes: 89,
-        comments: 31,
-        time: "3 days ago",
-        image: null,
-        solved: false
-    },
-    {
-        id: 6,
-        title: "Debugging JavaScript async/await errors",
-        author: "Michael Brown",
-        authorAvatar: "MB",
-        flair: "resource",
-        content: "Common async/await pitfalls and how to fix them:\n\n🐛 Problem 1: Forgetting to handle errors\n✅ Solution: Always wrap await calls in try-catch blocks\n\n🐛 Problem 2: Not waiting for parallel operations\n✅ Solution: Use Promise.all() for concurrent operations\n\n🐛 Problem 3: Mixing callbacks with async/await\n✅ Solution: Stick to one async pattern consistently\n\nFull guide with examples: [link in comments]",
-        votes: 156,
-        comments: 42,
-        time: "4 days ago",
-        image: null,
-        solved: false
-    }
-];
+import { apiRequest } from './api.js';
 
+let currentPosts = [];
+let currentFiltered = [];
 let currentFilter = 'hot';
 let userVotes = {};
+let topicId = null;
+let isLoggedIn = false;
+let currentUser = { id: null, name: '', initials: '' };
+
+// Time ago utility
+function timeAgo(dateString) {
+    const now = new Date();
+    const date = new Date(dateString);
+    const diff = now - date;
+    const seconds = Math.floor(diff / 1000);
+    if (seconds < 60) return 'just now';
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+    const days = Math.floor(hours / 24);
+    if (days < 30) return `${days} day${days > 1 ? 's' : ''} ago`;
+    const months = Math.floor(days / 30);
+    if (months < 12) return `${months} month${months > 1 ? 's' : ''} ago`;
+    const years = Math.floor(months / 12);
+    return `${years} year${years > 1 ? 's' : ''} ago`;
+}
+
+// Get age in hours
+function getAgeInHours(dateString) {
+    return (new Date() - new Date(dateString)) / 3600000 + 1;
+}
 
 // Initialize particles
 function initializeParticles() {
     if (typeof p5 !== 'undefined') {
         new p5((p) => {
             let particles = [];
-
             p.setup = () => {
                 const container = document.getElementById('particle-bg');
                 if (container) {
                     const canvas = p.createCanvas(container.offsetWidth, container.offsetHeight);
                     canvas.parent(container);
                 }
-                for (let i = 0; i < 60; i++) {
-                    particles.push(new Particle());
-                }
+                for (let i = 0; i < 80; i++) particles.push(new Particle());
             };
-
             p.draw = () => {
                 p.clear();
-                particles.forEach(particle => {
-                    particle.move();
-                    particle.display();
-                });
+                particles.forEach(particle => particle.move() || particle.display());
             };
-
             p.windowResized = () => {
                 const container = document.getElementById('particle-bg');
-                if (container) {
-                    p.resizeCanvas(container.offsetWidth, container.offsetHeight);
-                }
+                if (container) p.resizeCanvas(container.offsetWidth, container.offsetHeight);
             };
-
             class Particle {
-                constructor() {
-                    this.x = p.random(p.width);
-                    this.y = p.random(p.height);
-                    this.size = p.random(2, 4);
-                    this.speedX = p.random(-0.8, 0.8);
-                    this.speedY = p.random(-0.8, 0.8);
-                }
-
-                move() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x < 0 || this.x > p.width) this.speedX *= -1;
-                    if (this.y < 0 || this.y > p.height) this.speedY *= -1;
-                }
-
-                display() {
-                    p.noStroke();
-                    p.fill(255, 215, 0, 150);
-                    p.circle(this.x, this.y, this.size);
-                }
+                constructor() { this.x = p.random(p.width); this.y = p.random(p.height); this.size = p.random(2, 4); this.speedX = p.random(-1, 1); this.speedY = p.random(-1, 1); }
+                move() { this.x += this.speedX; this.y += this.speedY; if (this.x < 0 || this.x > p.width) this.speedX *= -1; if (this.y < 0 || this.y > p.height) this.speedY *= -1; }
+                display() { p.noStroke(); p.fill(255, 215, 0, 180); p.circle(this.x, this.y, this.size); }
             }
         });
     }
@@ -143,62 +64,61 @@ function initializeParticles() {
 
 // Initialize animations
 function initializeAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    document.querySelectorAll('.reveal-text').forEach(el => {
-        observer.observe(el);
-    });
+    const observer = new IntersectionObserver((entries) => entries.forEach(entry => entry.isIntersecting && entry.target.classList.add('revealed')), { threshold: 0.1 });
+    document.querySelectorAll('.reveal-text').forEach(el => observer.observe(el));
+}
+
+// Format content
+function formatContent(content) {
+    return content.replace(/\n/g, '<br>').replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
 }
 
 // Display posts
-function displayPosts(filteredPosts = posts) {
+function displayPosts(postsToDisplay) {
     const container = document.getElementById('posts-container');
-    container.innerHTML = filteredPosts.map(post => `
+    if (!postsToDisplay.length) {
+        container.innerHTML = '<p style="color: white; text-align: center;">No posts yet. Be the first!</p>';
+        return;
+    }
+    container.innerHTML = postsToDisplay.map(post => `
         <div class="post-card">
             <div class="post-content">
                 <div class="post-header">
-                    <div class="user-avatar">${post.authorAvatar}</div>
-                    <div class="post-author">${post.author}</div>
-                    <div class="post-time">${post.time}</div>
-                    ${post.flair ? `<div class="post-flair">${post.flair}</div>` : ''}
-                    ${post.solved ? '<div class="post-flair" style="background: #58D68D;">Solved</div>' : ''}
+                    <div class="user-avatar">${post.AuthorInitials || '??'}</div>
+                    <div class="post-author">${post.AuthorName || 'Unknown'}</div>
+                    <div class="post-time">${timeAgo(post.CreatedAt)}</div>
+                    ${post.Status === 'solved' ? '<div class="post-flair" style="background: #58D68D;">Solved</div>' : ''}
                 </div>
-                <h3 class="post-title" onclick="viewPost(${post.id})">${post.title}</h3>
-                <div class="post-body">${formatContent(post.content)}</div>
-                ${post.image ? `<div class="post-media"><img src="${post.image}" alt="Post image" class="post-image"></div>` : ''}
+                <h3 class="post-title" onclick="viewPost(${post.PostID})">${post.PostName}</h3>
+                <div class="post-body">${formatContent(post.PostBody)}</div>
+                ${currentUser.id === post.UserID ? `<button class="status-toggle-btn" onclick="toggleStatus(${post.PostID}, '${post.Status || ''}')">Toggle Solved</button>` : ''}
                 <div class="post-footer">
                     <div class="vote-buttons">
-                        <button class="vote-btn upvote" onclick="vote(${post.id}, 'up')" data-post-id="${post.id}">
+                        <button class="vote-btn upvote" onclick="vote(${post.PostID}, 'up')">
                             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
                             </svg>
                         </button>
-                        <div class="vote-count" id="votes-${post.id}">${post.votes}</div>
-                        <button class="vote-btn downvote" onclick="vote(${post.id}, 'down')" data-post-id="${post.id}">
+                        <div class="vote-count" id="votes-${post.PostID}">${post.Upvotes || 0}</div>
+                        <button class="vote-btn downvote" onclick="vote(${post.PostID}, 'down')">
                             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
                     </div>
-                    <div class="post-action" onclick="viewPost(${post.id})">
+                    <div class="post-action" onclick="viewPost(${post.PostID})">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
                         </svg>
-                        <span>${post.comments} Comments</span>
+                        <span>${post.PostReplies || 0} Comments</span>
                     </div>
-                    <div class="post-action" onclick="sharePost(${post.id})">
+                    <div class="post-action" onclick="sharePost(${post.PostID})">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
                         </svg>
                         <span>Share</span>
                     </div>
-                    <div class="post-action" onclick="savePost(${post.id})">
+                    <div class="post-action" onclick="savePost(${post.PostID})">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
                         </svg>
@@ -208,177 +128,243 @@ function displayPosts(filteredPosts = posts) {
             </div>
         </div>
     `).join('');
+    updateAllVoteButtons();
 }
 
-// Format content for display
-function formatContent(content) {
-    return content.replace(/\n/g, '<br>').replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+// Toggle status
+async function toggleStatus(postId, currentStatus) {
+    if (!isLoggedIn) {
+        alert('Please log in to update status.');
+        return;
+    }
+    const newStatus = currentStatus === 'solved' ? null : 'solved';
+    try {
+        await apiRequest(`/Posts/UpdatePostStatus/${postId}`, 'PUT', newStatus);
+        await loadPosts();
+        alert(`Status updated to ${newStatus ? 'solved' : 'unsolved'}.`);
+    } catch (err) {
+        console.error('Failed to update status:', err);
+        alert('❌ Failed to update status.');
+    }
 }
 
 // Handle voting
 function vote(postId, direction) {
-    const post = posts.find(p => p.id === postId);
-    const voteKey = `${postId}`;
-    
-    if (userVotes[voteKey] === direction) {
-        // Remove vote
-        if (direction === 'up') post.votes--;
-        else post.votes++;
-        delete userVotes[voteKey];
-    } else {
-        // Add or change vote
-        if (userVotes[voteKey] === 'up') post.votes--;
-        if (userVotes[voteKey] === 'down') post.votes++;
-        
-        if (direction === 'up') post.votes++;
-        else post.votes--;
-        userVotes[voteKey] = direction;
+    if (!isLoggedIn) {
+        alert('Please log in to vote.');
+        return;
     }
-    
-    document.getElementById(`votes-${postId}`).textContent = post.votes;
-    updateVoteButtons(postId);
+    const post = currentPosts.find(p => p.PostID === postId);
+    if (!post) return;
+    const existing = userVotes[postId];
+    if (existing === direction) {
+        post.Upvotes = (post.Upvotes || 0) + (direction === 'up' ? -1 : 1);
+        delete userVotes[postId];
+    } else {
+        if (existing === 'up') post.Upvotes = (post.Upvotes || 0) - 1;
+        if (existing === 'down') post.Upvotes = (post.Upvotes || 0) + 1;
+        post.Upvotes = (post.Upvotes || 0) + (direction === 'up' ? 1 : -1);
+        userVotes[postId] = direction;
+    }
+    filterPosts(currentFilter);
 }
 
 // Update vote button states
-function updateVoteButtons(postId) {
-    const upvoteBtn = document.querySelector(`[onclick="vote(${postId}, 'up')"]`);
-    const downvoteBtn = document.querySelector(`[onclick="vote(${postId}, 'down')"]`);
-    const voteKey = `${postId}`;
-    
-    // Reset styles
-    upvoteBtn.style.background = '';
-    downvoteBtn.style.background = '';
-    
-    if (userVotes[voteKey] === 'up') {
-        upvoteBtn.style.background = 'var(--upvote)';
-        upvoteBtn.style.color = '#ffffff';
-    } else if (userVotes[voteKey] === 'down') {
-        downvoteBtn.style.background = 'var(--downvote)';
-        downvoteBtn.style.color = '#ffffff';
-    }
+function updateAllVoteButtons() {
+    currentFiltered.forEach(post => {
+        const upBtn = document.querySelector(`[onclick="vote(${post.PostID}, 'up')"]`);
+        const downBtn = document.querySelector(`[onclick="vote(${post.PostID}, 'down')"]`);
+        if (!upBtn || !downBtn) return;
+        upBtn.style.background = '';
+        upBtn.style.color = '';
+        downBtn.style.background = '';
+        downBtn.style.color = '';
+        const vote = userVotes[post.PostID];
+        if (vote === 'up') { upBtn.style.background = 'var(--upvote)'; upBtn.style.color = '#ffffff'; }
+        else if (vote === 'down') { downBtn.style.background = 'var(--downvote)'; downBtn.style.color = '#ffffff'; }
+    });
 }
 
-// Filter posts
+// Filter and sort posts
 function filterPosts(filter) {
     currentFilter = filter;
-    
-    // Update active filter button
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
+    document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelector(`[data-filter="${filter}"]`).classList.add('active');
-    
-    let filteredPosts = [...posts];
-    
-    switch(filter) {
-        case 'new':
-            filteredPosts.sort((a, b) => {
-                const timeA = getTimeInHours(a.time);
-                const timeB = getTimeInHours(b.time);
-                return timeA - timeB;
-            });
-            break;
-        case 'hot':
-            filteredPosts.sort((a, b) => {
-                const hotA = a.votes * 2 + a.comments;
-                const hotB = b.votes * 2 + b.comments;
-                return hotB - hotA;
-            });
-            break;
-        case 'top':
-            filteredPosts.sort((a, b) => b.votes - a.votes);
-            break;
-        case 'rising':
-            filteredPosts.sort((a, b) => {
-                const risingA = a.votes / (getTimeInHours(a.time) + 1);
-                const risingB = b.votes / (getTimeInHours(b.time) + 1);
-                return risingB - risingA;
-            });
-            break;
+    currentFiltered = currentPosts.filter(p => p.TopicID === parseInt(topicId));
+    currentFiltered.sort((a, b) => {
+        switch (filter) {
+            case 'new': return new Date(b.CreatedAt) - new Date(a.CreatedAt);
+            case 'hot': return ((b.Upvotes || 0) * 2 + (b.PostReplies || 0)) - ((a.Upvotes || 0) * 2 + (a.PostReplies || 0));
+            case 'top': return (b.Upvotes || 0) - (a.Upvotes || 0);
+            case 'rising': return ((b.Upvotes || 0) / getAgeInHours(b.CreatedAt)) - ((a.Upvotes || 0) / getAgeInHours(a.CreatedAt));
+            default: return 0;
+        }
+    });
+    displayPosts(currentFiltered);
+}
+
+// Load posts
+async function loadPosts() {
+    try {
+        const posts = await apiRequest(`/Posts/GetPostsByTopic/${topicId}`, 'GET');
+        currentPosts = posts.map(p => ({
+            PostID: p.postID,
+            TopicID: p.topicID,
+            PostName: p.postName,
+            PostBody: p.postBody,
+            CreatedAt: p.createdAt || new Date().toISOString(), // 🔹 fallback in case backend returns null
+            AuthorName: p.authorName,
+            AuthorInitials: p.authorInitials,
+            Status: p.status,
+            PostReplies: p.postReplies,
+            Upvotes: p.upvotes,
+            UserID: p.userID // 🔹 ensure ownership comparisons still work
+        }));
+        filterPosts(currentFilter);
+    } catch (err) {
+        console.error('Error loading posts:', err);
+        document.getElementById('posts-container').innerHTML =
+            '<p style="color: white; text-align: center;">Failed to load posts. Check server logs.</p>';
     }
-    
-    displayPosts(filteredPosts);
 }
 
-// Convert time string to hours
-function getTimeInHours(timeStr) {
-    if (timeStr.includes('hour')) return parseInt(timeStr);
-    if (timeStr.includes('day')) return parseInt(timeStr) * 24;
-    return 0;
+// Load topic
+async function loadTopic() {
+    try {
+        const topics = await apiRequest('/Topics/GetTopics', 'GET');
+        console.log('Topic ID from URL:', topicId); // Debug the input
+        console.log('Topics response:', topics); // Debug the full response
+        const topic = topics.find(t => t.topicID === parseInt(topicId)); // Match case with claritas.js
+        if (!topic) {
+            throw new Error(`Topic with ID ${topicId} not found. Available IDs: ${topics.map(t => t.topicID).join(', ')}`);
+        }
+        const slug = topic.topicTitle.toLowerCase().replace(/\s+/g, '');
+        document.getElementById('topic-icon').textContent = '📌';
+        document.getElementById('topic-name').textContent = `r/${slug}`;
+        document.title = `r/${slug} - Valedictorian`;
+        document.getElementById('topic-meta').textContent = `${topic.topicTitle} Community`;
+        document.getElementById('topic-description').textContent = topic.topicDescription || 'No description available.';
+        document.getElementById('sidebar-description').textContent = topic.topicDescription || 'No description available.';
+        document.getElementById('created-stat').textContent = topic.createdAt ? `Created ${timeAgo(topic.createdAt)}` : 'Created recently'; // Match case
+        document.getElementById('members-stat').textContent = '2.4k';
+        document.getElementById('online-stat').textContent = '156';
+        document.getElementById('sidebar-members').textContent = '2.4k';
+        document.getElementById('sidebar-online').textContent = '156';
+    } catch (err) {
+        console.error('Error loading topic:', err);
+        document.getElementById('topic-description').textContent = err.message;
+    }
 }
 
-// Modal functions
+// Open create post modal
 function openCreatePostModal() {
+    if (!isLoggedIn) {
+        alert('Please log in to create a post.');
+        window.location.href = '../HTML/login.html';
+        return;
+    }
     document.getElementById('create-post-modal').style.display = 'block';
 }
 
 function closeCreatePostModal() {
     document.getElementById('create-post-modal').style.display = 'none';
     document.getElementById('create-post-form').reset();
-    document.querySelectorAll('.flair-option').forEach(option => {
-        option.classList.remove('selected');
-    });
 }
 
 // Post actions
 function viewPost(id) {
-    alert(`Opening post ${id}. In a real implementation, this would navigate to the full post page with comments.`);
+    window.location.href = `../HTML/post.html?postId=${id}`;
+    
 }
 
 function sharePost(id) {
-    alert(`Share post ${id}. In a real implementation, this would show sharing options.`);
+    alert(`Sharing post ${id}.`);
 }
 
 function savePost(id) {
-    alert(`Post ${id} saved. In a real implementation, this would save the post to your account.`);
+    alert(`Post ${id} saved.`);
 }
 
-// Handle form submission
-function handleFormSubmission() {
-    document.getElementById('create-post-form').addEventListener('submit', (e) => {
+// Handle post submission
+async function handlePostSubmission() {
+    const form = document.getElementById('create-post-form');
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const title = document.getElementById('post-title').value;
-        const content = document.getElementById('post-content').value;
-        const selectedFlair = document.querySelector('.flair-option.selected');
-        const flair = selectedFlair ? selectedFlair.dataset.flair : '';
-        
-        alert(`New post created:\nTitle: ${title}\nFlair: ${flair}\nContent: ${content.substring(0, 100)}...`);
-        
-        closeCreatePostModal();
-    });
-}
-
-// Flair selection
-function initializeFlairSelection() {
-    document.querySelectorAll('.flair-option').forEach(option => {
-        option.addEventListener('click', () => {
-            document.querySelectorAll('.flair-option').forEach(opt => {
-                opt.classList.remove('selected');
-            });
-            option.classList.add('selected');
-        });
-    });
-}
-
-// Initialize everything
-document.addEventListener('DOMContentLoaded', () => {
-    initializeAnimations();
-    displayPosts();
-    initializeParticles();
-    handleFormSubmission();
-    initializeFlairSelection();
-    
-    // Filter buttons
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            filterPosts(btn.dataset.filter);
-        });
-    });
-    
-    // Close modal when clicking outside
-    document.getElementById('create-post-modal').addEventListener('click', (e) => {
-        if (e.target === e.currentTarget) {
+        const postName = document.getElementById('post-title').value.trim();
+        const postBody = document.getElementById('post-content').value.trim();
+        if (!postName || !postBody) {
+            alert('Post name and body are required.');
+            return;
+        }
+        const body = {
+            topicID: parseInt(topicId),
+            userID: parseInt(currentUser.id),
+            postName: postName,
+            postBody: postBody,
+            status: "Unresolved",
+            postReplies: 0,
+            upvotes: 0,
+            createdAt: new Date().toISOString() // 🔹 add current timestamp
+        };
+        try {
+            await apiRequest('/Posts/AddPost', 'POST', body);
             closeCreatePostModal();
+            await loadPosts();
+            alert('✅ Post created successfully!');
+        } catch (err) {
+            console.error('Failed to create post:', err);
+            alert('❌ Failed to create post. Please try again.');
         }
     });
+}
+
+// Setup login check
+function setupLoginCheck() {
+    const userId = localStorage.getItem('userId');
+    const userName = localStorage.getItem('userName') || '';
+    const userSurname = localStorage.getItem('userSurname') || '';
+    isLoggedIn = !!userId;
+    if (isLoggedIn) {
+        currentUser = { id: userId, name: `${userName} ${userSurname}`, initials: (userName[0] || '?') + (userSurname[0] || '?') };
+        document.getElementById('user-avatar').textContent = currentUser.initials;
+        document.querySelector('.create-post-input').onclick = openCreatePostModal;
+        document.getElementById('text-post-btn').onclick = openCreatePostModal;
+    } else {
+        document.getElementById('user-avatar').textContent = '??';
+        document.querySelector('.create-post-input').placeholder = 'Log in to create a post';
+        document.querySelector('.create-post-input').onclick = () => alert('Please log in to create a post.');
+        document.getElementById('text-post-btn').onclick = () => alert('Please log in to create a post.');
+    }
+}
+
+// Main initialization
+document.addEventListener('DOMContentLoaded', async () => {
+    topicId = new URLSearchParams(window.location.search).get('topicId');
+    console.log('Parsed topicId:', topicId); // Debug the URL parameter
+    if (!topicId) {
+        alert('No topic selected.');
+        window.location.href = '../HTML/claritas.html';
+        return;
+    }
+    setupLoginCheck();
+    initializeAnimations();
+    initializeParticles();
+    handlePostSubmission();
+    await loadTopic();
+    await loadPosts();
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => filterPosts(btn.dataset.filter));
+    });
+
+    document.getElementById('create-post-modal').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeCreatePostModal();
+    });
+    document.querySelector('.close-btn').addEventListener('click', closeCreatePostModal);
 });
+
+window.vote = vote;
+window.toggleStatus = toggleStatus;
+window.viewPost = viewPost;
+window.sharePost = sharePost;
+window.savePost = savePost;

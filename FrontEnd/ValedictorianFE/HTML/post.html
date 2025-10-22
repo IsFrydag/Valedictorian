@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python list comprehension not working as expected - r/TechnicalSupport</title>
-    <meta name="description" content="View post: Python list comprehension not working as expected. Get help with coding problems and technical issues.">
+    <title>Post - Valedictorian</title>
+    <meta name="description" content="View post details and comments.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
@@ -19,7 +19,7 @@
         <div class="container">
             <div class="nav-content">
                 <div class="nav-logo">
-                    <span class="nav-logo-text">Valedictorian</span>
+                    <span class="nav-logo-text">Valedictorian</span> 
                 </div>
                 <div class="nav-links md-visible">
                     <a href="../HTML/Home.html" class="nav-link">Home</a>
@@ -35,56 +35,33 @@
         <!-- Content Area -->
         <div class="content-area">
             <!-- Back Button -->
-            <a href="topic.html" class="back-button reveal-text">
+            <a id="back-button" class="back-button reveal-text">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                 </svg>
-                Back to r/TechnicalSupport
+                Back to Topic
             </a>
 
             <!-- Post Content -->
             <div class="post-container reveal-text">
                 <div class="post-header">
                     <div class="post-meta">
-                        <a href="topic.html" class="community-link">r/TechnicalSupport</a>
+                        <a id="community-link" class="community-link"></a>
                         <span style="color: var(--text-light);">•</span>
                         <div class="post-author">
-                            <div class="author-avatar">AC</div>
+                            <div id="author-avatar" class="author-avatar"></div>
                             <div class="author-info">
-                                <div class="author-name">Alex Chen</div>
-                                <div class="post-time">4 hours ago</div>
+                                <div id="author-name" class="author-name"></div>
+                                <div id="post-time" class="post-time"></div>
                             </div>
                         </div>
                     </div>
-                    <h1 class="post-title">Python list comprehension not working as expected</h1>
-                    <div class="post-flair">Help</div>
+                    <h1 id="post-title" class="post-title"></h1>
+                    <div id="post-flair" class="post-flair"></div>
                 </div>
                 
                 <div class="post-content">
-                    <div class="post-body">
-                        I'm trying to create a list comprehension that filters and transforms data, but I'm getting unexpected results. Here's my code:
-
-                        <pre><code>numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-result = [x * 2 for x in numbers if x % 2 == 0 and x > 5]
-print(result)  # Expected: [12, 14, 16, 20]</code></pre>
-
-                        The output is `[12, 14, 16, 20]` which seems correct, but when I try to use this in my actual project with different data, it's not filtering properly. Any ideas?
-
-                        I've also tried breaking it down into steps:
-                        <pre><code># Step 1: Filter even numbers
-even_numbers = [x for x in numbers if x % 2 == 0]
-print(even_numbers)  # [2, 4, 6, 8, 10]
-
-# Step 2: Filter numbers greater than 5
-greater_than_five = [x for x in even_numbers if x > 5]
-print(greater_than_five)  # [6, 8, 10]
-
-# Step 3: Multiply by 2
-final_result = [x * 2 for x in greater_than_five]
-print(final_result)  # [12, 16, 20]</code></pre>
-
-                        But this gives me `[12, 16, 20]` instead of `[12, 14, 16, 20]`. What am I missing?
-                    </div>
+                    <div id="post-body" class="post-body"></div>
                 </div>
 
                 <div class="post-footer">
@@ -94,7 +71,7 @@ print(final_result)  # [12, 16, 20]</code></pre>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
                             </svg>
                         </button>
-                        <div class="vote-count" id="post-votes">45</div>
+                        <div class="vote-count" id="post-votes">0</div>
                         <button class="vote-btn downvote" onclick="votePost('down')">
                             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -126,7 +103,7 @@ print(final_result)  # [12, 16, 20]</code></pre>
             <div class="comments-section reveal-text">
                 <div class="comments-header">
                     <h2 class="comments-title">Comments</h2>
-                    <div class="comments-count" id="comments-count">12 comments</div>
+                    <div class="comments-count" id="comments-count">0 comments</div>
                 </div>
 
                 <!-- Comment Input -->
@@ -151,7 +128,7 @@ print(final_result)  # [12, 16, 20]</code></pre>
 
                 <!-- Comments List -->
                 <div class="comments-list" id="comments-list">
-                    <!-- Comments will be populated by JavaScript -->
+                    <!-- Dynamic comments -->
                 </div>
             </div>
         </div>
@@ -165,15 +142,15 @@ print(final_result)  # [12, 16, 20]</code></pre>
                     <div class="community-info">
                         <div class="community-stats">
                             <div class="stat-box">
-                                <div class="stat-number">2.4k</div>
+                                <div id="members-count" class="stat-number">2.4k</div>
                                 <div class="stat-label">Members</div>
                             </div>
                             <div class="stat-box">
-                                <div class="stat-number">156</div>
+                                <div id="online-count" class="stat-number">156</div>
                                 <div class="stat-label">Online</div>
                             </div>
                         </div>
-                        <p style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
+                        <p id="community-desc" style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
                             A community for technical support, coding help, and troubleshooting. 
                             Get help from fellow students and experts.
                         </p>
@@ -185,23 +162,8 @@ print(final_result)  # [12, 16, 20]</code></pre>
             <div class="sidebar-section reveal-text">
                 <div class="sidebar-header">Related Posts</div>
                 <div class="sidebar-content">
-                    <div class="related-posts">
-                        <div class="related-post" onclick="viewRelatedPost(1)">
-                            <div class="related-post-title">React useState hook causing infinite re-renders</div>
-                            <div class="related-post-meta">32 votes • 8 comments</div>
-                        </div>
-                        <div class="related-post" onclick="viewRelatedPost(2)">
-                            <div class="related-post-title">Best VS Code extensions for web development in 2025</div>
-                            <div class="related-post-meta">128 votes • 23 comments</div>
-                        </div>
-                        <div class="related-post" onclick="viewRelatedPost(3)">
-                            <div class="related-post-title">SQL query optimization - need help with JOIN performance</div>
-                            <div class="related-post-meta">67 votes • 15 comments</div>
-                        </div>
-                        <div class="related-post" onclick="viewRelatedPost(4)">
-                            <div class="related-post-title">Debugging JavaScript async/await errors</div>
-                            <div class="related-post-meta">156 votes • 42 comments</div>
-                        </div>
+                    <div id="related-posts" class="related-posts">
+                        <!-- Dynamic related posts -->
                     </div>
                 </div>
             </div>
@@ -230,6 +192,6 @@ print(final_result)  # [12, 16, 20]</code></pre>
         </div>
     </footer>
 
-    <script src="../JS/post.js"></script>
+    <script type="module" src="../JS/post.js"></script>
 </body>
 </html>

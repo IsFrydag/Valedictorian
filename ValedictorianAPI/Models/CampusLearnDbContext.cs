@@ -4,9 +4,10 @@ namespace ValedictorianAPI.Models
 {
     public class ValedictorianDbContext : DbContext
     {
-        public ValedictorianDbContext(DbContextOptions<ValedictorianDbContext> options): base(options)
+        public ValedictorianDbContext(DbContextOptions<ValedictorianDbContext> options) : base(options)
         {
         }
+
         public DbSet<UserModel> Users { get; set; }
         public DbSet<TutorSession> TutorSessions { get; set; }
         public DbSet<Upload> Uploads { get; set; }
@@ -18,15 +19,21 @@ namespace ValedictorianAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().ToTable("User"); // Maps to SQL table [User]
-            modelBuilder.Entity<Upload>().ToTable("Uploads"); // Maps to SQL table [Uploads]
-            modelBuilder.Entity<TutorSession>().ToTable("TutorSessions"); // Maps to SQL table [TutorSession]
-            modelBuilder.Entity<Topic>().ToTable("Topic"); // Maps to SQL table [TutorSession]
-            modelBuilder.Entity<Reply>().ToTable("Reply"); // Maps to SQL table [Reply]
-            modelBuilder.Entity<Post>().ToTable("Post"); // Maps to SQL table [Post]
-            modelBuilder.Entity<Notification>().ToTable("Notifications"); // Maps to SQL table [Notification] 
-            modelBuilder.Entity<Module>().ToTable("Module"); // Maps to SQL table [Module]
+            modelBuilder.Entity<UserModel>().ToTable("User"); 
+            modelBuilder.Entity<Upload>().ToTable("Uploads"); 
+            modelBuilder.Entity<TutorSession>().ToTable("TutorSessions");
+            modelBuilder.Entity<Topic>().ToTable("Topic");
+            modelBuilder.Entity<Reply>().ToTable("Reply");
+            modelBuilder.Entity<Post>().ToTable("Post");
+            modelBuilder.Entity<Notification>().ToTable("Notifications");
+            modelBuilder.Entity<Module>().ToTable("Module"); 
 
+            
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.User)
+                .WithMany()
+                .HasForeignKey(p => p.UserID)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

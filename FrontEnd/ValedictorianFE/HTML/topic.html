@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>r/BelgiumCampus - Technical Support</title>
-    <meta name="description" content="Technical support community for BelgiumCampus students. Get help with coding, software, and tech issues.">
+    <title>r/Topic - Valedictorian</title>
+    <meta name="description" content="Dynamic topic community.">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
@@ -14,7 +14,6 @@
 <body class="font-display">
     <div id="particle-bg" class="particle-bg"></div>
     
-    <!-- Navigation -->
     <nav class="nav-fixed">
         <div class="container">
             <div class="nav-content">
@@ -30,63 +29,56 @@
         </div>
     </nav>
 
-    <!-- Main Layout -->
     <div class="main-layout">
-        <!-- Content Area -->
         <div class="content-area">
-            <!-- Topic Header -->
             <div class="topic-header reveal-text">
                 <div class="topic-title">
-                    <div class="topic-icon">🔧</div>
-                    r/TechnicalSupport
+                    <div class="topic-icon" id="topic-icon">📌</div>
+                    <span id="topic-name">r/Topic</span>
                 </div>
-                <div class="topic-meta">Technical Support Community</div>
-                <div class="topic-description">
-                    Get help with coding problems, software issues, debugging, and all things technical. 
-                    Our community of students and experts is here to help you solve your tech challenges.
-                </div>
+                <div class="topic-meta" id="topic-meta">Topic Community</div>
+                <div class="topic-description" id="topic-description">Loading...</div>
                 <div class="topic-stats">
                     <div class="stat-item">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                         </svg>
-                        <span>2.4k Members</span>
+                        <span id="members-stat">0 Members</span>
                     </div>
                     <div class="stat-item">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <span>156 Online</span>
+                        <span id="online-stat">0 Online</span>
                     </div>
                     <div class="stat-item">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <span>Created 2 years ago</span>
+                        <span id="created-stat">Created recently</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Create Post -->
             <div class="create-post reveal-text">
                 <div class="create-post-header">
-                    <div class="user-avatar">JD</div>
-                    <input type="text" class="create-post-input" placeholder="Create a new post..." onclick="openCreatePostModal()" readonly>
+                    <div class="user-avatar" id="user-avatar">??</div>
+                    <input type="text" class="create-post-input" placeholder="Create a new post..." readonly>
                 </div>
                 <div class="create-post-actions">
-                    <button class="action-btn" onclick="openCreatePostModal()">
+                    <button class="action-btn" id="text-post-btn">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                         </svg>
                         Text
                     </button>
-                    <button class="action-btn">
+                    <button class="action-btn" disabled>
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                         </svg>
                         Image
                     </button>
-                    <button class="action-btn">
+                    <button class="action-btn" disabled>
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2"></path>
                         </svg>
@@ -95,7 +87,6 @@
                 </div>
             </div>
 
-            <!-- Post Filters -->
             <div class="post-filters reveal-text">
                 <button class="filter-btn active" data-filter="hot">🔥 Hot</button>
                 <button class="filter-btn" data-filter="new">🆕 New</button>
@@ -103,38 +94,33 @@
                 <button class="filter-btn" data-filter="rising">📈 Rising</button>
             </div>
 
-            <!-- Posts Container -->
             <div class="posts-container" id="posts-container">
-                <!-- Posts will be populated by JavaScript -->
+                <p style="color: white; text-align: center;">Loading posts...</p>
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="sidebar">
-            <!-- Community Info -->
             <div class="sidebar-section reveal-text">
                 <div class="sidebar-header">Community Info</div>
                 <div class="sidebar-content">
                     <div class="community-info">
                         <div class="community-stats">
                             <div class="stat-box">
-                                <div class="stat-number">2.4k</div>
+                                <div class="stat-number" id="sidebar-members">0</div>
                                 <div class="stat-label">Members</div>
                             </div>
                             <div class="stat-box">
-                                <div class="stat-number">156</div>
+                                <div class="stat-number" id="sidebar-online">0</div>
                                 <div class="stat-label">Online</div>
                             </div>
                         </div>
-                        <p style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
-                            A community for technical support, coding help, and troubleshooting. 
-                            Get help from fellow students and experts.
+                        <p id="sidebar-description" style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
+                            Loading description...
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- Moderators -->
             <div class="sidebar-section reveal-text">
                 <div class="sidebar-header">Moderators</div>
                 <div class="sidebar-content">
@@ -159,7 +145,6 @@
                 </div>
             </div>
 
-            <!-- Community Rules -->
             <div class="sidebar-section reveal-text">
                 <div class="sidebar-header">Community Rules</div>
                 <div class="sidebar-content">
@@ -190,7 +175,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container text-center">
             <div class="footer-logo">
@@ -202,15 +186,13 @@
             <div class="footer-copyright">
                 <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
             </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Create Post Modal -->
     <div id="create-post-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 class="modal-title">Create a Post</h3>
-                <button class="close-btn" onclick="closeCreatePostModal()">&times;</button>
+                <button class="close-btn">&times;</button>
             </div>
             <form id="create-post-form">
                 <div class="form-group">
@@ -218,24 +200,14 @@
                     <input type="text" id="post-title" class="form-input" placeholder="Enter your post title..." required>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Flair</label>
-                    <div class="flair-selector">
-                        <div class="flair-option" data-flair="help">Help</div>
-                        <div class="flair-option" data-flair="discussion">Discussion</div>
-                        <div class="flair-option" data-flair="solved">Solved</div>
-                        <div class="flair-option" data-flair="resource">Resource</div>
-                        <div class="flair-option" data-flair="announcement">Announcement</div>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-label" for="post-content">Content</label>
-                    <textarea id="post-content" class="form-textarea" placeholder="Share your thoughts, ask your question, or describe your problem..." required></textarea>
+                    <textarea id="post-content" class="form-textarea" placeholder="Share your thoughts..." required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Create Post</button>
             </form>
         </div>
     </div>
 
-    <script src="../JS/topic.js"></script>
+    <script type="module" src="../JS/topic.js"></script>
 </body>
 </html>

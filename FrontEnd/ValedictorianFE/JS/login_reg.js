@@ -140,5 +140,5 @@ loginForm.addEventListener('submit', async (e) => {
     } catch (err) {
         alert(err.message || 'Login failed.');
         console.error('Login error:', err);
-    }
+    } 
 });

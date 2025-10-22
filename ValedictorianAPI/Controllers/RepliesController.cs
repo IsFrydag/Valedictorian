@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using ValedictorianAPI.Models;
 
 namespace ValedictorianAPI.Controllers
@@ -15,76 +16,106 @@ namespace ValedictorianAPI.Controllers
             _context = context;
         }
 
-        [HttpPost("AddReply")]
-        public async Task<IActionResult> AddReply([FromBody] Reply dto)
+        public class ReplyCreateDto
         {
-            if (dto == null || string.IsNullOrWhiteSpace(dto.Body))
-                return BadRequest(new { Message = "Reply body is required." });
+            [Required]
+            public int PostID { get; set; }
+
+            [Required]
+            public int UserID { get; set; }
+
+            [Required]
+            [StringLength(5000)]
+            public string Body { get; set; }
+
+            public int? ParentReplyID { get; set; }
+
+            public string? Uploads { get; set; }
+            public string? UploadFormat { get; set; }
+
+            public DateTime? CreatedAt { get; set; }
+        }
+
+        [HttpPost("AddReply")]
+        public async Task<IActionResult> AddReply([FromBody] ReplyCreateDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             var reply = new Reply
             {
+                PostID = dto.PostID,
                 UserID = dto.UserID,
                 Body = dto.Body,
+                ParentReplyID = dto.ParentReplyID,
                 Uploads = dto.Uploads,
-                UploadFormat = dto.UploadFormat
+                UploadFormat = dto.UploadFormat,
+                Upvotes = 0,
+                CreatedAt = dto.CreatedAt ?? DateTime.UtcNow
             };
 
             _context.Replies.Add(reply);
             await _context.SaveChangesAsync();
 
-            return Ok(new
+            // Increment post's reply count
+            var post = await _context.Posts.FindAsync(dto.PostID);
+            if (post != null)
             {
-                Message = "Reply added successfully.",
-                reply.ReplyID
-            });
+                post.PostReplies = (post.PostReplies ?? 0) + 1;
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok(new { Message = "Reply added successfully.", ReplyID = reply.ReplyID });
         }
 
-        [HttpGet("GetReplies")]
-        public async Task<IActionResult> GetReplies()
+        [HttpGet("GetRepliesByPost/{postId}")]
+        public async Task<IActionResult> GetRepliesByPost(int postId)
         {
-            var replies = await _context.Replies.ToListAsync();
-            return Ok(replies);
+            try
+            {
+                var replies = await _context.Replies
+                    .Where(r => r.PostID == postId)
+                    .Include(r => r.User)
+                    .Select(r => new
+                    {
+                        r.ReplyID,
+                        r.ParentReplyID,
+                        r.Body,
+                        r.Upvotes,
+                        r.CreatedAt,
+                        r.Uploads,
+                        r.UploadFormat,
+                        AuthorName = r.User != null ? r.User.UserName + " " + r.User.UserSurname : "Unknown",
+                        AuthorInitials = r.User != null ? (r.User.UserName.Substring(0, 1) + r.User.UserSurname.Substring(0, 1)).ToUpper() : "??"
+                    })
+                    .OrderByDescending(r => r.CreatedAt) // Newest first
+                    .ToListAsync();
+
+                return Ok(replies);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Internal server error", Details = ex.Message });
+            }
         }
 
-        [HttpGet("GetReply/{id}")]
-        public async Task<IActionResult> GetReply(int id)
+        [HttpPost("UpvoteReply/{id}")]
+        public async Task<IActionResult> UpvoteReply(int id, [FromBody] VoteDto dto)
         {
             var reply = await _context.Replies.FindAsync(id);
             if (reply == null)
-                return NotFound(new { Message = $"Reply with ID {id} not found." });
+                return NotFound(new { Message = "Reply not found" });
 
-            return Ok(reply);
-        }
-
-        [HttpPut("UpdateReply/{id}")]
-        public async Task<IActionResult> UpdateReply(int id, [FromBody] Reply dto)
-        {
-            var reply = await _context.Replies.FindAsync(id);
-            if (reply == null)
-                return NotFound(new { Message = "Reply not found." });
-
-            reply.UserID = dto.UserID;
-            reply.Body = dto.Body;
-            reply.Uploads = dto.Uploads;
-            reply.UploadFormat = dto.UploadFormat;
-
-            _context.Replies.Update(reply);
+            reply.Upvotes += (dto.Direction == "up" ? 1 : -1);
             await _context.SaveChangesAsync();
 
-            return Ok(new { Message = "Reply updated successfully." });
+            return Ok(new { Message = "Vote updated", Upvotes = reply.Upvotes });
         }
 
-        [HttpDelete("DeleteReply/{id}")]
-        public async Task<IActionResult> DeleteReply(int id)
+        public class VoteDto
         {
-            var reply = await _context.Replies.FindAsync(id);
-            if (reply == null)
-                return NotFound(new { Message = "Reply not found." });
-
-            _context.Replies.Remove(reply);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { Message = "Reply deleted successfully." });
+            [Required]
+            public string Direction { get; set; } // "up" or "down"
         }
     }
 }
