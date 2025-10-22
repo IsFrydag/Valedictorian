@@ -1,69 +1,624 @@
-.calBox{
-
-    position: absolute;
-    left: 1%;
-    right: 35%;
-    top: 15%;
-    border: solid transparent 2px;
-    display: none;
-    height: 80vh;
-    overflow-y: auto;
-    background: white;
-    border-radius: 8px;
-    justify-items: center;
-    align-items: center;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-#calendarHeader{
+:root {
+    --primary: #2C3E50;
+    --secondary: #D4A574;
+    --neutral: #F8F9FA;
+    --accent: #5DADE2;
+    --text-dark: #2C3E50;
+    --text-light: #6C757D;
+    --gold: #D4A574;
+    --dark-gold: #B8860B;
+}
 
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--primary) 0%, #34495e 50%, var(--neutral) 100%);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    color: #ffffff;
+}
+
+.particle-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.nav-fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: 50;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.nav-content {
     display: flex;
     justify-content: space-between;
-    width: 90%;
-    margin: 10px auto;
-    font-family: "Zalando Sans Expanded", sans-serif;
-    font-weight: bold;
-    font-size: 30px;
-
+    align-items: center;
+    height: 4rem;
 }
 
-#calendarTable{
-
-    width: 90%;
-    border-collapse: collapse;
-    margin: 0 auto 20px auto;
-    table-layout: fixed;
-
+.nav-logo-text {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #ffffff;
 }
 
-#calendarTable th, #calendarTable td{
+.nav-links {
+    display: none;
+}
 
-    border: 1px solid #ccc;
+@media (min-width: 768px) {
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+}
+
+.nav-link {
+    color: rgb(255, 255, 255);
+    transition: color 0.2s;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: var(--secondary);
+}
+
+.main-content {
+    padding: 6rem 0 2rem;
+    min-height: calc(100vh - 4rem);
+}
+
+.calendar-header {
     text-align: center;
-    padding: 10px;
-    border: 1px solid #e5e7eb;
-    vertical-align: top;
-    width: 50px;
-    height: 70px;
-    font-size: 18px;
-
+    margin-bottom: 3rem;
 }
 
-#calendarTable td{
+.calendar-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
 
-    height: 50px;
+.calendar-subtitle {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.calendar-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+@media (min-width: 1024px) {
+    .calendar-container {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+.calendar-grid-container {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+}
+
+.calendar-header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    text-align: left;
-    vertical-align: top;
-    padding: 5px;
-    background-color: #f3f4f6;
-    font-weight: bold;
-    font-size: 16px;
-
+    transition: all 0.3s ease;
 }
 
-#calendarTable td:hover{
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
 
-    background-color: #f0f0f0;
+.current-month {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.calendar-day-header {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem 0.5rem;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--gold);
+}
+
+.calendar-day {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem 0.5rem;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+}
+
+.calendar-day:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+}
+
+.calendar-day.available {
+    background: rgba(93, 173, 226, 0.2);
+}
+
+.calendar-day.available:hover {
+    background: rgba(93, 173, 226, 0.3);
+}
+
+.calendar-day.has-meeting {
+    background: rgba(212, 165, 116, 0.3);
+}
+
+.calendar-day.has-meeting::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+}
+
+.calendar-day.other-month {
+    color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.day-number {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.day-meetings {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    opacity: 0.8;
+}
+
+.booking-panel {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    padding: 2rem;
+    height: fit-content;
+}
+
+.panel-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+    text-align: center;
+}
+
+.booking-form {
+    display: none;
+}
+
+.booking-form.active {
+    display: block;
+    animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-step {
+    display: none;
+    margin-bottom: 1.5rem;
+}
+
+.form-step.active {
+    display: block;
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.step-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--gold);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.form-select,
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus,
+.form-input:focus,
+.form-textarea:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--gold);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+}
+
+.form-select option {
+    background: var(--primary);
+    color: white;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.tutor-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.tutor-option {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tutor-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.tutor-option.selected {
+    background: rgba(212, 165, 116, 0.3);
+    border-color: var(--gold);
+}
+
+.tutor-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+}
+
+.tutor-info {
+    flex: 1;
+}
+
+.tutor-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.tutor-specialty {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.meeting-type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.meeting-type-option {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.meeting-type-option:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.meeting-type-option.selected {
+    background: rgba(212, 165, 116, 0.3);
+    border-color: var(--gold);
+}
+
+.meeting-type-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(93, 173, 226, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.selected-date-info {
+    background: rgba(212, 165, 116, 0.2);
+    border: 1px solid rgba(212, 165, 116, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.selected-date-text {
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.meetings-list {
+    margin-top: 2rem;
+}
+
+.meeting-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.meeting-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.meeting-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.meeting-title {
+    font-weight: 600;
+    color: var(--gold);
+}
+
+.meeting-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background: rgba(212, 165, 116, 0.2);
+    color: #D4A574;
+}
+
+.status-accepted {
+    background: rgba(40, 167, 69, 0.2);
+    color: #28A745;
+}
+
+.meeting-details {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+}
+
+.footer {
+    background: linear-gradient(to bottom right, #1a2332, #2d3748);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 3rem 0;
+    margin-top: 4rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo-text {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #ffffff;
+}
+
+.footer-description {
+    color: white;
+    margin-bottom: 1.5rem;
+    max-width: 28rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.footer-copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.footer-copyright p {
+    font-size: 0.875rem;
+    color: var(--secondary);
+}
+
+@media (max-width: 768px) {
+    .calendar-title {
+        font-size: 2rem;
+    }
     
+    .calendar-grid-container,
+    .booking-panel {
+        padding: 1rem;
+    }
+    
+    .meeting-type-grid {
+        grid-template-columns: 1fr;
+    }
 }
