@@ -1,77 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Claritas Main Topics Page</title>
-  <link rel="stylesheet" href="../CSS/topic.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>r/BelgiumCampus - Technical Support</title>
+    <meta name="description" content="Technical support community for BelgiumCampus students. Get help with coding, software, and tech issues.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <link rel="stylesheet" href="../CSS/topic.css">
+    <base target="_blank">
 </head>
+<body class="font-display">
+    <div id="particle-bg" class="particle-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-fixed">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <span class="nav-logo-text">Valedictorian</span>
+                </div>
+                <div class="nav-links md-visible">
+                    <a href="../HTML/Home.html" class="nav-link">Home</a>
+                    <a href="../HTML/contact.html" class="nav-link">Contact</a>
+                    <a href="../HTML/about.html" class="nav-link">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<body>
-  <h1>Claritas</h1>
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Topic Header -->
+            <div class="topic-header reveal-text">
+                <div class="topic-title">
+                    <div class="topic-icon">🔧</div>
+                    r/TechnicalSupport
+                </div>
+                <div class="topic-meta">Technical Support Community</div>
+                <div class="topic-description">
+                    Get help with coding problems, software issues, debugging, and all things technical. 
+                    Our community of students and experts is here to help you solve your tech challenges.
+                </div>
+                <div class="topic-stats">
+                    <div class="stat-item">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                        <span>2.4k Members</span>
+                    </div>
+                    <div class="stat-item">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>156 Online</span>
+                    </div>
+                    <div class="stat-item">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>Created 2 years ago</span>
+                    </div>
+                </div>
+            </div>
 
-  
-  <div>
-    <button id="createTopicBtn">Create New Topic</button>
-  </div>
+            <!-- Create Post -->
+            <div class="create-post reveal-text">
+                <div class="create-post-header">
+                    <div class="user-avatar">JD</div>
+                    <input type="text" class="create-post-input" placeholder="Create a new post..." onclick="openCreatePostModal()" readonly>
+                </div>
+                <div class="create-post-actions">
+                    <button class="action-btn" onclick="openCreatePostModal()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                        </svg>
+                        Text
+                    </button>
+                    <button class="action-btn">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        Image
+                    </button>
+                    <button class="action-btn">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2"></path>
+                        </svg>
+                        Code
+                    </button>
+                </div>
+            </div>
 
-  <section class="All-Topics">
-    <section class="set1Topics">
-      <aside class="Column1">
-        <h4>LPR281</h4>
-        <article>Discussion Topic 1:</article>
-        <article>Discussion Topic 2:</article>
-        <article>Discussion Topic 3:</article>
-        <article>Discussion Topic 4:</article>
-      </aside>
+            <!-- Post Filters -->
+            <div class="post-filters reveal-text">
+                <button class="filter-btn active" data-filter="hot">🔥 Hot</button>
+                <button class="filter-btn" data-filter="new">🆕 New</button>
+                <button class="filter-btn" data-filter="top">⭐ Top</button>
+                <button class="filter-btn" data-filter="rising">📈 Rising</button>
+            </div>
 
-      <aside class="Column2">
-        <h4>PRJ381</h4>
-        <article>Discussion Topic 1:</article>
-        <article>Discussion Topic 2:</article>
-        <article>Discussion Topic 3:</article>
-        <article>Discussion Topic 4:</article>
-      </aside>
+            <!-- Posts Container -->
+            <div class="posts-container" id="posts-container">
+                <!-- Posts will be populated by JavaScript -->
+            </div>
+        </div>
 
-      <aside class="Column3">
-        <h4>STATS281</h4>
-        <article>Discussion Topic 1:</article>
-        <article>Discussion Topic 2:</article>
-        <article>Discussion Topic 3:</article>
-        <article>Discussion Topic 4:</article>
-      </aside>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Community Info -->
+            <div class="sidebar-section reveal-text">
+                <div class="sidebar-header">Community Info</div>
+                <div class="sidebar-content">
+                    <div class="community-info">
+                        <div class="community-stats">
+                            <div class="stat-box">
+                                <div class="stat-number">2.4k</div>
+                                <div class="stat-label">Members</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Online</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
+                            A community for technical support, coding help, and troubleshooting. 
+                            Get help from fellow students and experts.
+                        </p>
+                    </div>
+                </div>
+            </div>
 
-      <aside class="Column4">
-        <h4>MLG381</h4>
-        <article>Discussion Topic 1:</article>
-        <article>Discussion Topic 2:</article>
-        <article>Discussion Topic 3:</article>
-        <article>Discussion Topic 4:</article>
-      </aside>
-    </section>
-  </section>
+            <!-- Moderators -->
+            <div class="sidebar-section reveal-text">
+                <div class="sidebar-header">Moderators</div>
+                <div class="sidebar-content">
+                    <div class="moderator-list">
+                        <div class="moderator-item">
+                            <div class="mod-avatar">JS</div>
+                            <div class="mod-name">Prof. Johnson</div>
+                        </div>
+                        <div class="moderator-item">
+                            <div class="mod-avatar">MC</div>
+                            <div class="mod-name">Maria Chen</div>
+                        </div>
+                        <div class="moderator-item">
+                            <div class="mod-avatar">AK</div>
+                            <div class="mod-name">Alex Kumar</div>
+                        </div>
+                        <div class="moderator-item">
+                            <div class="mod-avatar">ST</div>
+                            <div class="mod-name">Sarah Thompson</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  <footer>Footer</footer>
+            <!-- Community Rules -->
+            <div class="sidebar-section reveal-text">
+                <div class="sidebar-header">Community Rules</div>
+                <div class="sidebar-content">
+                    <ul class="rule-list">
+                        <li class="rule-item">
+                            <div class="rule-number">1</div>
+                            <div class="rule-text">Be respectful and constructive in your interactions</div>
+                        </li>
+                        <li class="rule-item">
+                            <div class="rule-number">2</div>
+                            <div class="rule-text">Provide detailed information when asking for help</div>
+                        </li>
+                        <li class="rule-item">
+                            <div class="rule-number">3</div>
+                            <div class="rule-text">Include error messages and relevant code snippets</div>
+                        </li>
+                        <li class="rule-item">
+                            <div class="rule-number">4</div>
+                            <div class="rule-text">Search before posting to avoid duplicates</div>
+                        </li>
+                        <li class="rule-item">
+                            <div class="rule-number">5</div>
+                            <div class="rule-text">Mark solved questions with the appropriate flair</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="footer-logo">
+                <span class="footer-logo-text">Valedictorian</span>
+            </div>
+            <p class="footer-description">
+                Empowering Excellence, Simplifying Success.
+            </p>
+            <div class="footer-copyright">
+                <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-  <script>
-    // Select the button and the first column
-    const button = document.getElementById("createTopicBtn");
-    const column1 = document.querySelector(".Column1");
+    <!-- Create Post Modal -->
+    <div id="create-post-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Create a Post</h3>
+                <button class="close-btn" onclick="closeCreatePostModal()">&times;</button>
+            </div>
+            <form id="create-post-form">
+                <div class="form-group">
+                    <label class="form-label" for="post-title">Title</label>
+                    <input type="text" id="post-title" class="form-input" placeholder="Enter your post title..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Flair</label>
+                    <div class="flair-selector">
+                        <div class="flair-option" data-flair="help">Help</div>
+                        <div class="flair-option" data-flair="discussion">Discussion</div>
+                        <div class="flair-option" data-flair="solved">Solved</div>
+                        <div class="flair-option" data-flair="resource">Resource</div>
+                        <div class="flair-option" data-flair="announcement">Announcement</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="post-content">Content</label>
+                    <textarea id="post-content" class="form-textarea" placeholder="Share your thoughts, ask your question, or describe your problem..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Create Post</button>
+            </form>
+        </div>
+    </div>
 
-    // When button is clicked
-    button.addEventListener("click", () => {
-      // Count how many topics already exist in Column1
-      const topics = column1.querySelectorAll("article");
-      const nextNumber = topics.length + 1;
-
-      // Create a new article element
-      const newTopic = document.createElement("article");
-      newTopic.textContent = `Discussion Topic ${nextNumber}:`;
-
-      // Append it to Column1
-      column1.appendChild(newTopic);
-    });
-  </script>
+    <script src="../JS/topic.js"></script>
 </body>
 </html>
