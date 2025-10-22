@@ -3,50 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog Post Title</title>
-    <link rel="stylesheet" href="../CSS/insidepost.css">
+    <title>Python list comprehension not working as expected - r/TechnicalSupport</title>
+    <meta name="description" content="View post: Python list comprehension not working as expected. Get help with coding problems and technical issues.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <link rel="stylesheet" href="../CSS/post.css">
+    <base target="_blank">
 </head>
-<body>
-    <header class="blog-header">
-        <h1>Claritas Comms:</h1>
-    </header>
-
-    <main class="container">
-        <article class="blog-post">
-            <h2>Chosen Topic Post Title Here</h2>
-            <p class="post-meta">Posted on October 12, 2025 by Author Name</p>
-            <div class="post-content">
-                <p>This is the main content of the blog post. It can contain multiple paragraphs, images, and other elements.</p>
-                <p>You can elaborate on your topic here, providing detailed information and insights for your readers.</p>
-                <button>Reply</button>
-                <p>Author Who Created this Topic</p>
-                <button>Upvote</button>
-                <p>Current Upvotes Count: </p>
-            </div>
-        </article>
-
-        <section class="comments-section">
-            <h3>Comments</h3>
-            <div class="comment">
-                <p class="comment-author"><strong>Commenter 1:</strong></p>
-                <p class="comment-text">Great post! Very informative and well-written.</p>
-                <button>Reply</button>
-                <div class="reply">
-                    <p class="comment-author"><strong>Replyer 1:</strong></p>
-                    <p class="comment-text">Thanks for your feedback!</p>
+<body class="font-display">
+    <div id="particle-bg" class="particle-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-fixed">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <span class="nav-logo-text">Valedictorian</span>
+                </div>
+                <div class="nav-links md-visible">
+                    <a href="../HTML/Home.html" class="nav-link">Home</a>
+                    <a href="../HTML/contact.html" class="nav-link">Contact</a>
+                    <a href="../HTML/about.html" class="nav-link">About</a>
                 </div>
             </div>
-            <div class="comment">
-                <p class="comment-author"><strong>Commenter 2:</strong></p>
-                <p class="comment-text">I have a question about this topic. Can you elaborate on X?</p>
-            </div>
-            <button>reply</button>
-            
-        </section>
-    </main>
+        </div>
+    </nav>
 
+    <!-- Main Layout -->
+    <div class="main-layout">
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Back Button -->
+            <a href="topic.html" class="back-button reveal-text">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Back to r/TechnicalSupport
+            </a>
+
+            <!-- Post Content -->
+            <div class="post-container reveal-text">
+                <div class="post-header">
+                    <div class="post-meta">
+                        <a href="topic.html" class="community-link">r/TechnicalSupport</a>
+                        <span style="color: var(--text-light);">•</span>
+                        <div class="post-author">
+                            <div class="author-avatar">AC</div>
+                            <div class="author-info">
+                                <div class="author-name">Alex Chen</div>
+                                <div class="post-time">4 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="post-title">Python list comprehension not working as expected</h1>
+                    <div class="post-flair">Help</div>
+                </div>
+                
+                <div class="post-content">
+                    <div class="post-body">
+                        I'm trying to create a list comprehension that filters and transforms data, but I'm getting unexpected results. Here's my code:
+
+                        <pre><code>numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+result = [x * 2 for x in numbers if x % 2 == 0 and x > 5]
+print(result)  # Expected: [12, 14, 16, 20]</code></pre>
+
+                        The output is `[12, 14, 16, 20]` which seems correct, but when I try to use this in my actual project with different data, it's not filtering properly. Any ideas?
+
+                        I've also tried breaking it down into steps:
+                        <pre><code># Step 1: Filter even numbers
+even_numbers = [x for x in numbers if x % 2 == 0]
+print(even_numbers)  # [2, 4, 6, 8, 10]
+
+# Step 2: Filter numbers greater than 5
+greater_than_five = [x for x in even_numbers if x > 5]
+print(greater_than_five)  # [6, 8, 10]
+
+# Step 3: Multiply by 2
+final_result = [x * 2 for x in greater_than_five]
+print(final_result)  # [12, 16, 20]</code></pre>
+
+                        But this gives me `[12, 16, 20]` instead of `[12, 14, 16, 20]`. What am I missing?
+                    </div>
+                </div>
+
+                <div class="post-footer">
+                    <div class="vote-buttons">
+                        <button class="vote-btn upvote" onclick="votePost('up')">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+                            </svg>
+                        </button>
+                        <div class="vote-count" id="post-votes">45</div>
+                        <button class="vote-btn downvote" onclick="votePost('down')">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="post-action" onclick="sharePost()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"></path>
+                        </svg>
+                        <span>Share</span>
+                    </button>
+                    <button class="post-action" onclick="savePost()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                        </svg>
+                        <span>Save</span>
+                    </button>
+                    <button class="post-action" onclick="reportPost()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                        </svg>
+                        <span>Report</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section reveal-text">
+                <div class="comments-header">
+                    <h2 class="comments-title">Comments</h2>
+                    <div class="comments-count" id="comments-count">12 comments</div>
+                </div>
+
+                <!-- Comment Input -->
+                <div class="comment-input-section">
+                    <div class="comment-input-header">
+                        <div class="author-avatar">JD</div>
+                        <span style="color: var(--text-dark); font-weight: 500;">Add a comment</span>
+                    </div>
+                    <form class="comment-form" onsubmit="submitComment(event)">
+                        <textarea 
+                            class="comment-textarea" 
+                            placeholder="What are your thoughts?"
+                            id="comment-input"
+                            required
+                        ></textarea>
+                        <div class="comment-actions">
+                            <button type="button" class="cancel-btn" onclick="clearComment()">Cancel</button>
+                            <button type="submit" class="submit-comment-btn">Comment</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Comments List -->
+                <div class="comments-list" id="comments-list">
+                    <!-- Comments will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Community Info -->
+            <div class="sidebar-section reveal-text">
+                <div class="sidebar-header">Community Info</div>
+                <div class="sidebar-content">
+                    <div class="community-info">
+                        <div class="community-stats">
+                            <div class="stat-box">
+                                <div class="stat-number">2.4k</div>
+                                <div class="stat-label">Members</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">156</div>
+                                <div class="stat-label">Online</div>
+                            </div>
+                        </div>
+                        <p style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
+                            A community for technical support, coding help, and troubleshooting. 
+                            Get help from fellow students and experts.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="sidebar-section reveal-text">
+                <div class="sidebar-header">Related Posts</div>
+                <div class="sidebar-content">
+                    <div class="related-posts">
+                        <div class="related-post" onclick="viewRelatedPost(1)">
+                            <div class="related-post-title">React useState hook causing infinite re-renders</div>
+                            <div class="related-post-meta">32 votes • 8 comments</div>
+                        </div>
+                        <div class="related-post" onclick="viewRelatedPost(2)">
+                            <div class="related-post-title">Best VS Code extensions for web development in 2025</div>
+                            <div class="related-post-meta">128 votes • 23 comments</div>
+                        </div>
+                        <div class="related-post" onclick="viewRelatedPost(3)">
+                            <div class="related-post-title">SQL query optimization - need help with JOIN performance</div>
+                            <div class="related-post-meta">67 votes • 15 comments</div>
+                        </div>
+                        <div class="related-post" onclick="viewRelatedPost(4)">
+                            <div class="related-post-title">Debugging JavaScript async/await errors</div>
+                            <div class="related-post-meta">156 votes • 42 comments</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scroll-top" onclick="scrollToTop()">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </button>
+
+    <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 Claristas Comms</p>
+        <div class="container text-center">
+            <div class="footer-logo">
+                <span class="footer-logo-text">Valedictorian</span>
+            </div>
+            <p class="footer-description">
+                Empowering Excellence, Simplifying Success.
+            </p>
+            <div class="footer-copyright">
+                <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
+            </div>
+        </div>
     </footer>
+
+    <script src="../JS/post.js"></script>
 </body>
 </html>
