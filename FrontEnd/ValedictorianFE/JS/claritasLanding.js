@@ -1,4 +1,5 @@
-// Forum data
+import { apiRequest } from './api.js';
+
 const categories = [
     {
         id: 'general',
@@ -207,4 +208,100 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeParticles();
     handleFormSubmission();
    
+});
+
+
+// API FOR TOPICS 
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const topicList = document.querySelector('#topic-list');
+  const createBtn = document.querySelector('#create-topic-btn');
+  const modal = document.querySelector('#topic-modal');
+  const form = document.querySelector('#topic-form');
+  const moduleSelect = document.querySelector('#module-select');
+
+  // Open modal
+  createBtn.addEventListener('click', async () => {
+    await loadModules();
+    modal.style.display = 'block';
+  });
+
+  // Close modal when clicking outside
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+      form.reset();
+    }
+  });
+
+  // Load modules into dropdown
+  async function loadModules() {
+    moduleSelect.innerHTML = `<option value="">Loading modules...</option>`;
+    try {
+      const modules = await apiRequest('/Modules/GetModules', 'GET');
+      if (!modules.length) {
+        moduleSelect.innerHTML = `<option value="">No modules available</option>`;
+        return;
+      }
+      moduleSelect.innerHTML = `<option value="">Select a module</option>`;
+      modules.forEach(m => {
+        const option = document.createElement('option');
+        option.value = m.moduleID;
+        option.textContent = m.moduleName;
+        moduleSelect.appendChild(option);
+      });
+    } catch (err) {
+      console.error('Error loading modules:', err);
+      moduleSelect.innerHTML = `<option value="">Failed to load modules</option>`;
+    }
+  }
+
+  // Load and render topics
+  async function loadTopics() {
+    try {
+      const topics = await apiRequest('/Topics/GetTopics', 'GET');
+      topicList.innerHTML = topics.map(t => `
+        <div class="discussion-card">
+          <div class="discussion-header">
+            <span class="discussion-category">${t.moduleName || 'General'}</span>
+          </div>
+          <h3 class="discussion-title">${t.topicTitle}</h3>
+          <p class="discussion-excerpt">${t.topicDescription || ''}</p>
+        </div>
+      `).join('');
+    } catch (err) {
+      console.error('Error loading topics:', err);
+      topicList.innerHTML = `<p style="color:white;">Failed to load topics</p>`;
+    }
+  }
+
+  // Handle topic submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const moduleID = parseInt(moduleSelect.value);
+    const topicTitle = form.querySelector('#topic-title').value.trim();
+    const topicDescription = form.querySelector('#topic-desc').value.trim();
+
+    if (!moduleID || !topicTitle) {
+      alert('Please select a module and enter a topic title.');
+      return;
+    }
+
+    const body = { ModuleID: moduleID, TopicTitle: topicTitle, TopicDescription: topicDescription };
+
+    try {
+      await apiRequest('/Topics/AddTopic', 'POST', body);
+      modal.style.display = 'none';
+      form.reset();
+      await loadTopics();
+      alert('✅ Topic added successfully');
+    } catch (err) {
+      console.error('Failed to submit topic:', err);
+      alert('❌ Failed to create topic. Please try again.');
+    }
+  });
+
+  // Initial load
+  await loadTopics();
 });

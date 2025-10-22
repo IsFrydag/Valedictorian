@@ -1,117 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forums - Valedictorian</title>
-    <meta name="description" content="Join discussions, ask questions, and connect with students and faculty in our community forums.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    <link rel="stylesheet" href="../CSS/claritas.css">
-    <base target="_blank">
-</head>
-<body class="font-display">
-    <div id="particle-bg" class="particle-bg"></div>
-    
-    <!-- Navigation -->
-    <nav class="nav-fixed">
-        <div class="container">
-            <div class="nav-content">
-                <div class="nav-logo">
-                    <span class="nav-logo-text">Valedictorian</span>
-                </div>
-                <div class="nav-links md-visible">
-                    <a href="../HTML/Home.html" class="nav-link" target="_self">Home</a>
-                    <a href="../HTML/contact.html" class="nav-link" target="_self">Contact</a>
-                    <a href="../HTML/about.html" class="nav-link" target="_self">About</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <section class="hero-section">
-        <div class="container text-center">
-            <h1 class="hero-title reveal-text">
-                Clar<span class="highlight-text">itas</span>
-            </h1>
-            <p class="hero-description reveal-text">
-                Claritas - Latin for clarity. Got some confusion? Get some clarity.
-            </p>
-            <div class="search-container reveal-text">
-                <div class="search-wrapper">
-                    <input 
-                        type="text" 
-                        id="search-input"
-                        placeholder="Search discussions..."
-                        class="search-input"
-                    >
-                    <div class="search-icon">
-                        <svg class="icon-size" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Forums - Valedictorian</title>
+        <meta name="description" content="Join discussions, ask questions, and connect with students and faculty in our community forums.">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+        <link rel="stylesheet" href="../CSS/claritas.css">
+        <base target="_blank">
+    </head>
+    <body class="font-display">
+        <div id="particle-bg" class="particle-bg"></div>
+        
+        <!-- Navigation -->
+        <nav class="nav-fixed">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="nav-logo">
+                        <span class="nav-logo-text">Valedictorian</span>
+                    </div>
+                    <div class="nav-links md-visible">
+                        <a href="../HTML/Home.html" class="nav-link" target="_self">Home</a>
+                        <a href="../HTML/contact.html" class="nav-link" target="_self">Contact</a>
+                        <a href="../HTML/about.html" class="nav-link" target="_self">About</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </nav>
 
-    <section class="forum-section">
-        <div class="container">
-            <h2 class="section-title text-center reveal-text">Browse Topics</h2>
-            <div class="categories-grid" id="categories-grid">
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container text-center">
-            <div class="footer-logo">
-                <span class="footer-logo-text">Valedictorian</span>
-            </div>
-            <p class="footer-description">
-                Empowering Excellence, Simplifying Success.
-            </p>
-            <div class="footer-copyright">
-                <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <div id="new-discussion-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Start New Discussion</h3>
-                <button class="close-btn" onclick="closeNewDiscussionModal()">&times;</button>
-            </div>
-            <form id="new-discussion-form">
-                <div class="form-group">
-                    <label class="form-label" for="discussion-title">Title</label>
-                    <input type="text" id="discussion-title" class="form-input" placeholder="Enter discussion title..." required>
+        <section class="hero-section">
+            <div class="container text-center">
+                <h1 class="hero-title reveal-text">
+                    Clar<span class="highlight-text">itas</span>
+                </h1>
+                <p class="hero-description reveal-text">
+                    Claritas - Latin for clarity. Got some confusion? Get some clarity.
+                </p>
+                <div class="search-container reveal-text">
+                    <div class="search-wrapper">
+                        <input 
+                            type="text" 
+                            id="search-input"
+                            placeholder="Search discussions..."
+                            class="search-input"
+                        >
+                        <div class="search-icon">
+                            <svg class="icon-size" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="discussion-category">Category</label>
-                    <select id="discussion-category" class="form-select" required>
-                        <option value="">Select a category</option>
-                        <option value="general">General Discussion</option>
-                        <option value="academics">Academics</option>
-                        <option value="technical">Technical Support</option>
-                        <option value="career">Career & Jobs</option>
-                        <option value="projects">Projects & Portfolio</option>
-                        <option value="events">Events & Meetups</option>
-                        <option value="resources">Resources & Tutorials</option>
-                        <option value="lifestyle">Student Life</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="discussion-content">Content</label>
-                    <textarea id="discussion-content" class="form-textarea" placeholder="Share your thoughts or ask your question..." required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Create Discussion</button>
-            </form>
-        </div>
-    </div>
+            </div>
+        </section>
 
-    <script src="../JS/claritasLanding.js"></script>
-</body>
+        <section class="forum-section">
+            <div class="container">
+                <h2 class="section-title text-center reveal-text">Browse Topics</h2>
+                <div class="categories-grid" id="categories-grid">
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container text-center">
+                <div class="footer-logo">
+                    <span class="footer-logo-text">Valedictorian</span>
+                </div>
+                <p class="footer-description">
+                    Empowering Excellence, Simplifying Success.
+                </p>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <div id="new-discussion-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Start New Discussion</h3>
+                    <button class="close-btn" onclick="closeNewDiscussionModal()">&times;</button>
+                </div>
+                <form id="new-discussion-form">
+                    <div class="form-group">
+                        <label class="form-label" for="discussion-title">Title</label>
+                        <input type="text" id="discussion-title" class="form-input" placeholder="Enter discussion title..." required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="discussion-category">Category</label>
+                        <select id="discussion-category" class="form-select" required>
+                            <option value="">Select a category</option>
+                            <option value="general">General Discussion</option>
+                            <option value="academics">Academics</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="career">Career & Jobs</option>
+                            <option value="projects">Projects & Portfolio</option>
+                            <option value="events">Events & Meetups</option>
+                            <option value="resources">Resources & Tutorials</option>
+                            <option value="lifestyle">Student Life</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="discussion-content">Content</label>
+                        <textarea id="discussion-content" class="form-textarea" placeholder="Share your thoughts or ask your question..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Create Discussion</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button class="new-discussion-btn" onclick="openTopicModal()">
+                + Create Topic
+            </button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="topicModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Create a New Topic</h2>
+                    <button class="close-btn" onclick="closeTopicModal()">×</button>
+                </div>
+                <form id="topicForm">
+                    <div class="form-group">
+                        <label class="form-label" for="topicTitle">Topic Title</label>
+                        <input class="form-input" id="topicTitle" name="topicTitle" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="topicDescription">Topic Description</label>
+                        <textarea class="form-textarea" id="topicDescription" name="topicDescription"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="moduleSelect">Select Module</label>
+                        <select class="form-select" id="moduleSelect" name="moduleID" required>
+                            <option value="">Loading modules...</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Submit Topic</button>
+                </form>
+            </div>
+        </div>
+
+        <script src="../JS/claritasLanding.js"></script>
+    </body>
 </html>
