@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forums - Valedictorian</title>
+    <meta name="description" content="Join discussions, ask questions, and connect with students and faculty in our community forums.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <link rel="stylesheet" href="../CSS/claritas.css">
+    <base target="_blank">
+</head>
+<body class="font-display">
+    <div id="particle-bg" class="particle-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav-fixed">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <span class="nav-logo-text">Valedictorian</span>
+                </div>
+                <div class="nav-links md-visible">
+                    <a href="../HTML/Home.html" class="nav-link">Home</a>
+                    <a href="../HTML/contact.html" class="nav-link">Contact</a>
+                    <a href="../HTML/about.html" class="nav-link">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="hero-title reveal-text">
+                Community <span class="highlight-text">Forums</span>
+            </h1>
+            <p class="hero-description reveal-text">
+                Connect with fellow students, ask questions, share knowledge, and build our learning community together.
+            </p>
+            <div class="search-container reveal-text">
+                <div class="search-wrapper">
+                    <input 
+                        type="text" 
+                        id="search-input"
+                        placeholder="Search discussions..."
+                        class="search-input"
+                    >
+                    <div class="search-icon">
+                        <svg class="icon-size" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="stats-container reveal-text">
+                <div class="stat-item">
+                    <div class="stat-number">2,847</div>
+                    <div class="stat-label">Active Members</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,293</div>
+                    <div class="stat-label">Discussions</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8,456</div>
+                    <div class="stat-label">Posts</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Forum Categories -->
+    <section class="forum-section">
+        <div class="container">
+            <h2 class="section-title text-center reveal-text">Browse Categories</h2>
+            <div class="categories-grid" id="categories-grid">
+            </div>
+        </div>
+    </section>
+
+    <section class="discussions-section">
+        <div class="container">
+            <div class="discussions-header reveal-text">
+                <h2 class="section-title">Recent Discussions</h2>
+                <button class="new-discussion-btn" onclick="openNewDiscussionModal()">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    New Discussion
+                </button>
+            </div>
+            <div class="discussion-list" id="discussion-list">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <div class="footer-logo">
+                <span class="footer-logo-text">Valedictorian</span>
+            </div>
+            <p class="footer-description">
+                Empowering Excellence, Simplifying Success.
+            </p>
+            <div class="footer-copyright">
+                <p>&copy; 2025 BelgiumCampus ITversity. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="new-discussion-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Start New Discussion</h3>
+                <button class="close-btn" onclick="closeNewDiscussionModal()">&times;</button>
+            </div>
+            <form id="new-discussion-form">
+                <div class="form-group">
+                    <label class="form-label" for="discussion-title">Title</label>
+                    <input type="text" id="discussion-title" class="form-input" placeholder="Enter discussion title..." required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="discussion-category">Category</label>
+                    <select id="discussion-category" class="form-select" required>
+                        <option value="">Select a category</option>
+                        <option value="general">General Discussion</option>
+                        <option value="academics">Academics</option>
+                        <option value="technical">Technical Support</option>
+                        <option value="career">Career & Jobs</option>
+                        <option value="projects">Projects & Portfolio</option>
+                        <option value="events">Events & Meetups</option>
+                        <option value="resources">Resources & Tutorials</option>
+                        <option value="lifestyle">Student Life</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="discussion-content">Content</label>
+                    <textarea id="discussion-content" class="form-textarea" placeholder="Share your thoughts or ask your question..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Create Discussion</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../JS/claritasLanding.js"></script>
+</body>
+</html>
