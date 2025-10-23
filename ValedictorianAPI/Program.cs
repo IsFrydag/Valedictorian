@@ -16,8 +16,8 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
                 "http://localhost:4200", // Angular
-                "http://127.0.0.1:5500"  // Local test client
-            )
+                "http://127.0.0.1:5500",
+                "http://localhost:5500")
             .AllowAnyMethod()
             .AllowAnyHeader();
     });

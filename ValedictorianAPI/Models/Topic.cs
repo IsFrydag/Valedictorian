@@ -20,6 +20,6 @@ namespace ValedictorianAPI.Models
         [StringLength(1000)]
         public string? TopicDescription { get; set; }
 
-        public ICollection<TopicSubscription> Subscriptions { get; set; }
+        public ICollection<TopicSubscription>? Subscriptions { get; set; } = new List<TopicSubscription>();
     }
 }

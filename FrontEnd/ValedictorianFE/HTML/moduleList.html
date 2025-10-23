@@ -1,253 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modules</title>
-    
-    <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/moduleList.css">
-</head>
-<body>
-    
-    <div id="particle-bg" class="particle-bg"></div>
-    <nav class="nav-fixed">
-        <div class="container">
-            <div class="nav-content">
-                <div class="nav-logo">
-                    <span class="nav-logo-text">Valedictorian</span>
-                </div>
-                <div class="nav-links md-visible">
-                    <a href="../HTML/Home.html" class="nav-link">Home</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-    
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                
-                <div class="flex items-center space-x-3">
-                    
-                    <div>
-                        <h1 class="text-white font-bold text-lg">Valedictorian</h1>
-                        <p class="text-white/70 text-xs">BelgiumCampus</p>
-                    </div>
-                </div>
-                                
-                <div class="flex-1 max-w-md mx-8">
-                    <div class="relative">
-                        <input 
-                            type="text" 
-                            id="searchInput"
-                            placeholder="Search modules..."
-                            class="w-full px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:bg-white/30 focus:border-white/50 focus:outline-none transition-all"
-                        >
-                        <svg class="absolute right-3 top-2.5 h-5 w-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                        </svg>
-                    </div>
-                </div>
-                
-                <div class="relative">
-                    <button id="profileBtn" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-white/20 transition-colors">
-                        <img src="../assets/images/profile-avatar.jpg" alt="Profile" class="h-10 w-10 rounded-full border-2 border-white/30">
-                        <div class="hidden sm:block text-right">
-                            <p class="text-white font-medium text-sm">Name Surname</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Modules</title>
+        
+        <link href="https://unpkg.com/splitting@1.0.6/dist/splitting.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="../CSS/moduleList.css">
+    </head>
+    <body>
+        
+        <div id="particle-bg" class="particle-bg"></div>
+
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+
+                    <!-- Left: Logo -->
+                    <div class="flex items-center space-x-3">
+                        <div>
+                            <h1 class="text-white font-bold text-lg">Valedictorian</h1>
+                            <p class="text-white/70 text-xs">BelgiumCampus</p>
                         </div>
-                    </button>
-                    
-                    <div id="profileDropdown" class="profile-dropdown absolute right-0 mt-2 w-64 rounded-lg shadow-lg py-2">
-                        <div class="px-4 py-3 border-b border-gray-200">
-                            <div class="flex items-center space-x-3">
-                                <img src="../assets/images/profile-avatar.jpg" alt="Profile" class="h-12 w-12 rounded-full">
-                                <div>
-                                    <p class="font-semibold text-gray-800">Alex Student</p>
-                                    <p class="text-sm text-gray-600">alex.student@itversity.be</p>
+                    </div>
+
+                    <!-- Center: Search -->
+                    <div class="flex-1 max-w-md mx-8">
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                id="searchInput"
+                                placeholder="Search modules..."
+                                class="w-full px-4 py-2 bg-white/20 border border-white/30 rounded-lg text-white placeholder-white/70 focus:bg-white/30 focus:border-white/50 focus:outline-none transition-all"
+                            >
+                            <svg class="absolute right-3 top-2.5 h-5 w-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Right: Home button + Profile -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Home Button -->
+                        <a href="../HTML/Home.html" 
+                        class="text-white font-medium px-4 py-2 rounded-lg transition-colors home-link">
+                            Home
+                        </a>
+
+                        <!-- Profile Dropdown -->
+                        <div class="relative" onclick="window.location.href='../HTML/profile.html'">
+                            <button id="profileBtn" class="flex items-center space-x-3 p-2 rounded-lg hover:bg-white/20 transition-colors">
+                                <img src="../assets/images/profile-avatar.jpg" alt="Profile" class="h-10 w-10 rounded-full border-2 border-white/30">
+                                <div class="hidden sm:block text-right">
+                                    <p id="profileName" class="text-white font-medium text-sm">Name Surname</p>
                                 </div>
-                            </div>
-                        </div>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">Profile Settings</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">Notifications</a>
-                        <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors">Academic Calendar</a>
-                        <div class="border-t border-gray-200 mt-2 pt-2">
-                            <a href="#" class="block px-4 py-2 text-red-600 hover:bg-red-50 transition-colors">Sign Out</a>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </nav>
-    
-    <main class="pt-20 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <section class="text-center mb-12">
-                <h1 class="hero-title text-5xl md:text-6xl font-bold mb-4" data-splitting>
-                    IT Versity Modules
-                </h1>
-                <p class="text-white/80 text-xl mb-8 max-w-2xl mx-auto">
-                    Students can manage their academic journey with our comprehensive module management system...
-                </p>
+        </nav>
+        
+        <main class="pt-20 pb-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 
-                <div class="flex flex-wrap justify-center gap-6 mb-8">
-
-                    <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 basis-1/2 md:basis-1/4">
-                        <div class="stats-counter text-3xl font-bold" data-count="24">0</div>
-                        <p class="text-white/70 text-sm">Total Modules</p>
-                    </div>
-
-                </div>
-                
-                <button id="addModuleBtn" class="btn-primary px-8 py-3 rounded-lg text-white font-semibold text-lg shadow-lg">
-                    <svg class="inline h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                    </svg>
-                    Add New Module
-                </button>
-            </section>
-            
-            
-            <section class="mb-8">
-                <div class="flex flex-wrap gap-3 justify-center">
-                    <button class="filter-chip active px-4 py-2 rounded-full text-sm font-medium" data-filter="all">
-                        All Modules
-                    </button>
-                    <button class="filter-chip px-4 py-2 rounded-full text-sm font-medium" data-filter="hiddenModules">
-                        Hidden Modules
-                    </button>
+                <section class="text-center mb-12">
+                    <h1 class="hero-title text-5xl md:text-6xl font-bold mb-4" data-splitting>
+                        Modules
+                    </h1>
+                    <p class="text-white/80 text-xl mb-8 max-w-2xl mx-auto">
+                        Students can manage their academic journey with our comprehensive module management system...
+                    </p>
                     
-                </div>
-            </section>
-            
-            
-            <section id="modulesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                <!-- Modules will be dynamically loaded here -->
-            </section>
-            
-            
-            <div id="emptyState" class="empty-state rounded-lg p-12 text-center hidden">
-                <svg class="mx-auto h-16 w-16 text-white/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-                <h3 class="text-white text-xl font-semibold mb-2">No modules found</h3>
-                <p class="text-white/70 mb-4">Get started by adding your first module to the system</p>
-                <button class="btn-primary px-6 py-2 rounded-lg text-white font-medium" onclick="document.getElementById('addModuleBtn').click()">
-                    Add Module
-                </button>
-            </div>
-        </div>
-    </main>
-    
-    
-    <div id="addModuleModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center hidden">
-        <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 transform scale-95 opacity-0 transition-all duration-300">
-            <div class="p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-800">Add New Module</h2>
-                    <button id="closeModal" class="text-gray-400 hover:text-gray-600 transition-colors">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <div class="flex flex-wrap justify-center gap-6 mb-8">
+                        <div class="bg-white/10 backdrop-blur-md rounded-lg p-4 basis-1/2 md:basis-1/4">
+                            <div class="stats-counter text-3xl font-bold" data-count="24">0</div>
+                            <p class="text-white/70 text-sm">Total Modules</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Only visible for Admins -->
+                    <button id="addModuleBtn" class="btn-primary px-8 py-3 rounded-lg text-white font-semibold text-lg shadow-lg hidden">
+                        <svg class="inline h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                         </svg>
+                        Add New Module
+                    </button>
+                </section>
+                
+                <section class="mb-8">
+                    <div class="flex flex-wrap gap-3 justify-center">
+                        <button class="filter-chip active px-4 py-2 rounded-full text-sm font-medium" data-filter="all">
+                            All Modules
+                        </button>
+                        <button id="hiddenModulesBtn" class="filter-chip px-4 py-2 rounded-full text-sm font-medium" data-filter="hiddenModules">
+                            Hidden Modules
+                        </button>
+                    </div>
+                </section>
+                
+                <section id="modulesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <!-- Modules will be dynamically loaded here -->
+                </section>
+                
+                <div id="emptyState" class="empty-state rounded-lg p-12 text-center hidden">
+                    <svg class="mx-auto h-16 w-16 text-white/50 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    <h3 class="text-white text-xl font-semibold mb-2">No modules found</h3>
+                    <p class="text-white/70 mb-4">Get started by adding your first module to the system</p>
+                    <button id="emptyAddBtn" class="btn-primary px-6 py-2 rounded-lg text-white font-medium hidden" 
+                            onclick="document.getElementById('addModuleBtn').click()">
+                        Add Module
                     </button>
                 </div>
-                
-                <form id="addModuleForm" class="space-y-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Module Name *</label>
-                        <input 
-                            type="text" 
-                            id="moduleName"
-                            class="form-input w-full px-4 py-3 rounded-lg border-gray-300 focus:outline-none"
-                            placeholder="Enter module name"
-                            required
-                        >
-                        <div id="nameError" class="text-red-500 text-sm mt-1 hidden"></div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Description *</label>
-                        <textarea 
-                            id="moduleDescription"
-                            rows="3"
-                            class="form-input w-full px-4 py-3 rounded-lg border-gray-300 focus:outline-none"
-                            placeholder="Enter module description"
-                            required
-                        ></textarea>
-                        <div id="descriptionError" class="text-red-500 text-sm mt-1 hidden"></div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
-                        <select id="moduleCategory" class="form-input w-full px-4 py-3 rounded-lg border-gray-300 focus:outline-none">
-                            <option value="programming">Programming</option>
-                            <option value="data-science">Data Science</option>
-                            <option value="cybersecurity">Cybersecurity</option>
-                            <option value="software-engineering">Software Engineering</option>
-                            <option value="ai">Artificial Intelligence</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Difficulty Level</label>
-                        <select id="moduleDifficulty" class="form-input w-full px-4 py-3 rounded-lg border-gray-300 focus:outline-none">
-                            <option value="beginner">Beginner</option>
-                            <option value="intermediate">Intermediate</option>
-                            <option value="advanced">Advanced</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Module Image (Optional)</label>
-                        <div id="imageUpload" class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-gray-400 transition-colors">
-                            <svg class="mx-auto h-12 w-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                            </svg>
-                            <p class="text-gray-600">Click to upload or drag and drop</p>
-                            <p class="text-gray-400 text-sm">PNG, JPG up to 5MB</p>
-                            <input type="file" id="moduleImage" accept="image/*" class="hidden">
-                        </div>
-                        <div id="imagePreview" class="mt-4 hidden">
-                            <img id="previewImg" class="w-full h-32 object-cover rounded-lg">
-                        </div>
-                    </div>
-                    
-                    <div class="flex space-x-3 pt-4">
-                        <button type="button" id="cancelBtn" class="flex-1 px-4 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors">
-                            Cancel
-                        </button>
-                        <button type="submit" id="submitBtn" class="flex-1 btn-primary px-4 py-3 rounded-lg text-white font-medium">
-                            <span id="submitText">Add Module</span>
-                            <svg id="submitLoader" class="hidden animate-spin h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24">
-                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </div>
+        </main>
+        
+        <div id="addModuleModal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 transform scale-95 opacity-0 transition-all duration-300">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">Add New Module</h2>
+                        <button id="closeModal" class="text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </button>
                     </div>
-                </form>
+                    
+                    <form id="addModuleForm" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Module Name *</label>
+                            <input type="text" id="moduleName" 
+                                class="form-input w-full px-4 py-3 rounded-lg border-gray-300 focus:outline-none" 
+                                placeholder="Enter module name" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Module Description *</label>
+                            <textarea id="moduleDescription" 
+                                    class="form-input w-full px-4 py-3 rounded-lg border-gray-300 focus:outline-none" 
+                                    placeholder="Enter module description" rows="4" required></textarea>
+                        </div>
+
+                        <div class="flex justify-end space-x-3">
+                            <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+                            <button type="submit" class="btn-primary">Add Module</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    
-    <!-- Footer -->
-    <footer class="bg-white/10 backdrop-blur-md border-t border-white/20 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="flex items-center justify-center space-x-3 mb-4">
-                <span class="text-white font-semibold">A Belgium Campus Learning Platform</span>
+        
+        <!-- Footer -->
+        <footer class="bg-white/10 backdrop-blur-md border-t border-white/20 py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <span class="text-white font-semibold">A Belgium Campus Learning Platform</span>
+                </div>
+                <p class="text-white/70 text-sm">
+                    © 2025. Empowering Excellence, Simplifying Success.
+                </p>
             </div>
-            <p class="text-white/70 text-sm">
-                © 2025. Empowering Excellence, Simplifying Success.
-            </p>
-        </div>
-    </footer>
+        </footer>
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-    <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
-    <script src="../JS/moduleList.js"></script>
-</body>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+        <script src="https://unpkg.com/splitting@1.0.6/dist/splitting.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.0/echarts.min.js"></script>
+        <script src="../JS/moduleList.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const userRole = localStorage.getItem("userRole");
+                const addBtn = document.getElementById("addModuleBtn");
+                const emptyAddBtn = document.getElementById("emptyAddBtn");
+
+                if (userRole === "Admin") {
+                    addBtn.classList.remove("hidden");
+                    emptyAddBtn.classList.remove("hidden");
+                }
+            });
+        </script>
+    </body>
 </html>

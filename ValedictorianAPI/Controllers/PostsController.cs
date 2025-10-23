@@ -236,32 +236,26 @@ namespace ValedictorianAPI.Controllers
 
 
         [HttpDelete("DeletePost/{id}")]
-        public async Task<IActionResult> DeletePost(int id)
+        public async Task<IActionResult> DeletePost(int id, [FromQuery] int userId)
         {
             try
             {
-                // Get the current user's ID from the JWT token
-                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-                if (string.IsNullOrEmpty(userId))
-                    return Unauthorized(new { message = "User ID not found in token." });
-
                 var post = await _context.Posts.FindAsync(id);
                 if (post == null)
-                    return NotFound(new { message = "Post not found." });
+                    return NotFound(new { message = "Post not found" });
 
-                // Only allow delete if the logged-in user owns the post
-                if (post.UserID.ToString() != userId)
-                    return Forbid();
+                // Check ownership
+                if (post.UserID != userId)
+                    return Unauthorized(new { message = "You can only delete your own posts" });
 
-                // Delete any replies if needed
+                // Remove replies (optional, if you have them)
                 var replies = _context.Replies.Where(r => r.PostID == id);
                 _context.Replies.RemoveRange(replies);
 
                 _context.Posts.Remove(post);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { message = "Post deleted successfully." });
+                return Ok(new { message = "Post deleted successfully" });
             }
             catch (Exception ex)
             {
@@ -270,24 +264,6 @@ namespace ValedictorianAPI.Controllers
             }
         }
 
-        [HttpDelete("DeletePost/{id}")]
-        public async Task<IActionResult> DeletePost(int id, [FromQuery] int userId)
-        {
-            var post = await _context.Posts.FindAsync(id);
 
-            if (post == null)
-                return NotFound("Post not found");
-
-            // Check if the requesting user is the owner
-            if (post.UserID != userId)
-                return Unauthorized("You can only delete your own posts");
-
-            _context.Posts.Remove(post);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { message = "Post deleted successfully" });
-        }
-
-        
     }
 }
