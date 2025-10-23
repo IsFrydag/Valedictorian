@@ -30,7 +30,10 @@ namespace ValedictorianAPI.Controllers
         [HttpGet("All")]
         public async Task<IActionResult> GetAllSessions()
         {
-            var sessions = await _context.TutorSessions.ToListAsync();
+            var sessions = await _context.TutorSessions
+                .OrderBy(s => s.RequestedDate)
+                .ToListAsync();
+
             return Ok(sessions);
         }
 
