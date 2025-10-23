@@ -40,13 +40,13 @@
                     </button>
                 </div>
 
-                <h1 class="name">Heiner<span class="highlight-text"> Freitag</span></h1>
+                <h1 id="profileFullName" class="name">Loading<span class="highlight-text">...</span></h1>
 
                 <div class="statusTabs">
-                    <span class="statusRed">Student</span>
+                    <span id="profileRole" class="statusRed">Role</span>
                 </div>
 
-                <div class="infoGrid">
+                <div class="infoGrid"> 
                     <div>
                         <p class="label">Course / Major</p>
                         <p class="infoTitle">Computer Science</p>
@@ -69,30 +69,6 @@
                         </p>
                     </div>
                 </div>
-
-                <div class="modulesSection">
-                    <p class="label">Current Modules (Semester 6)</p>
-
-                    <div class="modulesGrid">
-                        <div class="moduleCard yellow">
-                            <p class="moduleTitle">Advanced Algorithms (CS301)</p>
-                            <p class="moduleSub">Lecturer: Dr. J. Chen</p>
-                        </div>
-                        <div class="moduleCard red">
-                            <p class="moduleTitle">Neural Networks & Deep Learning (AI305)</p>
-                            <p class="moduleSub">Lecturer: Prof. E. Khan</p>
-                        </div>
-                        <div class="moduleCard yellow">
-                            <p class="moduleTitle">Database Systems II (DB302)</p>
-                            <p class="moduleSub">Tutor: L. Rodriguez</p>
-                        </div>
-                        <div class="moduleCard red">
-                            <p class="moduleTitle">Software Engineering Practice (SE301)</p>
-                            <p class="moduleSub">Lecturer: Dr. K. Gupta</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <!-- Edit Modal -->
@@ -117,6 +93,16 @@
                     <div class="formGroup">
                         <label for="pfpFile">Upload Profile Picture</label>
                         <input type="file" id="pfpFile" accept="image/*">
+                    </div>
+
+                    <div class="formGroup">
+                        <label for="courseInput">Course / Major</label>
+                        <input type="text" id="courseInput" placeholder="e.g., Computer Science">
+                        </div>
+
+                        <div class="formGroup">
+                        <label for="focusInput">Focus / Specialization</label>
+                        <input type="text" id="focusInput" placeholder="e.g., Software Engineering">
                     </div>
 
                     <div class="formGroup">

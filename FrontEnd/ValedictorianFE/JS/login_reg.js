@@ -41,26 +41,31 @@ registerForm.addEventListener('submit', async (e) => {
         domain = '@tutor.belgiumcampus.ac.za';
         userType = 'Tutor';
     } else if (type === 'optAdmin') {
-        alert('Admin registration not supported yet.');
-        return;
+        domain = '@admin.belgiumcampus.ac.za';
+        userType = 'Admin';
     } else {
         alert('Invalid account type.');
         return;
     }
 
-    // Email domain validation
+    // ✅ Email domain validation
     if (!email.endsWith(domain)) {
         alert(`Email must end with ${domain}`);
         return;
     }
 
-    // Extract 6-digit ID from email (e.g. 123456@student.belgiumcampus.ac.za)
-    const match = email.match(/^(\d{6})@/);
-    if (!match) {
-        alert('Email must begin with a 6-digit ID.');
-        return;
+    // ✅ Only enforce 6-digit rule for Students and Tutors
+    if (userType !== 'Admin') {
+        const match = email.match(/^(\d{6})@/);
+        if (!match) {
+            alert('Email must begin with a 6-digit ID (e.g., 123456@student.belgiumcampus.ac.za).');
+            return;
+        }
+        userID = match[1];
+    } else {
+        // Admins don't need a 6-digit prefix
+        userID = 'ADMIN';
     }
-    userID = match[1];
 
     const body = {
         userName: name,

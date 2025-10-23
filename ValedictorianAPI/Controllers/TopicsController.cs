@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ValedictorianAPI.Models;
 
@@ -15,6 +16,7 @@ namespace ValedictorianAPI.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("AddTopic")]
         public async Task<IActionResult> AddTopic([FromBody] Topic dto)
         {
