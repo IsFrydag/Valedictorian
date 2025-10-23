@@ -94,7 +94,19 @@ function debounce(func, wait) {
 document.addEventListener('DOMContentLoaded', () => {
     initializeAnimations();
     initializeParticles();
+
+    // ✅ Role-based button visibility
+    const userRole = localStorage.getItem('userRole');
+    const addTopicBtn = document.getElementById('addTopicBtn');
+    if (addTopicBtn) {
+        if (userRole !== 'Admin' && userRole !== 'Tutor') {
+            addTopicBtn.style.display = 'none';
+        } else {
+            addTopicBtn.style.display = 'inline-block';
+        }
+    }
 });
+
 // Topics API Section (dynamic loading)
 let allTopics = []; // Global for search if needed
 
@@ -124,7 +136,7 @@ async function loadTopics(topicList) {
         const topics = await apiRequest('/Topics/GetTopics', 'GET');
         allTopics = topics; // Store for search if needed
         topicList.innerHTML = topics.map(t => `
-            <div class="category-card" onclick="navigateToTopic(${t.topicID})"> <!-- Add onclick with topicID -->
+            <div class="category-card" onclick="navigateToTopic(${t.topicID})">
                 <div class="category-header">
                     <div class="category-icon" style="background: #5DADE2">
                         <span style="font-size: 1.5rem;">📚</span>
@@ -135,13 +147,15 @@ async function loadTopics(topicList) {
                 </div>
                 <p class="category-description">${t.topicDescription || ''}</p>
                 <div class="category-stats">
-                    <div class="stat-item">
-                        <!-- Add if needed -->
-                    </div>
+                    <div class="stat-item"></div>
                     <div class="stat-item">
                         <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 
+                                9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 
+                                0-8.268-2.943-9.542-7z"></path>
                         </svg>
                         ${t.posts || 0} posts
                     </div>
@@ -165,11 +179,9 @@ function closeTopicModal() {
     document.getElementById('topicForm').reset();
 }
 
-// Make functions global for HTML onclick
 window.openTopicModal = openTopicModal;
 window.closeTopicModal = closeTopicModal;
 
-// Setup topics on load
 document.addEventListener('DOMContentLoaded', async () => {
     const topicList = document.querySelector('#categories-grid');
     const modal = document.querySelector('#topicModal');

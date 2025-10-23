@@ -16,7 +16,6 @@ namespace ValedictorianAPI.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("AddTopic")]
         public async Task<IActionResult> AddTopic([FromBody] Topic dto)
         {

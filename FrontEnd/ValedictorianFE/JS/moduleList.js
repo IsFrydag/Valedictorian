@@ -31,6 +31,14 @@ class ModuleListManager {
         this.initializeTextAnimations();
         this.initializeParticles();
         this.populateProfileName();
+
+        // Always show Add Module button (ignore roles)
+        this.addModuleBtn?.classList.remove('hidden');
+        this.addModuleBtn?.removeAttribute('disabled');
+        this.addModuleBtn.style.display = 'block';
+        this.addModuleBtn.style.visibility = 'visible';
+        this.addModuleBtn.style.opacity = '1';
+        console.log("✅ Add Module button always visible");
     }
 
     cacheDOM() {

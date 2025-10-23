@@ -83,13 +83,14 @@
                     </div>
                     
                     <!-- Only visible for Admins -->
-                    <button id="addModuleBtn" class="btn-primary px-8 py-3 rounded-lg text-white font-semibold text-lg shadow-lg hidden">
-                        <svg class="inline h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        Add New Module
-                    </button>
+                    <div class="flex justify-center mt-6">
+                        <button
+                            id="addModuleBtn"
+                            style="display: block !important; visibility: visible !important; opacity: 1 !important;"
+                            class="bg-blue-600 text-white font-semibold px-5 py-2 rounded-lg shadow-lg hover:bg-blue-700 transition-all duration-200">
+                            + Add New Module
+                        </button>
+                    </div>
                 </section>
                 
                 <section class="mb-8">
@@ -179,15 +180,21 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", () => {
-                const userRole = localStorage.getItem("userRole");
-                const addBtn = document.getElementById("addModuleBtn");
-                const emptyAddBtn = document.getElementById("emptyAddBtn");
+            // Try both keys (in case login uses userType or userRole)
+            const userRole = localStorage.getItem("userRole") || localStorage.getItem("userType");
+            const addBtn = document.getElementById("addModuleBtn");
+            const emptyAddBtn = document.getElementById("emptyAddBtn");
 
-                if (userRole === "Admin") {
-                    addBtn.classList.remove("hidden");
-                    emptyAddBtn.classList.remove("hidden");
-                }
-            });
+            console.log("Detected userRole:", userRole); // ✅ debug
+
+            if (userRole === "Admin" || userRole === "Tutor") {
+                addBtn.classList.remove("hidden");
+                emptyAddBtn.classList.remove("hidden");
+            } else {
+                addBtn.classList.add("hidden");
+                emptyAddBtn.classList.add("hidden");
+            }
+        });
         </script>
     </body>
 </html>

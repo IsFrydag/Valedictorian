@@ -16,7 +16,6 @@ namespace ValedictorianAPI.Controllers
             _context = context;
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("AddModule")]
         public async Task<IActionResult> AddModule([FromBody] Module dto)
         {

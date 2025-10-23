@@ -138,6 +138,7 @@ loginForm.addEventListener('submit', async (e) => {
         localStorage.setItem('userName', res.userName);
         localStorage.setItem('userSurname', res.userSurname);
         localStorage.setItem('userType', res.role);
+        
 
         alert(`Welcome back, ${res.userName}!`);
         loginForm.reset();
