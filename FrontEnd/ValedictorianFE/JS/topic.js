@@ -124,6 +124,14 @@ function displayPosts(postsToDisplay) {
                         </svg>
                         <span>Save</span>
                     </div>
+                    <!-- 🔹 Delete button now always shown -->
+                    <div class="post-action delete-btn" onclick="deletePost(${post.PostID}, ${currentUser.id})">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-8V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        <span>Delete</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -244,12 +252,6 @@ async function loadTopic() {
         document.title = `r/${slug} - Valedictorian`;
         document.getElementById('topic-meta').textContent = `${topic.topicTitle} Community`;
         document.getElementById('topic-description').textContent = topic.topicDescription || 'No description available.';
-        document.getElementById('sidebar-description').textContent = topic.topicDescription || 'No description available.';
-        document.getElementById('created-stat').textContent = topic.createdAt ? `Created ${timeAgo(topic.createdAt)}` : 'Created recently'; // Match case
-        document.getElementById('members-stat').textContent = '2.4k';
-        document.getElementById('online-stat').textContent = '156';
-        document.getElementById('sidebar-members').textContent = '2.4k';
-        document.getElementById('sidebar-online').textContent = '156';
     } catch (err) {
         console.error('Error loading topic:', err);
         document.getElementById('topic-description').textContent = err.message;
@@ -325,7 +327,7 @@ function setupLoginCheck() {
     const userSurname = localStorage.getItem('userSurname') || '';
     isLoggedIn = !!userId;
     if (isLoggedIn) {
-        currentUser = { id: userId, name: `${userName} ${userSurname}`, initials: (userName[0] || '?') + (userSurname[0] || '?') };
+        currentUser = { id: parseInt(userId, 10), name: `${userName} ${userSurname}`, initials: (userName[0] || '?') + (userSurname[0] || '?') };
         document.getElementById('user-avatar').textContent = currentUser.initials;
         document.querySelector('.create-post-input').onclick = openCreatePostModal;
         document.getElementById('text-post-btn').onclick = openCreatePostModal;
@@ -368,3 +370,75 @@ window.toggleStatus = toggleStatus;
 window.viewPost = viewPost;
 window.sharePost = sharePost;
 window.savePost = savePost;
+
+async function deletePost(postId, userId) {
+    if (!confirm("🗑️ Are you sure you want to delete this post? This action cannot be undone.")) {
+        return;
+    }
+
+    try {
+        const response = await apiRequest(`/Posts/DeletePost/${postId}?userId=${userId}`, "DELETE");
+
+        if (response && response.message) {
+            alert(response.message);
+            // Refresh posts list
+            await loadPosts();
+        } else {
+            alert("Failed to delete post (no response message).");
+        }
+    } catch (error) {
+        console.error("Delete error:", error);
+        alert("Failed to delete post. You can only delete your own posts.");
+    }
+}
+
+window.deletePost = deletePost;
+
+window.addEventListener('load', async () => {
+    const subscribeBtn = document.getElementById('subscribeBtn');
+    if (!subscribeBtn) {
+        console.error('❌ Subscribe button not found even after load');
+        return;
+    }
+
+    const topicId = new URLSearchParams(window.location.search).get('topicId');
+    const userId = localStorage.getItem('userId'); // however you store it
+    if (!topicId || !userId) {
+        console.error('Missing topicId or userId');
+        return;
+    }
+
+    // Helper to check and update button state
+    async function updateSubscribeButton() {
+        try {
+        const res = await fetch(`https://localhost:7161/api/Topics/IsSubscribed/${topicId}?userId=${userId}`);
+        if (!res.ok) throw new Error('Failed to fetch subscription state');
+        const data = await res.json();
+        subscribeBtn.textContent = data.subscribed ? 'Unsubscribe' : 'Subscribe';
+        } catch (err) {
+        console.error('Failed to check subscription:', err);
+        }
+    }
+
+    subscribeBtn.addEventListener('click', async () => {
+        console.log('✅ Subscribe button clicked');
+        try {
+        const isUnsubscribing = subscribeBtn.textContent === 'Unsubscribe';
+        const endpoint = isUnsubscribing
+            ? `https://localhost:7161/api/Topics/Unsubscribe/${topicId}?userId=${userId}`
+            : `https://localhost:7161/api/Topics/Subscribe/${topicId}?userId=${userId}`;
+
+        const method = isUnsubscribing ? 'DELETE' : 'POST';
+        const res = await fetch(endpoint, { method });
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+
+        alert(isUnsubscribing ? 'Unsubscribed from topic' : 'Subscribed to topic');
+        await updateSubscribeButton();
+        } catch (err) {
+        console.error('Subscription toggle failed:', err);
+        }
+    });
+
+    // Initialize button state
+    await updateSubscribeButton();
+});

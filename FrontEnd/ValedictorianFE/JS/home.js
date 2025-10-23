@@ -176,90 +176,103 @@ function initNotificationSystem() {
     }, 30000); // Check every 30 seconds
 }
 
-// Notification Popup
-function showNotificationPopup() {
-    // Remove existing popup
-    const existingPopup = document.querySelector('.notification-popup');
-    if (existingPopup) {
-        existingPopup.remove();
-    }
-    
-    // Create popup
-    const popup = document.createElement('div');
-    popup.className = 'notification-popup';
-    popup.innerHTML = `
-        <div class="popup-header">
-            <h3>Notifications</h3>
-            <button class="close-btn">&times;</button>
-        </div>
-        <div class="popup-content">
-            <div class="notification-item">
-                <div class="notification-icon">
-                    <i class="fas fa-bullhorn"></i>
-                </div>
-                <div class="notification-text">
-                    <h4>New announcement posted</h4>
-                    <p>Check out the latest updates from your department</p>
-                    <span class="notification-time">2 hours ago</span>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notification-icon">
-                    <i class="fas fa-calendar"></i>
-                </div>
-                <div class="notification-text">
-                    <h4>Upcoming deadline</h4>
-                    <p>Assignment due tomorrow at 11:59 PM</p>
-                    <span class="notification-time">4 hours ago</span>
-                </div>
-            </div>
-            <div class="notification-item">
-                <div class="notification-icon">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="notification-text">
-                    <h4>New message received</h4>
-                    <p>You have a new message from your professor</p>
-                    <span class="notification-time">1 day ago</span>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    // Add styles
-    popup.style.cssText = `
-        position: fixed;
-        top: 90px;
-        right: 30px;
-        width: 350px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-        z-index: 1000;
-        animation: slideIn 0.3s ease-out;
-        max-height: 500px;
-        overflow-y: auto;
-    `;
-    
-    document.body.appendChild(popup);
-    
-    // Close functionality
-    const closeBtn = popup.querySelector('.close-btn');
-    closeBtn.addEventListener('click', () => {
-        popup.style.animation = 'slideOut 0.3s ease-in';
-        setTimeout(() => popup.remove(), 300);
+async function showNotificationPopup() {
+  const notificationBtn = document.getElementById("notificationBtn");
+  const existingPopup = document.querySelector(".notification-popup");
+  if (existingPopup) existingPopup.remove();
+
+  const popup = document.createElement("div");
+  popup.className = "notification-popup";
+  popup.innerHTML = `
+      <div class="popup-header">
+          <h3>Notifications</h3>
+          <button class="close-btn">&times;</button>
+      </div>
+      <div class="popup-content" id="notifications-container">
+          <p style="padding: 16px;">Loading notifications...</p>
+      </div>
+  `;
+
+  popup.style.cssText = `
+      position: fixed;
+      top: 90px;
+      right: 30px;
+      width: 350px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      z-index: 1000;
+      animation: slideIn 0.3s ease-out;
+      max-height: 500px;
+      overflow-y: auto;
+  `;
+  document.body.appendChild(popup);
+
+  // Close popup logic
+  popup.querySelector(".close-btn").addEventListener("click", () => popup.remove());
+
+  // Close on outside click
+  setTimeout(() => {
+    document.addEventListener("click", function closePopup(e) {
+      if (!popup.contains(e.target) && !notificationBtn.contains(e.target)) {
+        popup.remove();
+        document.removeEventListener("click", closePopup);
+      }
     });
-    
-    // Close on outside click
-    setTimeout(() => {
-        document.addEventListener('click', function closePopup(e) {
-            if (!popup.contains(e.target) && !notificationBtn.contains(e.target)) {
-                popup.style.animation = 'slideOut 0.3s ease-in';
-                setTimeout(() => popup.remove(), 300);
-                document.removeEventListener('click', closePopup);
-            }
-        });
-    }, 100);
+  }, 100);
+
+  // ✅ Load and display real notifications
+  const notifications = await loadNotifications();
+  displayNotifications(notifications);
+}
+
+async function loadNotifications() {
+  const userId = localStorage.getItem("userId");
+  const container = document.getElementById("notifications-container");
+
+  if (!userId) {
+    container.innerHTML = `<p style="padding: 16px; color: red;">You must be logged in to see notifications.</p>`;
+    return [];
+  }
+
+  try {
+    const res = await fetch(`https://localhost:7161/api/Notifications/User/${userId}`);
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+
+    const data = await res.json();
+    console.log("✅ Notifications loaded:", data);
+    return data;
+  } catch (err) {
+    console.error("❌ Failed to load notifications:", err);
+    container.innerHTML = `<p style="padding: 16px; color: red;">Failed to load notifications</p>`;
+    return [];
+  }
+}
+
+function displayNotifications(notifications) {
+  const container = document.getElementById("notifications-container");
+  if (!container) return;
+
+  if (!notifications || notifications.length === 0) {
+    container.innerHTML = `<p style="padding: 16px; color: #555;">No new notifications</p>`;
+    return;
+  }
+
+  container.innerHTML = notifications
+    .map(
+      (n) => `
+      <div class="notification-item">
+          <div class="notification-icon">
+              <i class="fas fa-bell"></i>
+          </div>
+          <div class="notification-text">
+              <h4>${n.notificationType || "Update"}</h4>
+              <p>${n.notificationText || "New activity"}</p>
+              <span class="notification-time">${new Date(n.notificationDate).toLocaleString()}</span>
+          </div>
+      </div>`
+    )
+    .join("");
 }
 
 // Announcement Animations
@@ -581,4 +594,73 @@ if (typeof module !== 'undefined' && module.exports) {
         showMessage,
         debounce
     };
+}
+
+function displayNotifications(notifications) {
+  const container = document.getElementById("notifications-container");
+  if (!container) return;
+
+  if (!notifications || notifications.length === 0) {
+    container.innerHTML = `<p style="padding: 16px;">No new notifications</p>`;
+    return;
+  }
+
+  container.innerHTML = notifications
+    .map(
+      (n) => `
+      <div class="notification-item">
+          <div class="notification-icon">
+              <i class="fas fa-bell"></i>
+          </div>
+          <div class="notification-text">
+              <h4>${n.notificationType || "Update"}</h4>
+              <p>${n.notificationText || "New activity"}</p>  <!-- Changed to n.notificationText -->
+              <span class="notification-time">${new Date(n.notificationDate).toLocaleString()}</span>
+          </div>
+      </div>
+    `
+    )
+    .join("");
+}
+
+async function loadNotifications() {
+  try {
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      console.error("No userId found in localStorage");
+      return [];
+    }
+
+    const res = await fetch(`https://localhost:7161/api/Notifications/User/${userId}`);
+    if (!res.ok) throw new Error(`Server error: ${res.status}`);
+
+    const data = await res.json();
+    console.log("✅ Notifications loaded:", data);
+    return data;
+
+  } catch (err) {
+    console.error("❌ Failed to load notifications:", err);
+    return [];
+  }
+}
+
+function renderNotifications(notifications) {
+  const container = document.getElementById("notification-list");
+  container.innerHTML = ""; // clear old notifications
+
+  if (!notifications || notifications.length === 0) {
+    container.innerHTML = "<p class='text-gray-500'>No notifications yet.</p>";
+    return;
+  }
+
+  notifications.forEach(n => {
+    const item = document.createElement("div");
+    item.className = "p-2 border-b border-gray-200";
+    item.innerHTML = `
+      <p class="font-semibold">${n.notificationType}</p>
+      <p class="text-sm text-gray-600">${n.notificationText}</p>
+      <p class="text-xs text-gray-400">${new Date(n.notificationDate).toLocaleString()}</p>
+    `;
+    container.appendChild(item);
+  });
 }

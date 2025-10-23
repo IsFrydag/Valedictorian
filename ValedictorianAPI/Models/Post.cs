@@ -31,6 +31,8 @@ namespace ValedictorianAPI.Models
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Added for timing
 
+        public Topic? Topic { get; set; }
+
         // Navigation property to UserModel
         [ForeignKey(nameof(UserID))]
         public virtual UserModel User { get; set; } // Virtual for lazy loading if enabled

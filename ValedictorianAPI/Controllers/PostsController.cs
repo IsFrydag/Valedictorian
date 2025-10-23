@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using ValedictorianAPI.Models;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ValedictorianAPI.Controllers
 {
@@ -37,7 +39,6 @@ namespace ValedictorianAPI.Controllers
 
             public int? Upvotes { get; set; }
 
-            // Optional: allows frontend to send a custom timestamp, otherwise backend sets it
             public DateTime? CreatedAt { get; set; }
         }
 
@@ -56,15 +57,45 @@ namespace ValedictorianAPI.Controllers
                 Status = dto.Status,
                 PostReplies = dto.PostReplies,
                 Upvotes = dto.Upvotes ?? 0,
-                CreatedAt = dto.CreatedAt ?? DateTime.UtcNow // set automatically if not provided
+                CreatedAt = dto.CreatedAt ?? DateTime.UtcNow
             };
 
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
 
+            // ✅ Get the author's name
+            var author = await _context.Users
+                .Where(u => u.UserID == dto.UserID)
+                .Select(u => u.UserName + " " + u.UserSurname)
+                .FirstOrDefaultAsync();
+
+            // ✅ Find all topic subscribers except the author
+            var subscribers = await _context.TopicSubscriptions
+                .Where(s => s.TopicID == dto.TopicID && s.UserID != dto.UserID)
+                .Select(s => s.UserID)
+                .ToListAsync();
+
+            if (subscribers.Any())
+            {
+                var topic = await _context.Topics.FindAsync(dto.TopicID);
+                if (topic != null)
+                {
+                    var notifications = subscribers.Select(uid => new Notification
+                    {
+                        UserID = uid,
+                        NotificationType = "NewPost",
+                        NotificationText = $"New post from {author} in topic '{topic.TopicTitle}'",
+                        NotificationDate = DateTime.UtcNow
+                    }).ToList();
+
+                    _context.Notifications.AddRange(notifications);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
             return Ok(new
             {
-                Message = "Post added successfully.",
+                Message = "Post added successfully and notifications sent.",
                 post.PostID,
                 post.CreatedAt
             });
@@ -139,5 +170,124 @@ namespace ValedictorianAPI.Controllers
                 return StatusCode(500, new { Message = "Internal server error", Details = ex.Message });
             }
         }
+
+        [HttpGet("GetPost/{id}")]
+        public async Task<IActionResult> GetPost(int id)
+        {
+            try
+            {
+                var post = await _context.Posts
+                    .Include(p => p.User)
+                    .Include(p => p.Topic)
+                    .Where(p => p.PostID == id)
+                    .Select(p => new
+                    {
+                        p.PostID,
+                        p.TopicID,
+                        p.PostName,
+                        p.PostBody,
+                        p.Status,
+                        p.PostReplies,
+                        p.Upvotes,
+                        p.CreatedAt,
+                        AuthorName = p.User != null
+                            ? p.User.UserName + " " + p.User.UserSurname
+                            : "Unknown",
+                        AuthorInitials = p.User != null
+                            ? (p.User.UserName.Substring(0, 1) + p.User.UserSurname.Substring(0, 1)).ToUpper()
+                            : "??",
+                        TopicTitle = p.Topic != null ? p.Topic.TopicTitle : "Unknown"
+                    })
+                    .FirstOrDefaultAsync();
+
+                if (post == null)
+                    return NotFound(new { Message = "Post not found" });
+
+                return Ok(post);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "Internal server error", Details = ex.Message });
+            }
+        }
+
+        [HttpPost("UpvotePost/{id}")]
+        public async Task<IActionResult> UpvotePost(int id, [FromBody] VoteRequest request)
+        {
+            var post = await _context.Posts.FindAsync(id);
+            if (post == null)
+                return NotFound(new { Message = "Post not found." });
+
+            if (request.Direction == "down")
+                post.Upvotes = (post.Upvotes ?? 0) - 1;
+            else
+                post.Upvotes = (post.Upvotes ?? 0) + 1;
+
+            _context.Posts.Update(post);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { post.PostID, post.Upvotes });
+        }
+
+        public class VoteRequest
+        {
+            public string Direction { get; set; }
+        }
+
+
+        [HttpDelete("DeletePost/{id}")]
+        public async Task<IActionResult> DeletePost(int id)
+        {
+            try
+            {
+                // Get the current user's ID from the JWT token
+                var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                if (string.IsNullOrEmpty(userId))
+                    return Unauthorized(new { message = "User ID not found in token." });
+
+                var post = await _context.Posts.FindAsync(id);
+                if (post == null)
+                    return NotFound(new { message = "Post not found." });
+
+                // Only allow delete if the logged-in user owns the post
+                if (post.UserID.ToString() != userId)
+                    return Forbid();
+
+                // Delete any replies if needed
+                var replies = _context.Replies.Where(r => r.PostID == id);
+                _context.Replies.RemoveRange(replies);
+
+                _context.Posts.Remove(post);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = "Post deleted successfully." });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting post: {ex.Message}");
+                return StatusCode(500, new { message = "Error deleting post." });
+            }
+        }
+
+        [HttpDelete("DeletePost/{id}")]
+        public async Task<IActionResult> DeletePost(int id, [FromQuery] int userId)
+        {
+            var post = await _context.Posts.FindAsync(id);
+
+            if (post == null)
+                return NotFound("Post not found");
+
+            // Check if the requesting user is the owner
+            if (post.UserID != userId)
+                return Unauthorized("You can only delete your own posts");
+
+            _context.Posts.Remove(post);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Post deleted successfully" });
+        }
+
+        
     }
 }

@@ -84,5 +84,34 @@ namespace ValedictorianAPI.Controllers
 
             return Ok(new { Message = "Topic deleted successfully." });
         }
+
+        [HttpPost("Subscribe/{topicId}")]
+        public async Task<IActionResult> Subscribe(int topicId, [FromQuery] int userId)
+        {
+            var sub = new TopicSubscription { TopicID = topicId, UserID = userId };
+            _context.TopicSubscriptions.Add(sub);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Subscribed successfully" });
+        }
+
+        [HttpDelete("Unsubscribe/{topicId}")]
+        public async Task<IActionResult> Unsubscribe(int topicId, [FromQuery] int userId)
+        {
+            var sub = await _context.TopicSubscriptions
+                .FirstOrDefaultAsync(s => s.TopicID == topicId && s.UserID == userId);
+            if (sub == null) return NotFound(new { message = "Subscription not found" });
+
+            _context.TopicSubscriptions.Remove(sub);
+            await _context.SaveChangesAsync();
+            return Ok(new { message = "Unsubscribed successfully" });
+        }
+
+        [HttpGet("IsSubscribed/{topicId}")]
+        public async Task<IActionResult> IsSubscribed(int topicId, [FromQuery] int userId)
+        {
+            bool isSub = await _context.TopicSubscriptions
+                .AnyAsync(s => s.TopicID == topicId && s.UserID == userId);
+            return Ok(new { subscribed = isSub });
+        }
     }
 }

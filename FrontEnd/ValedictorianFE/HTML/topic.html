@@ -21,9 +21,9 @@
                     <span class="nav-logo-text">Valedictorian</span>
                 </div>
                 <div class="nav-links md-visible">
-                    <a href="../HTML/Home.html" class="nav-link">Home</a>
-                    <a href="../HTML/contact.html" class="nav-link">Contact</a>
-                    <a href="../HTML/about.html" class="nav-link">About</a>
+                    <a href="../HTML/Home.html" class="nav-link" target="_self">Home</a>
+                    <a href="../HTML/contact.html" class="nav-link" target="_self">Contact</a>
+                    <a href="../HTML/about.html" class="nav-link" target="_self">About</a>
                 </div>
             </div>
         </div>
@@ -38,26 +38,8 @@
                 </div>
                 <div class="topic-meta" id="topic-meta">Topic Community</div>
                 <div class="topic-description" id="topic-description">Loading...</div>
-                <div class="topic-stats">
-                    <div class="stat-item">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                        </svg>
-                        <span id="members-stat">0 Members</span>
-                    </div>
-                    <div class="stat-item">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span id="online-stat">0 Online</span>
-                    </div>
-                    <div class="stat-item">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <span id="created-stat">Created recently</span>
-                    </div>
-                </div>
+                <button id="subscribeBtn" class="btn">Subscribe</button>
+                
             </div>
 
             <div class="create-post reveal-text">
@@ -100,46 +82,14 @@
         </div>
 
         <div class="sidebar">
-            <div class="sidebar-section reveal-text">
-                <div class="sidebar-header">Community Info</div>
-                <div class="sidebar-content">
-                    <div class="community-info">
-                        <div class="community-stats">
-                            <div class="stat-box">
-                                <div class="stat-number" id="sidebar-members">0</div>
-                                <div class="stat-label">Members</div>
-                            </div>
-                            <div class="stat-box">
-                                <div class="stat-number" id="sidebar-online">0</div>
-                                <div class="stat-label">Online</div>
-                            </div>
-                        </div>
-                        <p id="sidebar-description" style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
-                            Loading description...
-                        </p>
-                    </div>
-                </div>
-            </div>
 
             <div class="sidebar-section reveal-text">
                 <div class="sidebar-header">Moderators</div>
                 <div class="sidebar-content">
                     <div class="moderator-list">
                         <div class="moderator-item">
-                            <div class="mod-avatar">JS</div>
-                            <div class="mod-name">Prof. Johnson</div>
-                        </div>
-                        <div class="moderator-item">
-                            <div class="mod-avatar">MC</div>
-                            <div class="mod-name">Maria Chen</div>
-                        </div>
-                        <div class="moderator-item">
-                            <div class="mod-avatar">AK</div>
-                            <div class="mod-name">Alex Kumar</div>
-                        </div>
-                        <div class="moderator-item">
-                            <div class="mod-avatar">ST</div>
-                            <div class="mod-name">Sarah Thompson</div>
+                            <div class="mod-avatar">M</div>
+                            <div class="mod-name">Moderator</div>
                         </div>
                     </div>
                 </div>
@@ -164,10 +114,6 @@
                         <li class="rule-item">
                             <div class="rule-number">4</div>
                             <div class="rule-text">Search before posting to avoid duplicates</div>
-                        </li>
-                        <li class="rule-item">
-                            <div class="rule-number">5</div>
-                            <div class="rule-text">Mark solved questions with the appropriate flair</div>
                         </li>
                     </ul>
                 </div>

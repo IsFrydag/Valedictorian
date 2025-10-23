@@ -8,16 +8,12 @@ namespace ValedictorianAPI.Models
     public class Notification
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int NotificationID { get; set; }
+        public int NotificationId { get; set; }
 
-        [Required]
-        public string NotificationText { get; set; } = string.Empty;
+        public int UserID { get; set; }  // ⚡ No [Column] attribute here
 
-        [Required]
-        public string NotificationType { get; set; } = string.Empty;
-
-        [Required]
+        public string NotificationType { get; set; }
+        public string NotificationText { get; set; }
         public DateTime NotificationDate { get; set; }
     }
 }

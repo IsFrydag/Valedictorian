@@ -109,26 +109,22 @@ async function loadPost(postId) {
         currentPost = post;
 
         document.title = `${post.PostName} - Valedictorian`;
-        document.getElementById('post-title').textContent = post.PostName;
-        document.getElementById('post-body').innerHTML = post.PostBody.replace(/\n/g, '<br>');
-        document.getElementById('author-name').textContent = post.AuthorName;
-        document.getElementById('author-avatar').textContent = post.AuthorInitials;
-        document.getElementById('post-time').textContent = timeAgo(post.CreatedAt);
-        document.getElementById('post-votes').textContent = post.Upvotes || 0;
-        document.getElementById('post-flair').textContent = post.Status || 'Help';
+        document.getElementById('post-title').textContent = post.postName;
+        document.getElementById('post-body').innerHTML = post.postBody.replace(/\n/g, '<br>');
+        document.getElementById('author-name').textContent = post.authorName;
+        document.getElementById('author-avatar').textContent = post.authorInitials;
+        document.getElementById('post-time').textContent = timeAgo(post.createdAt);
+        document.getElementById('post-votes').textContent = post.upvotes || 0;
 
-        const topic = await apiRequest(`/Topics/GetTopic/${post.TopicID}`, 'GET');
+        const topic = await apiRequest(`/Topics/GetTopic/${post.topicID || post.TopicID}`, 'GET');
         document.getElementById('community-link').textContent = `r/${topic.TopicTitle || 'Unknown'}`;
-        document.getElementById('community-link').href = `../HTML/topic.html?topicId=${post.TopicID}`;
-        document.getElementById('back-button').href = `../HTML/topic.html?topicId=${post.TopicID}`;
-        document.getElementById('community-desc').textContent = topic.TopicDescription || 'No description available.';
+        document.getElementById('community-link').href = `../HTML/topic.html?topicId=${post.topicID || post.TopicID}`;
+        document.getElementById('back-button').href = `../HTML/topic.html?topicId=${post.topicID || post.TopicID}`;
+        document.getElementById('back-button').target = '_self';
 
-        // Placeholder stats
-        document.getElementById('members-count').textContent = '2.4k';
-        document.getElementById('online-count').textContent = '156';
 
         await loadReplies(postId);
-        await loadRelatedPosts(post.TopicID, postId);
+        await loadRelatedPosts(post.topicID || post.TopicID, postId);
     } catch (err) {
         console.error('Error loading post:', err);
         alert('Failed to load post.');
@@ -253,7 +249,7 @@ async function votePost(direction) {
     if (!currentPost) return;
     
     try {
-        const response = await apiRequest(`/Posts/UpvotePost/${currentPost.PostID}`, 'POST', { Direction: direction });
+        const response = await apiRequest(`/Posts/UpvotePost/${currentPost.postID}`, 'POST', { Direction: direction });
         document.getElementById('post-votes').textContent = response.Upvotes;
         userPostVote = direction === userPostVote ? null : direction;
         updatePostVoteButtons();
@@ -402,3 +398,56 @@ document.addEventListener('DOMContentLoaded', async () => {
         alert('No post ID provided.');
     }
 });
+
+let userVotes = {};
+let isLoggedIn = !!localStorage.getItem('userId');
+let currentUser = {
+  id: localStorage.getItem('userId'),
+  name: `${localStorage.getItem('userName') || ''} ${localStorage.getItem('userSurname') || ''}`,
+  initials: (localStorage.getItem('userName')?.[0] || '?') + (localStorage.getItem('userSurname')?.[0] || '?')
+};
+
+function vote(postId, direction) {
+  if (!isLoggedIn) {
+    alert('Please log in to vote.');
+    return;
+  }
+
+  const voteCountElement = document.getElementById(`votes-${postId}`);
+  let count = parseInt(voteCountElement.textContent) || 0;
+  const existing = userVotes[postId];
+
+  if (existing === direction) {
+    count += (direction === 'up' ? -1 : 1);
+    delete userVotes[postId];
+  } else {
+    if (existing === 'up') count--;
+    if (existing === 'down') count++;
+    count += (direction === 'up' ? 1 : -1);
+    userVotes[postId] = direction;
+  }
+
+  voteCountElement.textContent = count;
+}
+window.votePost = votePost;
+
+async function deletePost(postId, userId) {
+    // Step 1: Ask for confirmation
+    if (!confirm("🗑️ Are you sure you want to delete this post? This action cannot be undone.")) {
+        return;
+    }
+
+    try {
+        // Step 2: Call the API
+        const response = await apiRequest(`Posts/DeletePost/${postId}?userId=${userId}`, "DELETE");
+
+        if (response && response.message) {
+            alert(response.message);
+            // Optionally redirect back to topic page after deleting
+            window.location.href = `topic.html?topicId=${getTopicIdFromUrl()}`;
+        }
+    } catch (error) {
+        console.error("Delete error:", error);
+        alert("Failed to delete post. You can only delete your own posts.");
+    }
+}

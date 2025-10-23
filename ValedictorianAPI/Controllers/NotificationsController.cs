@@ -1,75 +1,61 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using ValedictorianAPI.Models;
 
-namespace ValedictorianAPI.Controllers
+namespace ValedictorianAPI.Models
 {
     [ApiController]
     [Route("api/[controller]")]
     public class NotificationsController : ControllerBase
     {
         private readonly ValedictorianDbContext _context;
-
         public NotificationsController(ValedictorianDbContext context)
         {
             _context = context;
         }
 
-        [HttpPost("add")]
-        public async Task<IActionResult> AddNotification([FromBody] Notification dto)
+
+        [HttpPost("notifyTopicSubscribers")]
+        public async Task<IActionResult> NotifyTopicSubscribers(int topicId, string postAuthor)
         {
-            if (dto == null ||
-                string.IsNullOrWhiteSpace(dto.NotificationText) ||
-                string.IsNullOrWhiteSpace(dto.NotificationType))
-            {
-                return BadRequest(new { Message = "All fields are required." });
-            }
+            // Get all subscribers for this topic
+            var subscribers = await _context.TopicSubscriptions
+                .Where(s => s.TopicID == topicId)
+                .Select(s => s.UserID)
+                .ToListAsync();
 
-            var notification = new Notification
-            {
-                NotificationText = dto.NotificationText,
-                NotificationType = dto.NotificationType,
-                NotificationDate = dto.NotificationDate
-            };
+            if (!subscribers.Any())
+                return Ok(new { Message = "No subscribers to notify." });
 
-            _context.Notifications.Add(notification);
+            var topic = await _context.Topics.FindAsync(topicId);
+            if (topic == null)
+                return NotFound(new { Message = "Topic not found." });
+
+            var notifications = subscribers.Select(uid => new Notification
+            {
+                UserID = uid,
+                NotificationType = "NewPost",
+                NotificationText = $"New post from {postAuthor} in {topic.TopicTitle}",
+                NotificationDate = DateTime.UtcNow
+            }).ToList();
+
+            _context.Notifications.AddRange(notifications);
             await _context.SaveChangesAsync();
 
-            return Ok(new
-            {
-                Message = "Notification added successfully.",
-                notification.NotificationID
-            });
+            return Ok(new { Message = "Notifications sent.", Count = notifications.Count });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [HttpGet("User/{userId}")]
+        public IActionResult GetUserNotifications(int userId)
         {
-            var notifications = await _context.Notifications.ToListAsync();
+            var notifications = _context.Notifications
+                .Where(n => n.UserID == userId)
+                .OrderByDescending(n => n.NotificationDate)
+                .ToList();
+
             return Ok(notifications);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            var notif = await _context.Notifications.FindAsync(id);
-            if (notif == null)
-                return NotFound(new { Message = "Notification not found." });
-
-            return Ok(notif);
-        }
-
-        [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var notif = await _context.Notifications.FindAsync(id);
-            if (notif == null)
-                return NotFound(new { Message = "Notification not found." });
-
-            _context.Notifications.Remove(notif);
-            await _context.SaveChangesAsync();
-
-            return Ok(new { Message = "Notification deleted successfully." });
         }
     }
 }

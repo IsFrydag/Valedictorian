@@ -22,9 +22,9 @@
                     <span class="nav-logo-text">Valedictorian</span> 
                 </div>
                 <div class="nav-links md-visible">
-                    <a href="../HTML/Home.html" class="nav-link">Home</a>
-                    <a href="../HTML/contact.html" class="nav-link">Contact</a>
-                    <a href="../HTML/about.html" class="nav-link">About</a>
+                    <a href="../HTML/Home.html" class="nav-link" target="_self">Home</a>
+                    <a href="../HTML/contact.html" class="nav-link" target="_self">Contact</a>
+                    <a href="../HTML/about.html" class="nav-link" target="_self">About</a>
                 </div>
             </div>
         </div>
@@ -96,6 +96,13 @@
                         </svg>
                         <span>Report</span>
                     </button>
+                    <button class="post-action delete-btn" onclick="deletePost(currentPostId, currentUserId)">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-8V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                        </svg>
+                        <span>Delete</span>
+                    </button>
                 </div>
             </div>
 
@@ -140,16 +147,6 @@
                 <div class="sidebar-header">Community Info</div>
                 <div class="sidebar-content">
                     <div class="community-info">
-                        <div class="community-stats">
-                            <div class="stat-box">
-                                <div id="members-count" class="stat-number">2.4k</div>
-                                <div class="stat-label">Members</div>
-                            </div>
-                            <div class="stat-box">
-                                <div id="online-count" class="stat-number">156</div>
-                                <div class="stat-label">Online</div>
-                            </div>
-                        </div>
                         <p id="community-desc" style="color: var(--text-light); font-size: 0.875rem; line-height: 1.5; margin-top: 1rem;">
                             A community for technical support, coding help, and troubleshooting. 
                             Get help from fellow students and experts.

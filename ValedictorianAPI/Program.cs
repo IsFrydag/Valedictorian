@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ValedictorianAPI.Models;
+using Microsoft.AspNetCore.Cors;
 
 var builder = WebApplication.CreateBuilder(args);
 
