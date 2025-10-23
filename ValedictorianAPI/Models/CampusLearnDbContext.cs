@@ -17,9 +17,12 @@ namespace ValedictorianAPI.Models
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Module> Modules { get; set; }
         public DbSet<TopicSubscription> TopicSubscriptions { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<UserModel>().ToTable("User"); 
             modelBuilder.Entity<Upload>().ToTable("Uploads"); 
             modelBuilder.Entity<TutorSession>().ToTable("TutorSessions");
@@ -28,6 +31,8 @@ namespace ValedictorianAPI.Models
             modelBuilder.Entity<Post>().ToTable("Post");
             modelBuilder.Entity<Notification>().ToTable("Notifications");
             modelBuilder.Entity<Module>().ToTable("Module");
+            modelBuilder.Entity<Message>().ToTable("Messages");
+            modelBuilder.Entity<Conversation>().ToTable("Conversations");
 
             modelBuilder.Entity<TopicSubscription>()
                 .HasOne(ts => ts.Topic)
