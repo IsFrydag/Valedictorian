@@ -327,3 +327,7 @@ body {
 .saveBtn:hover {
     background-color: #b88e55;
 }
+
+.statusRed { background-color: #dc2626; color: white; padding: 4px 10px; border-radius: 8px; }
+.statusOrange { background-color: #ea580c; color: white; padding: 4px 10px; border-radius: 8px; }
+.statusYellow { background-color: #facc15; color: black; padding: 4px 10px; border-radius: 8px; }

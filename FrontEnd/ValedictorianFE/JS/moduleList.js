@@ -25,21 +25,29 @@ class ModuleListManager {
     }
 
     initialize() {
-        this.cacheDOM();
-        this.bindEvents();
-        this.loadModules();
-        this.initializeTextAnimations();
-        this.initializeParticles();
-        this.populateProfileName();
+    this.cacheDOM();
+    this.bindEvents();
+    this.loadModules();
+    this.initializeTextAnimations();
+    this.initializeParticles();
+    this.populateProfileName();
 
-        // Always show Add Module button (ignore roles)
+    const userType = localStorage.getItem('userType');
+    if (userType === 'Admin') {
         this.addModuleBtn?.classList.remove('hidden');
         this.addModuleBtn?.removeAttribute('disabled');
         this.addModuleBtn.style.display = 'block';
         this.addModuleBtn.style.visibility = 'visible';
         this.addModuleBtn.style.opacity = '1';
-        console.log("✅ Add Module button always visible");
+        console.log("✅ Add Module button visible for Admin");
+    } else {
+        this.addModuleBtn?.classList.add('hidden');
+        this.addModuleBtn.style.display = 'none';
+        this.addModuleBtn.style.visibility = 'hidden';
+        this.addModuleBtn.style.opacity = '0';
+        console.log("🚫 Add Module button hidden for non-admin users");
     }
+}
 
     cacheDOM() {
         this.profileBtn = document.getElementById('profileBtn');

@@ -87,6 +87,7 @@ function getPostIdFromUrl() {
 
 // Relative time
 function timeAgo(date) {
+    if (!date) return '';
     const now = new Date();
     const seconds = Math.floor((now - new Date(date)) / 1000);
     let interval = Math.floor(seconds / 31536000);
@@ -102,29 +103,81 @@ function timeAgo(date) {
     return "just now";
 }
 
+// Normalize incoming API object to consistent camel/UpperCase property names used by backend DTO
+function normalizePostObject(post) {
+    if (!post) return null;
+    // Accept either casing from backend, produce canonical object with PostID etc.
+    return {
+        PostID: post.PostID ?? post.postID ?? post.id ?? null,
+        TopicID: post.TopicID ?? post.topicID ?? post.topicId ?? null,
+        PostName: post.PostName ?? post.postName ?? post.postTitle ?? '',
+        PostBody: post.PostBody ?? post.postBody ?? post.body ?? '',
+        Upvotes: post.Upvotes ?? post.upvotes ?? 0,
+        PostReplies: post.PostReplies ?? post.postReplies ?? post.postRepliesCount ?? 0,
+        AuthorName: post.AuthorName ?? post.authorName ?? post.author ?? '',
+        AuthorInitials: post.AuthorInitials ?? post.authorInitials ?? (() => {
+            const n = post.AuthorName ?? post.authorName ?? '';
+            const parts = n.split(' ').filter(Boolean);
+            return (parts[0]?.[0] ?? '?') + (parts[1]?.[0] ?? '?');
+        })(),
+        CreatedAt: post.CreatedAt ?? post.createdAt ?? post.createdAtUtc ?? null,
+        // keep raw as well if needed
+        __raw: post
+    };
+}
+
 // Load post details
 async function loadPost(postId) {
     try {
-        const post = await apiRequest(`/Posts/GetPost/${postId}`, 'GET');
+        const postFromApi = await apiRequest(`/Posts/GetPost/${postId}`, 'GET');
+        const post = normalizePostObject(postFromApi);
+        if (!post || !post.PostID) {
+            console.error('Invalid post object from API:', postFromApi);
+            throw new Error('Invalid post data');
+        }
+
         currentPost = post;
 
+        // update DOM using canonical keys
         document.title = `${post.PostName} - Valedictorian`;
-        document.getElementById('post-title').textContent = post.postName;
-        document.getElementById('post-body').innerHTML = post.postBody.replace(/\n/g, '<br>');
-        document.getElementById('author-name').textContent = post.authorName;
-        document.getElementById('author-avatar').textContent = post.authorInitials;
-        document.getElementById('post-time').textContent = timeAgo(post.createdAt);
-        document.getElementById('post-votes').textContent = post.upvotes || 0;
+        const titleEl = document.getElementById('post-title');
+        const bodyEl = document.getElementById('post-body');
+        const authorNameEl = document.getElementById('author-name');
+        const authorAvatarEl = document.getElementById('author-avatar');
+        const postTimeEl = document.getElementById('post-time');
+        const postVotesEl = document.getElementById('post-votes');
 
-        const topic = await apiRequest(`/Topics/GetTopic/${post.topicID || post.TopicID}`, 'GET');
-        document.getElementById('community-link').textContent = `r/${topic.TopicTitle || 'Unknown'}`;
-        document.getElementById('community-link').href = `../HTML/topic.html?topicId=${post.topicID || post.TopicID}`;
-        document.getElementById('back-button').href = `../HTML/topic.html?topicId=${post.topicID || post.TopicID}`;
-        document.getElementById('back-button').target = '_self';
+        if (titleEl) titleEl.textContent = post.PostName;
+        if (bodyEl) bodyEl.innerHTML = (post.PostBody || '').replace(/\n/g, '<br>');
+        if (authorNameEl) authorNameEl.textContent = post.AuthorName;
+        if (authorAvatarEl) authorAvatarEl.textContent = post.AuthorInitials;
+        if (postTimeEl) postTimeEl.textContent = timeAgo(post.CreatedAt);
+        if (postVotesEl) postVotesEl.textContent = post.Upvotes ?? 0;
 
+        // load topic for breadcrumb/link — normalize topic response too
+        if (post.TopicID) {
+            try {
+                const topicRaw = await apiRequest(`/Topics/GetTopic/${post.TopicID}`, 'GET');
+                const topicTitle = topicRaw.TopicTitle ?? topicRaw.topicTitle ?? 'Unknown';
+                const communityLink = document.getElementById('community-link');
+                if (communityLink) {
+                    communityLink.textContent = `r/${topicTitle}`;
+                    communityLink.href = `../HTML/topic.html?topicId=${post.TopicID}`;
+                }
+                const backButton = document.getElementById('back-button');
+                if (backButton) {
+                    backButton.href = `../HTML/topic.html?topicId=${post.TopicID}`;
+                    backButton.target = '_self';
+                }
+            } catch (err) {
+                // non-fatal
+                console.warn('Failed to load topic for post:', err);
+            }
+        }
 
-        await loadReplies(postId);
-        await loadRelatedPosts(post.topicID || post.TopicID, postId);
+        // load replies and related posts
+        await loadReplies(post.PostID);
+        await loadRelatedPosts(post.TopicID, post.PostID);
     } catch (err) {
         console.error('Error loading post:', err);
         alert('Failed to load post.');
@@ -134,8 +187,28 @@ async function loadPost(postId) {
 // Load replies
 async function loadReplies(postId) {
     try {
+        if (!postId) {
+            console.warn('loadReplies called with falsy postId', postId);
+            return;
+        }
         const flatReplies = await apiRequest(`/Replies/GetRepliesByPost/${postId}`, 'GET');
-        replies = buildNestedReplies(flatReplies);
+        // Normalize replies' casing (ensure ReplyID, ParentReplyID, Body, Upvotes, CreatedAt)
+        const normalized = (flatReplies || []).map(r => ({
+            ReplyID: r.ReplyID ?? r.replyID ?? r.id,
+            ParentReplyID: r.ParentReplyID ?? r.parentReplyID ?? r.parentId ?? null,
+            Body: r.Body ?? r.body ?? '',
+            Upvotes: r.Upvotes ?? r.upvotes ?? 0,
+            CreatedAt: r.CreatedAt ?? r.createdAt ?? r.CreatedAt,
+            AuthorName: r.AuthorName ?? r.authorName ?? r.Author ?? 'Unknown',
+            AuthorInitials: r.AuthorInitials ?? r.authorInitials ?? (() => {
+                const n = r.AuthorName ?? r.authorName ?? '??';
+                const parts = n.split(' ').filter(Boolean);
+                return ((parts[0]?.[0] ?? '?') + (parts[1]?.[0] ?? '?')).toUpperCase();
+            })(),
+            // keep raw for anything else
+            __raw: r
+        }));
+        replies = buildNestedReplies(normalized);
         displayComments();
     } catch (err) {
         console.error('Error loading replies:', err);
@@ -156,6 +229,7 @@ function buildNestedReplies(flatReplies) {
         if (reply.ParentReplyID) {
             const parent = replyMap[reply.ParentReplyID];
             if (parent) parent.replies.push(reply);
+            else rootReplies.push(reply); // parent missing -> treat as root to avoid losing it
         } else {
             rootReplies.push(reply);
         }
@@ -167,10 +241,12 @@ function buildNestedReplies(flatReplies) {
 // Display comments
 function displayComments() {
     const container = document.getElementById('comments-list');
+    if (!container) return;
     container.innerHTML = replies.map(reply => createCommentHTML(reply)).join('');
     
     const totalComments = countAllComments(replies);
-    document.getElementById('comments-count').textContent = `${totalComments} comments`;
+    const countEl = document.getElementById('comments-count');
+    if (countEl) countEl.textContent = `${totalComments} comments`;
 }
 
 // Count all comments
@@ -207,7 +283,7 @@ function createCommentHTML(reply, level = 0) {
                 </div>
                 <div class="comment-main">
                     <div class="comment-header">
-                        <div class="comment-author">${reply.AuthorName}</div>
+                        <div class="comment-author">${escapeHtml(reply.AuthorName)}</div>
                         <div class="comment-time">${timeAgo(reply.CreatedAt)}</div>
                     </div>
                     <div class="comment-body">${formatCommentContent(reply.Body)}</div>
@@ -239,9 +315,14 @@ function createCommentHTML(reply, level = 0) {
     `;
 }
 
-// Format comment content
+// Simple HTML escape
+function escapeHtml(str = '') {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// Format comment content (keeps simple markup)
 function formatCommentContent(content) {
-    return content.replace(/\n/g, '<br>').replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+    return escapeHtml(content || '').replace(/\n/g, '<br>').replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
 }
 
 // Handle post voting
@@ -249,7 +330,7 @@ async function votePost(direction) {
     if (!currentPost) return;
     
     try {
-        const response = await apiRequest(`/Posts/UpvotePost/${currentPost.postID}`, 'POST', { Direction: direction });
+        const response = await apiRequest(`/Posts/UpvotePost/${currentPost.PostID}`, 'POST', { Direction: direction });
         document.getElementById('post-votes').textContent = response.Upvotes;
         userPostVote = direction === userPostVote ? null : direction;
         updatePostVoteButtons();
@@ -262,67 +343,118 @@ async function votePost(direction) {
 function updatePostVoteButtons() {
     const upvoteBtn = document.querySelector('.vote-btn.upvote');
     const downvoteBtn = document.querySelector('.vote-btn.downvote');
-    
-    upvoteBtn.classList.toggle('active', userPostVote === 'up');
-    downvoteBtn.classList.toggle('active', userPostVote === 'down');
+    if (upvoteBtn) upvoteBtn.classList.toggle('active', userPostVote === 'up');
+    if (downvoteBtn) downvoteBtn.classList.toggle('active', userPostVote === 'down');
 }
 
 // Handle reply voting
+const replyVotes = {}; // { replyId: 'up' | 'down' }
+
 async function voteReply(replyId, direction) {
+    const voteCountEl = document.getElementById(`reply-votes-${replyId}`);
+    let count = parseInt(voteCountEl.textContent) || 0;
+
+    const previousVote = replyVotes[replyId];
+
+    // Toggle logic
+    if (previousVote === direction) {
+        // Undo vote
+        replyVotes[replyId] = null;
+        count += (direction === 'up' ? -1 : 1);
+    } else {
+        // New vote or flipped
+        if (previousVote === 'up') count -= 1;
+        if (previousVote === 'down') count += 1;
+        replyVotes[replyId] = direction;
+        count += (direction === 'up' ? 1 : -1);
+    }
+
+    // Update UI immediately
+    voteCountEl.textContent = count;
+
+    // Update colors (optional)
+    updateReplyVoteButtons(replyId);
+
+    // Send to backend
     try {
-        const response = await apiRequest(`/Replies/UpvoteReply/${replyId}`, 'POST', { Direction: direction });
-        document.getElementById(`reply-votes-${replyId}`).textContent = response.Upvotes;
-        // Optional: Update local userReplyVotes if tracking
+        await fetch(`${API_BASE}/Replies/UpvoteReply/${replyId}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ Direction: direction })
+        });
     } catch (err) {
-        console.error('Vote error:', err);
+        console.error("Vote error:", err);
     }
 }
 
-// Submit comment (top-level reply)
-async function submitComment(event) {
-    event.preventDefault();
-    const commentInput = document.getElementById('comment-input');
-    const body = commentInput.value.trim();
-    if (!body || !currentPost) return;
+function updateReplyVoteButtons(replyId) {
+    const upBtn = document.querySelector(`#reply-votes-${replyId}`).closest('.comment-vote').querySelector('button:nth-child(1)');
+    const downBtn = document.querySelector(`#reply-votes-${replyId}`).closest('.comment-vote').querySelector('button:nth-child(3)');
     
+    upBtn.classList.toggle('active', replyVotes[replyId] === 'up');
+    downBtn.classList.toggle('active', replyVotes[replyId] === 'down');
+}
+
+window.voteReply = voteReply;
+
+// Submit top-level comment helper (used by form listener)
+async function submitComment(postId, userId, body, parentReplyId = null) {
+    const replyData = {
+        PostID: postId,
+        UserID: userId,
+        Body: body,
+        ParentReplyID: parentReplyId,
+        Uploads: null,
+        UploadFormat: null,
+        CreatedAt: new Date().toISOString()
+    };
+
+    console.log("Sending reply: ", replyData);
+
     try {
-        await apiRequest('/Replies/AddReply', 'POST', {
-            PostID: currentPost.PostID,
-            UserID: parseInt(localStorage.getItem('userId')) || 1, // From login
-            Body: body
-        });
-        commentInput.value = '';
-        await loadReplies(currentPost.PostID);
-    } catch (err) {
-        console.error('Add reply error:', err);
+        const result = await apiRequest(`/Replies/AddReply`, "POST", replyData);
+        console.log("Reply created:", result);
+
+        // Optional: reload replies or update UI
+        await loadReplies(postId);
+    } catch (error) {
+        console.error("Add reply error:", error);
     }
 }
 
 // Clear comment
 function clearComment() {
-    document.getElementById('comment-input').value = '';
+    const el = document.getElementById('comment-input');
+    if (el) el.value = '';
 }
 
 // Reply to comment
 function replyToComment(replyId) {
     document.querySelectorAll('.reply-form').forEach(form => form.classList.remove('active'));
     const replyForm = document.getElementById(`reply-form-${replyId}`);
-    replyForm.classList.add('active');
-    replyForm.querySelector('textarea').focus();
+    if (replyForm) {
+        replyForm.classList.add('active');
+        const ta = replyForm.querySelector('textarea');
+        if (ta) ta.focus();
+    }
 }
 
 // Cancel reply
 function cancelReply(replyId) {
     const replyForm = document.getElementById(`reply-form-${replyId}`);
-    replyForm.classList.remove('active');
-    replyForm.querySelector('textarea').value = '';
+    if (replyForm) {
+        replyForm.classList.remove('active');
+        const ta = replyForm.querySelector('textarea');
+        if (ta) ta.value = '';
+    }
 }
 
-// Submit reply (nested)
+// Submit nested reply
 async function submitReply(parentReplyId) {
     const replyForm = document.getElementById(`reply-form-${parentReplyId}`);
+    if (!replyForm || !currentPost) return;
     const body = replyForm.querySelector('textarea').value.trim();
-    if (!body || !currentPost) return;
+    if (!body) return;
     
     try {
         await apiRequest('/Replies/AddReply', 'POST', {
@@ -339,47 +471,41 @@ async function submitReply(parentReplyId) {
 }
 
 // Post actions (placeholders)
-function sharePost() {
-    alert('Post shared!');
-}
-
-function savePost() {
-    alert('Post saved!');
-}
-
-function reportPost() {
-    alert('Post reported!');
-}
-
-function shareComment(replyId) {
-    alert(`Comment ${replyId} shared!`);
-}
+function sharePost() { alert('Post shared!'); }
+function savePost() { alert('Post saved!'); }
+function reportPost() { alert('Post reported!'); }
+function shareComment(replyId) { alert(`Comment ${replyId} shared!`); }
 
 // Load related posts
 async function loadRelatedPosts(topicId, currentPostId) {
     try {
+        if (!topicId) return;
         const posts = await apiRequest(`/Posts/GetPostsByTopic/${topicId}`, 'GET');
-        const related = posts.filter(p => p.PostID !== currentPostId).slice(0, 4);
+        const related = (posts || []).filter(p => (p.PostID ?? p.postID) !== currentPostId).slice(0, 4);
         const container = document.getElementById('related-posts');
-        container.innerHTML = related.map(p => `
-            <div class="related-post" onclick="window.location.href='../HTML/post.html?postId=${p.PostID}'">
-                <div class="related-post-title">${p.PostName}</div>
-                <div class="related-post-meta">${p.Upvotes || 0} votes • ${p.PostReplies || 0} comments</div>
-            </div>
-        `).join('');
+        if (!container) return;
+        container.innerHTML = related.map(p => {
+            const pid = p.PostID ?? p.postID;
+            const name = p.PostName ?? p.postName;
+            return `
+                <div class="related-post" onclick="window.location.href='../HTML/post.html?postId=${pid}'">
+                    <div class="related-post-title">${escapeHtml(name)}</div>
+                    <div class="related-post-meta">${p.Upvotes ?? p.upvotes ?? 0} votes • ${p.PostReplies ?? p.postReplies ?? 0} comments</div>
+                </div>
+            `;
+        }).join('');
     } catch (err) {
         console.error('Error loading related posts:', err);
     }
 }
 
 // Scroll to top
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
 // Show/hide scroll to top
 window.addEventListener('scroll', () => {
     const scrollTop = document.getElementById('scroll-top');
+    if (!scrollTop) return;
     if (window.pageYOffset > 300) {
         scrollTop.classList.add('visible');
     } else {
@@ -391,59 +517,78 @@ window.addEventListener('scroll', () => {
 document.addEventListener('DOMContentLoaded', async () => {
     initializeAnimations();
     initializeParticles();
+
     const postId = getPostIdFromUrl();
     if (postId) {
         await loadPost(postId);
     } else {
         alert('No post ID provided.');
     }
+
+    // Attach comment submit listener (top-level comments)
+    const commentForm = document.querySelector('.comment-form');
+    if (commentForm) {
+        commentForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const commentInput = document.getElementById('comment-input');
+            const commentText = commentInput.value.trim();
+            if (!commentText) return;
+
+            const userId = parseInt(localStorage.getItem('userId')) || 1;
+            const parentReplyId = commentInput.dataset.parentReplyId ? parseInt(commentInput.dataset.parentReplyId) : null;
+
+            await submitComment(currentPost.PostID, userId, commentText, parentReplyId);
+            commentInput.value = "";
+            commentInput.placeholder = "Write a comment...";
+            delete commentInput.dataset.parentReplyId; // clear reply mode
+
+            await loadReplies(currentPost.PostID);
+        });
+    }
 });
 
 let userVotes = {};
 let isLoggedIn = !!localStorage.getItem('userId');
 let currentUser = {
-  id: localStorage.getItem('userId'),
-  name: `${localStorage.getItem('userName') || ''} ${localStorage.getItem('userSurname') || ''}`,
-  initials: (localStorage.getItem('userName')?.[0] || '?') + (localStorage.getItem('userSurname')?.[0] || '?')
+    id: localStorage.getItem('userId'),
+    name: `${localStorage.getItem('userName') || ''} ${localStorage.getItem('userSurname') || ''}`,
+    initials: (localStorage.getItem('userName')?.[0] || '?') + (localStorage.getItem('userSurname')?.[0] || '?')
 };
 
 function vote(postId, direction) {
-  if (!isLoggedIn) {
-    alert('Please log in to vote.');
-    return;
-  }
+    if (!isLoggedIn) {
+        alert('Please log in to vote.');
+        return;
+    }
 
-  const voteCountElement = document.getElementById(`votes-${postId}`);
-  let count = parseInt(voteCountElement.textContent) || 0;
-  const existing = userVotes[postId];
+    const voteCountElement = document.getElementById(`votes-${postId}`);
+    if (!voteCountElement) return;
+    let count = parseInt(voteCountElement.textContent) || 0;
+    const existing = userVotes[postId];
 
-  if (existing === direction) {
-    count += (direction === 'up' ? -1 : 1);
-    delete userVotes[postId];
-  } else {
-    if (existing === 'up') count--;
-    if (existing === 'down') count++;
-    count += (direction === 'up' ? 1 : -1);
-    userVotes[postId] = direction;
-  }
+    if (existing === direction) {
+        count += (direction === 'up' ? -1 : 1);
+        delete userVotes[postId];
+    } else {
+        if (existing === 'up') count--;
+        if (existing === 'down') count++;
+        count += (direction === 'up' ? 1 : -1);
+        userVotes[postId] = direction;
+    }
 
-  voteCountElement.textContent = count;
+    voteCountElement.textContent = count;
 }
 window.votePost = votePost;
 
 async function deletePost(postId, userId) {
-    // Step 1: Ask for confirmation
     if (!confirm("🗑️ Are you sure you want to delete this post? This action cannot be undone.")) {
         return;
     }
 
     try {
-        // Step 2: Call the API
         const response = await apiRequest(`Posts/DeletePost/${postId}?userId=${userId}`, "DELETE");
-
         if (response && response.message) {
             alert(response.message);
-            // Optionally redirect back to topic page after deleting
             window.location.href = `topic.html?topicId=${getTopicIdFromUrl()}`;
         }
     } catch (error) {
@@ -451,3 +596,10 @@ async function deletePost(postId, userId) {
         alert("Failed to delete post. You can only delete your own posts.");
     }
 }
+
+window.replyToComment = function (parentReplyId) {
+    const replyBox = document.getElementById('comment-input');
+    replyBox.placeholder = "Replying to comment #" + parentReplyId;
+    replyBox.dataset.parentReplyId = parentReplyId; // store it for later use
+    replyBox.focus();
+};

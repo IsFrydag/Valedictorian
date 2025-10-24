@@ -8,7 +8,9 @@ const STORAGE_KEY = 'studentProfileData';
 const initialData = {
   bannerUrl: "https://placehold.co/1200x200/DC2626/FBBF24?text=Student+Banner+Image",
   pfpUrl: "https://placehold.co/128x128/FBBF24/DC2626?text=AD",
-  aboutText: "Alex is a highly motivated third-year student with a passion for emerging technologies. In addition to excelling in core coursework, Alex volunteers as a peer tutor in introductory programming and leads the university's Robotics Club. Looking forward to applying theoretical knowledge in a practical internship setting next semester."
+  aboutText: "Tell us about yourself",
+  course: "Which course are you enrolled in?",
+  focus: "Whats your focus stream in bc?"
 };
 
 function loadProfileData() {
@@ -18,7 +20,7 @@ function loadProfileData() {
   } catch (error) {
     console.error("Error loading profile data:", error);
     return initialData;
-  }
+  } 
 }
 
 function saveProfileData(data) {
@@ -33,18 +35,25 @@ function renderProfile(data) {
   const banner = document.getElementById('bannerImg');
   const pfp = document.getElementById('pfpImg');
   const about = document.getElementById('aboutText');
+  const course = document.querySelector('.infoTitle'); // "Computer Science"
+  const focus = document.querySelector('.infoSub'); // "Focus on Software Engineering"
 
   if (banner) banner.src = data.bannerUrl || initialData.bannerUrl;
   if (pfp) pfp.src = data.pfpUrl || initialData.pfpUrl;
   if (about) about.textContent = data.aboutText;
+  if (course) course.textContent = data.course || initialData.course;
+  if (focus) focus.textContent = data.focus || initialData.focus;
 }
-
 function openModal() {
   const modal = document.getElementById('editModal');
   const data = loadProfileData();
+
   document.getElementById('bannerUrl').value = data.bannerUrl;
   document.getElementById('pfpUrl').value = data.pfpUrl;
   document.getElementById('aboutTextarea').value = data.aboutText;
+  document.getElementById('courseInput').value = data.course || '';
+  document.getElementById('focusInput').value = data.focus || '';
+
   document.getElementById('bannerFile').value = '';
   document.getElementById('pfpFile').value = '';
   modal.style.display = 'flex';
@@ -94,6 +103,8 @@ async function saveProfile(event) {
   const bannerUrl = document.getElementById('bannerUrl').value.trim();
   const pfpUrl = document.getElementById('pfpUrl').value.trim();
   const aboutText = document.getElementById('aboutTextarea').value.trim();
+  const course = document.getElementById('courseInput').value.trim();
+  const focus = document.getElementById('focusInput').value.trim();
 
   try {
     const newBannerUrl = bannerFile ? await readFileAsDataURL(bannerFile) : (bannerUrl || initialData.bannerUrl);
@@ -103,7 +114,9 @@ async function saveProfile(event) {
     const newData = {
       bannerUrl: newBannerUrl,
       pfpUrl: newPfpUrl,
-      aboutText: newAboutText
+      aboutText: newAboutText,
+      course: course || initialData.course,
+      focus: focus || initialData.focus
     };
 
     renderProfile(newData);
@@ -171,5 +184,31 @@ document.addEventListener('DOMContentLoaded', () => {
       card.style.transition = 'transform 0.3s ease-out';
       handleReset();
     });
+  }
+});
+
+// =======================
+// DYNAMIC USER DETAILS (Fixed)
+// =======================
+document.addEventListener('DOMContentLoaded', () => {
+  const fullNameEl = document.getElementById('profileFullName');
+  const roleEl = document.getElementById('profileRole');
+
+  const storedName = localStorage.getItem('userName') || '';
+  const storedSurname = localStorage.getItem('userSurname') || '';
+  const storedRole = localStorage.getItem('userType') || '';
+
+  // Update name (e.g., "Heiner Freitag")
+  if (fullNameEl) {
+    fullNameEl.innerHTML = `${storedName}<span class="highlight-text"> ${storedSurname}</span>`;
+  }
+
+  // Update role (Student / Tutor / Admin)
+  if (roleEl) {
+    roleEl.textContent = storedRole || 'Unknown Role';
+    roleEl.className = 
+      storedRole.toLowerCase() === 'admin' ? 'statusYellow' :
+      storedRole.toLowerCase() === 'tutor' ? 'statusOrange' :
+      'statusRed';
   }
 });
